@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://exp10it.io/sitemap-index.xml
+Sitemap: https://x1r0z.github.io/sitemap-index.xml
