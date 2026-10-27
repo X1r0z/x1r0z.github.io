@@ -1,0 +1,665 @@
+<!DOCTYPE html><html dir="ltr" lang="en" class="scroll-smooth" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/png" href="/favicon.png"><link rel="canonical" href="https://exp10it.io/posts/dotnet-insecure-serialization/"><meta name="generator" content="Astro v5.12.0"><!-- General Meta Tags --><title>dotnet Insecure Serialization | X1r0z Blog</title><meta name="title" content="dotnet Insecure Serialization | X1r0z Blog"><meta name="description" content="dotnet Insecure Serialization"><meta name="author" content="X1r0z"><link rel="sitemap" href="/sitemap-index.xml"><!-- Open Graph / Facebook --><meta property="og:title" content="dotnet Insecure Serialization | X1r0z Blog"><meta property="og:description" content="dotnet Insecure Serialization"><meta property="og:url" content="https://exp10it.io/posts/dotnet-insecure-serialization/"><meta property="og:image" content="https://exp10it.io/og.png"><!-- Article Published/Modified time --><meta property="article:published_time" content="2024-02-11T00:00:00.000Z"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://exp10it.io/posts/dotnet-insecure-serialization/"><meta property="twitter:title" content="dotnet Insecure Serialization | X1r0z Blog"><meta property="twitter:description" content="dotnet Insecure Serialization"><meta property="twitter:image" content="https://exp10it.io/og.png"><!-- Google JSON-LD Structured data --><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"dotnet Insecure Serialization | X1r0z Blog","image":"https://exp10it.io/og.png","datePublished":"2024-02-11T00:00:00.000Z","author":[{"@type":"Person","name":"X1r0z","url":"https://exp10it.io/"}]}</script><!-- Enable RSS feed auto-discovery  --><!-- https://docs.astro.build/en/recipes/rss/#enabling-rss-feed-auto-discovery --><link rel="alternate" type="application/rss+xml" title="X1r0z Blog" href="https://exp10it.io/rss.xml"><meta name="theme-color" content=""><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.D98dxaWf.js"></script><script src="/toggle-theme.js"></script><link rel="stylesheet" href="/_astro/about.Cn_dDryL.css">
+<style>@keyframes astroFadeInOut{0%{opacity:1}to{opacity:0}}@keyframes astroFadeIn{0%{opacity:0;mix-blend-mode:plus-lighter}to{opacity:1;mix-blend-mode:plus-lighter}}@keyframes astroFadeOut{0%{opacity:1;mix-blend-mode:plus-lighter}to{opacity:0;mix-blend-mode:plus-lighter}}@keyframes astroSlideFromRight{0%{transform:translate(100%)}}@keyframes astroSlideFromLeft{0%{transform:translate(-100%)}}@keyframes astroSlideToRight{to{transform:translate(100%)}}@keyframes astroSlideToLeft{to{transform:translate(-100%)}}@media (prefers-reduced-motion){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}[data-astro-transition-scope]{animation:none!important}}
+:where([data-astro-image]){object-fit:var(--fit);object-position:var(--pos);height:auto}:where([data-astro-image=full-width]){width:100%}:where([data-astro-image=constrained]){max-width:100%}
+</style><style>[data-astro-transition-scope="astro-fam6wyqg-1"] { view-transition-name: dotnet-insecure-serialization; }@layer astro { ::view-transition-old(dotnet-insecure-serialization) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(dotnet-insecure-serialization) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(dotnet-insecure-serialization) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(dotnet-insecure-serialization) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-fam6wyqg-1"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-fam6wyqg-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-fam6wyqg-1"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-fam6wyqg-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-fam6wyqg-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-fam6wyqg-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-fam6wyqg-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-fam6wyqg-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-2"] { view-transition-name: dotnet; }@layer astro { ::view-transition-old(dotnet) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(dotnet) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(dotnet) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(dotnet) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-3"] { view-transition-name: deserialization; }@layer astro { ::view-transition-old(deserialization) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(deserialization) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(deserialization) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(deserialization) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-4"] { view-transition-name: bypass; }@layer astro { ::view-transition-old(bypass) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(bypass) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(bypass) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(bypass) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-4"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-4"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-4"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-4"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style></head> <body data-astro-cid-sckkx6r4>  <header> <a id="skip-to-content" href="#main-content" class="absolute start-16 -top-full z-50 bg-background px-3 py-2 text-accent backdrop-blur-lg transition-all focus:top-4">
+Skip to content
+</a> <div id="nav-container" class="mx-auto flex max-w-app flex-col items-center justify-between sm:flex-row"> <div id="top-nav-wrap" class="relative flex w-full items-baseline justify-between bg-background p-4 sm:items-center sm:py-6"> <a href="/" class="absolute py-1 text-xl leading-8 font-semibold whitespace-nowrap sm:static sm:my-auto sm:text-2xl sm:leading-none"> X1r0z Blog </a> <nav id="nav-menu" class="flex w-full flex-col items-center sm:ms-2 sm:flex-row sm:justify-end sm:space-x-4 sm:py-0"> <button id="menu-btn" class="focus-outline self-end p-2 sm:hidden" aria-label="Open Menu" aria-expanded="false" aria-controls="menu-items"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden" id="close-icon"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-menu-deep" id="menu-icon"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 6h16" /><path d="M7 12h13" /><path d="M10 18h10" /></svg> </button> <ul id="menu-items" class="mt-4 grid w-44 grid-cols-2 place-content-center gap-2 [&#38;>li>a]:block [&#38;>li>a]:px-4 [&#38;>li>a]:py-3 [&#38;>li>a]:text-center [&#38;>li>a]:font-medium [&#38;>li>a]:hover:text-accent sm:[&#38;>li>a]:px-2 sm:[&#38;>li>a]:py-1 hidden sm:mt-0 sm:flex sm:w-auto sm:gap-x-5 sm:gap-y-0"> <li class="col-span-2"> <a href="/posts" class="active-nav">
+Posts
+</a> </li> <li class="col-span-2"> <a href="/tags">
+Tags
+</a> </li> <li class="col-span-2"> <a href="/links">
+Links
+</a> </li> <li class="col-span-2"> <a href="/about">
+About
+</a> </li> <li class="col-span-2"> <a href="/archives" class="group inline-block hover:text-accent focus-outline flex justify-center p-3 sm:p-1" aria-label="archives" title="Archives"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden sm:inline-block"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /><path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" /><path d="M10 12l4 0" /></svg> <span class="sm:sr-only">Archives</span> </a> </li> <li class="col-span-1 flex items-center justify-center"> <a href="/search" class="group inline-block hover:text-accent focus-outline flex p-3 sm:p-1" aria-label="search" title="Search"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-search"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg> <span class="sr-only">Search</span> </a> </li> <li class="col-span-1 flex items-center justify-center"> <button id="theme-btn" class="focus-outline relative size-12 p-4 sm:size-8 hover:[&>svg]:stroke-accent" title="Toggles light & dark" aria-label="auto" aria-live="polite"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute top-[50%] left-[50%] -translate-[50%] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" /></svg> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute top-[50%] left-[50%] -translate-[50%] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M14.828 14.828a4 4 0 1 0 -5.656 -5.656a4 4 0 0 0 5.656 5.656z" /><path d="M6.343 17.657l-1.414 1.414" /><path d="M6.343 6.343l-1.414 -1.414" /><path d="M17.657 6.343l1.414 -1.414" /><path d="M17.657 17.657l1.414 1.414" /><path d="M4 12h-2" /><path d="M12 4v-2" /><path d="M20 12h2" /><path d="M12 20v2" /></svg> </button> </li> </ul> </nav> </div> </div> <div class="mx-auto max-w-app px-4"> <hr class="border-border" aria-hidden="true"> </div> </header> <script type="module">function s(){const e=document.querySelector("#menu-btn"),t=document.querySelector("#menu-items"),n=document.querySelector("#menu-icon"),o=document.querySelector("#close-icon");!e||!t||!n||!o||e.addEventListener("click",()=>{const c=e.getAttribute("aria-expanded")==="true";e.setAttribute("aria-expanded",c?"false":"true"),e.setAttribute("aria-label",c?"Open Menu":"Close Menu"),t.classList.toggle("hidden"),n.classList.toggle("hidden"),o.classList.toggle("hidden")})}s();document.addEventListener("astro:after-swap",s);</script> <div class="mx-auto flex w-full max-w-app items-center justify-start px-2"><a id="back-button" href="/" class="group inline-block hover:text-accent focus-outline mt-8 mb-2 flex hover:text-foreground/75"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 rtl:rotate-180"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 6l-6 6l6 6" /></svg><span>Go back</span></a></div><script type="module">function o(){const t=document.querySelector("#back-button"),e=sessionStorage.getItem("backUrl");e&&t&&(t.href=e)}document.addEventListener("astro:page-load",o);o();</script> <main id="main-content" class="mx-auto w-full max-w-app px-4 pb-12" data-pagefind-body> <h1 class="inline-block text-2xl font-bold text-accent sm:text-3xl" data-astro-transition-scope="astro-fam6wyqg-1"> dotnet Insecure Serialization </h1> <div class="my-2 flex items-center gap-2"> <div class="flex items-center gap-x-2 opacity-80"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 min-w-[1.375rem]"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M7 14h.013" /><path d="M10.01 14h.005" /><path d="M13.01 14h.005" /><path d="M16.015 14h.005" /><path d="M13.015 17h.005" /><path d="M7.01 17h.005" /><path d="M10.01 17h.005" /></svg>  <time class="text-sm sm:text-base" datetime="2024-02-11T00:00:00.000Z">11 Feb, 2024</time> </div> <span aria-hidden="true" class="max-sm:hidden">|</span> <a href="https://github.com/X1r0z/exp10it.io/edit/master/src/data/web/dotnet/dotnet-insecure-serialization.md" target="_blank" rel="noopener noreferrer" class="flex justify-baseline gap-1.5 opacity-80 hover:text-accent max-sm:hidden"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg><span>Edit page</span></a> </div> <article id="article" class="app-prose mx-auto mt-8 max-w-app prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)"> <h2 id="table-of-contents">Table of contents</h2>
+<p></p><details><summary>Open Table of contents</summary><p></p>
+<ul>
+<li><a href="#%E5%89%8D%E8%A8%80">前言</a></li>
+<li><a href="#net-framework">.NET Framework</a>
+<ul>
+<li><a href="#settingspropertyvalue">SettingsPropertyValue</a></li>
+<li><a href="#securityexception">SecurityException</a></li>
+<li><a href="#compilerresults">CompilerResults</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93">第三方库</a>
+<ul>
+<li><a href="#activemqobjectmessage">ActiveMQObjectMessage</a></li>
+<li><a href="#optimisticlockedtextfile">OptimisticLockedTextFile</a></li>
+<li><a href="#customuri">CustomUri</a></li>
+<li><a href="#querypartitionprovider">QueryPartitionProvider</a></li>
+</ul>
+</li>
+</ul>
+<p></p></details><p></p>
+<h2 id="前言">前言</h2>
+<blockquote>
+<p><a href="https://github.com/thezdi/presentations/blob/main/2023_Hexacon/whitepaper-net-deser.pdf">https://github.com/thezdi/presentations/blob/main/2023_Hexacon/whitepaper-net-deser.pdf</a></p>
+</blockquote>
+<p>这几天花了点时间认真学习了 <a href="https://twitter.com/chudyPB">@chudyPB</a> 在 Hexacon 2023 分享的议题: <em>Exploiting Hardened .NET Deserialization: New Exploitation Ideas and Abuse of Insecure Serialization</em></p>
+<p>PDF 一共有 124 页, 主要内容如下</p>
+<ul>
+<li>SolarWinds Platform 的多个反序列化漏洞以及黑名单绕过</li>
+<li>多个第三方库的反序列化 Gadget</li>
+<li>Delta Electronics InfraSuite Device Master MessagePack 反序列化漏洞</li>
+<li>引入 “不安全的序列化” (Insecure Serializaion) 这个攻击面, 分享了多个基于 .NET Framework 和第三方库的序列化 Gadget</li>
+<li>多个基于. NET Framework 的任意 Getter 调用 Gadget, 然后将其与 “不安全的序列化” 结合, 形成多条新的反序列化 Gadget</li>
+<li>多个基于 .NET >= 5 (.NET Core) 的反序列化 Gadget</li>
+</ul>
+<p>本文简单记录一下关于 “不安全的序列化” (Insecure Serializaion) 这部分的内容</p>
+<p>关于任意 Getter 调用以及新的反序列化 Gadget 这两个部分的内容会放在下一篇文章</p>
+<p>攻击面</p>
+<p><img src="https://img.exp10it.io/2024/02/202402122141835.png" alt="img"></p>
+<p><img src="https://img.exp10it.io/2024/02/202402122141842.png" alt="img"></p>
+<p>流程图</p>
+<p><img src="https://img.exp10it.io/2024/02/202402122141866.png" alt="img"></p>
+<p>不安全的序列化的本质其实就是调用某个 getter, 而 getter 内部存在恶意操作</p>
+<p>.NET 的大部分序列化器例如 Json.Net, 在反序列化时只会调用构造函数和 setter, 这一点与 Java 中的 FastJson 不同, FastJson 在某些场景下依然能够实现在反序列化时调用 getter (通过 JSONObject.toString 或 <code>$ref</code> 属性)</p>
+<p>不安全的序列化这个概念我感觉更类似于 Ruilin 师傅前几年提出的 “Java 后反序列化漏洞”, 即漏洞本身并不是由反序列化时 readObject 的调用关系而产生, 而是在反序列化拿到对象后, 针对这个对象进行一些其它的操作, 例如 toString/finalize 或者其它方法, 在这些方法中存在一些调用关系, 导致恶意操作, 因此被称为 “后” 反序列化漏洞</p>
+<p><a href="http://rui0.cn/archives/1338">http://rui0.cn/archives/1338</a></p>
+<p><a href="https://xz.aliyun.com/t/12459">https://xz.aliyun.com/t/12459</a></p>
+<h2 id="net-framework">.NET Framework</h2>
+<p><img src="https://img.exp10it.io/2024/02/202402122141872.png" alt="img"></p>
+<h3 id="settingspropertyvalue">SettingsPropertyValue</h3>
+<p>序列化时触发 BinaryFormatter 反序列化</p>
+<p>PropertyValue getter</p>
+<p><img src="https://img.exp10it.io/2024/02/202402122141898.png" alt="img"></p>
+<p>Deserialize</p>
+<p><img src="https://img.exp10it.io/2024/02/202402122141929.png" alt="img"></p>
+<p>判断 SerializedValue 的实际类型</p>
+<ul>
+<li>byte[]: 直接触发 BinaryFormatter 反序列化</li>
+<li>string: 调用 GetObjectFromString</li>
+</ul>
+<p>GetObjectFromString 最终也会触发 BinaryFormatter 反序列化 (需要为上面的 Property 设置 SerializeAs 枚举)</p>
+<p><img src="https://img.exp10it.io/2024/02/202402122141813.png" alt="img"></p>
+<p>payload</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="csharp"><code><span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">using</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6"> ConsoleApp</span><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6">Gadget</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">using</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6"> Newtonsoft</span><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6">Json</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">using</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6"> System</span><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6">Configuration</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">using</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6"> System</span><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6">IO</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">using</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6"> System</span><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6">Runtime</span><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6">Serialization</span><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6">Formatters</span><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6">Binary</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">namespace</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6"> ConsoleApp</span><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6">InsecureSerialization</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">{</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">    internal</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#FFCB8B"> SettingsPropertyValueDemo</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    {</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">        public</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> static</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> void</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic"> Main</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">(</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">string</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">[] args)</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">        {</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#D6DEEB">            TextFormattingRunPropertiesMarshal</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> textFormattingRunProperties </span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">=</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA"> new</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D6DEEB"> TextFormattingRunPropertiesMarshal</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">(</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">calc.exe</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">            byte</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">[] data;</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">            using</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> (</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D6DEEB">MemoryStream</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> mem </span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">=</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA"> new</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D6DEEB"> MemoryStream</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">())</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">            {</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#D6DEEB">                BinaryFormatter</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> binaryFormatter </span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">=</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA"> new</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D6DEEB"> BinaryFormatter</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">();</span></span>
+<span class="line"><span style="--shiki-light:#1976D2;--shiki-dark:#B2CCD6">                binaryFormatter</span><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">.</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">Serialize</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">(mem</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> textFormattingRunProperties);</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">                data </span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">=</span><span style="--shiki-light:#1976D2;--shiki-dark:#B2CCD6"> mem</span><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">.</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">ToArray</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">();</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">            }</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#D6DEEB">            SettingsProperty</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> property </span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">=</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA"> new</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D6DEEB"> SettingsProperty</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">(</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">test</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#D6DEEB">            SettingsPropertyValue</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> settingsPropertyValue </span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">=</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA"> new</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D6DEEB"> SettingsPropertyValue</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">(property);</span></span>
+<span class="line"><span style="--shiki-light:#1976D2;--shiki-dark:#B2CCD6">            settingsPropertyValue</span><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">.</span><span style="--shiki-light:#1976D2;--shiki-light-font-style:inherit;--shiki-dark:#FAF39F;--shiki-dark-font-style:italic">Deserialized</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> =</span><span style="--shiki-light:#1976D2;--shiki-dark:#FF5874"> false</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#1976D2;--shiki-dark:#B2CCD6">            settingsPropertyValue</span><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">.</span><span style="--shiki-light:#1976D2;--shiki-light-font-style:inherit;--shiki-dark:#FAF39F;--shiki-dark-font-style:italic">SerializedValue</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> =</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> data;</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#C2C3C5;--shiki-light-font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic">            //Console.Write(settingsPropertyValue.PropertyValue);</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#D6DEEB">            JsonSerializerSettings</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> settings </span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">=</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA"> new</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D6DEEB"> JsonSerializerSettings</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">            {</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">                TypeNameHandling </span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">=</span><span style="--shiki-light:#1976D2;--shiki-dark:#B2CCD6"> TypeNameHandling</span><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">.</span><span style="--shiki-light:#1976D2;--shiki-light-font-style:inherit;--shiki-dark:#FAF39F;--shiki-dark-font-style:italic">All</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">            };</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#1976D2;--shiki-dark:#B2CCD6">            JsonConvert</span><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">.</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">SerializeObject</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">(settingsPropertyValue</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> settings);</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">        }</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    }</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">}</span></span></code></pre>
+<p>作者指出 SettingsPropertyValue 的构造方法可能不适用于 Json.Net 反序列化</p>
+<p><img src="https://img.exp10it.io/2024/02/202402122141266.png" alt="img"></p>
+<p>报错</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plain"><code><span class="line"><span>Newtonsoft.Json.JsonSerializationException: Unable to find a constructor to use for type System.Configuration.SettingsProperty. A class should either have a default constructor, one constructor with arguments or a constructor marked with the JsonConstructor attribute.</span></span></code></pre>
+<p>另外部分序列化器可能会先调用 Name getter, 导致抛出异常终止序列化过程</p>
+<p><img src="https://img.exp10it.io/2024/02/202402122141303.png" alt="img"></p>
+<h3 id="securityexception">SecurityException</h3>
+<p>序列化时触发 BinaryFormatter 反序列化</p>
+<p>Method getter</p>
+<p><img src="https://img.exp10it.io/2024/02/202402122141313.png" alt="img"></p>
+<p>getMethod</p>
+<p><img src="https://img.exp10it.io/2024/02/202402122141352.png" alt="img"></p>
+<p>ByteArrayToObject</p>
+<p><img src="https://img.exp10it.io/2024/02/202402122141416.png" alt="img"></p>
+<p>m_serializedMethodInfo 字段放入 BinaryFormatter 反序列化 Gadget</p>
+<p>这条序列化 Gadget 存在一些限制</p>
+<p><img src="https://img.exp10it.io/2024/02/202402122141532.png" alt="img"></p>
+<p>需要组合两种不同类型的序列化器:</p>
+<ul>
+<li>支持 Serializable 特性 (GetObjectData + 特殊反序列化构造函数)</li>
+<li>不支持 Serializable 特性/在序列化时优先调用 getter</li>
+</ul>
+<p>原因如下</p>
+<p><img src="https://img.exp10it.io/2024/02/202402122141937.png" alt="img"></p>
+<p>部分序列化器在反序列化恢复字段时会调用 Method setter, 导致覆盖 m_serializedMethodInfo 的内容, 无法触发恶意 Gadget</p>
+<p>因此需要某个不完全依赖于 setter 赋值的序列化器, 例如 BinaryFormatter/Json.Net, 都支持调用特殊的反序列化构造函数</p>
+<p><img src="https://img.exp10it.io/2024/02/202402122141009.png" alt="img"></p>
+<p>其中 m_serializedMethodInfo 字段直接从 SerializationInfo 内取值, 绕过了 Method setter</p>
+<p>另外后续序列化时所使用的序列化器应当直接调用 Method getter, 而不是 GetObjectData 方法</p>
+<p>payload</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="csharp"><code><span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">using</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6"> ConsoleApp</span><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6">Gadget</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">using</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6"> System</span><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6">IO</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">using</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6"> System</span><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6">Reflection</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">using</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6"> System</span><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6">Runtime</span><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6">Serialization</span><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6">Formatters</span><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6">Binary</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">using</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6"> System</span><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6">Security</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">using</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6"> System</span><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6">Web</span><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6">Script</span><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6">Serialization</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">namespace</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6"> ConsoleApp</span><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6">InsecureSerialization</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">{</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">    internal</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#FFCB8B"> SecurityExceptionDemo</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    {</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">        public</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> static</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> void</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic"> Main</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">(</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">string</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">[] args)</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">        {</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#D6DEEB">            TextFormattingRunPropertiesMarshal</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> textFormattingRunProperties </span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">=</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA"> new</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D6DEEB"> TextFormattingRunPropertiesMarshal</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">(</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">calc.exe</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">            byte</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">[] data;</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">            using</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> (</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D6DEEB">MemoryStream</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> mem </span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">=</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA"> new</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D6DEEB"> MemoryStream</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">())</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">            {</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#D6DEEB">                BinaryFormatter</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> binaryFormatter </span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">=</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA"> new</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D6DEEB"> BinaryFormatter</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">();</span></span>
+<span class="line"><span style="--shiki-light:#1976D2;--shiki-dark:#B2CCD6">                binaryFormatter</span><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">.</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">Serialize</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">(mem</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> textFormattingRunProperties);</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">                data </span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">=</span><span style="--shiki-light:#1976D2;--shiki-dark:#B2CCD6"> mem</span><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">.</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">ToArray</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">();</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">            }</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#D6DEEB">            SecurityException</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> securityException </span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">=</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA"> new</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D6DEEB"> SecurityException</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">();</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">            typeof</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">(</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D6DEEB">SecurityException</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">)</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">                .</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">GetField</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">(</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">m_serializedMethodInfo</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span><span style="--shiki-light:#1976D2;--shiki-dark:#B2CCD6"> BindingFlags</span><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">.</span><span style="--shiki-light:#1976D2;--shiki-light-font-style:inherit;--shiki-dark:#FAF39F;--shiki-dark-font-style:italic">Instance</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> |</span><span style="--shiki-light:#1976D2;--shiki-dark:#B2CCD6"> BindingFlags</span><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">.</span><span style="--shiki-light:#1976D2;--shiki-light-font-style:inherit;--shiki-dark:#FAF39F;--shiki-dark-font-style:italic">NonPublic</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">)</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">                .</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">SetValue</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">(securityException</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> data);</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#C2C3C5;--shiki-light-font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic">            //Console.Write(securityException.Method);</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#D6DEEB">            JavaScriptSerializer</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> javaScriptSerializer </span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">=</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA"> new</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D6DEEB"> JavaScriptSerializer</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">();</span></span>
+<span class="line"><span style="--shiki-light:#1976D2;--shiki-dark:#B2CCD6">            javaScriptSerializer</span><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">.</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">Serialize</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">(securityException);</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">        }</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    }</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">}</span></span></code></pre>
+<h3 id="compilerresults">CompilerResults</h3>
+<p>序列化时触发本地 DLL 加载 (Assembly.Load), 类似 AssemblyInstaller</p>
+<p>PathToAssembly</p>
+<p><img src="https://img.exp10it.io/2024/02/202402122141096.png" alt="img"></p>
+<p>CompiledAssembly getter</p>
+<p><img src="https://img.exp10it.io/2024/02/202402122141103.png" alt="img"></p>
+<p><img src="https://img.exp10it.io/2024/02/202402122141245.png" alt="img"></p>
+<p>payload</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="json"><code><span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">{</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">    "$type"</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">:</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> "</span><span style="--shiki-light:#22863A;--shiki-dark:#C789D6">System.CodeDom.Compiler.CompilerResults, System.CodeDom, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">    "tempFiles"</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">:</span><span style="--shiki-light:#1976D2;--shiki-dark:#FF5874"> null</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">    "PathToAssembly"</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">:</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> "</span><span style="--shiki-light:#22863A;--shiki-dark:#C789D6">C:</span><span style="--shiki-light:#22863A;--shiki-dark:#F78C6C">\\</span><span style="--shiki-light:#22863A;--shiki-dark:#C789D6">Users</span><span style="--shiki-light:#22863A;--shiki-dark:#F78C6C">\\</span><span style="--shiki-light:#22863A;--shiki-dark:#C789D6">Public</span><span style="--shiki-light:#22863A;--shiki-dark:#F78C6C">\\</span><span style="--shiki-light:#22863A;--shiki-dark:#C789D6">mixedassembly.dll</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">}</span></span></code></pre>
+<p>DLL 需要使用混合程序集 (Mixed Assembly), 参考: <a href="https://github.com/noperator/CVE-2019-18935">https://github.com/noperator/CVE-2019-18935</a></p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="c"><code><span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">#</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">include</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">windows.h</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">></span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">#</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">include</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">stdio.h</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">></span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">BOOL WINAPI </span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">DllMain</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">(HINSTANCE </span><span style="--shiki-light:#24292EFF;--shiki-dark:#D7DBE0">hinstDLL</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> DWORD </span><span style="--shiki-light:#24292EFF;--shiki-dark:#D7DBE0">fdwReason</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> LPVOID </span><span style="--shiki-light:#24292EFF;--shiki-dark:#D7DBE0">lpReserved</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">)</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">{</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">    if</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> (fdwReason </span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">==</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> DLL_PROCESS_ATTACH)</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">        system</span><span style="--shiki-light:#6F42C1;--shiki-dark:#82AAFF">(</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">calc.exe</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#82AAFF">)</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">    return</span><span style="--shiki-light:#1976D2;--shiki-dark:#82AAFF"> TRUE</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">}</span></span></code></pre>
+<p>编译脚本</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">::</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Author:</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">   @noperator</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">::</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Purpose:</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  Compile</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> a</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> uniquely</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> named</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> mixed</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> mode</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> .NET</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> assembly</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> DLL</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> as</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> a</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> payload</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">::</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">           for</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> exploiting</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> CVE-2019-18935.</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">::</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Notes:</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">    -</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> You</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> may</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> need</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> to</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> adjust</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> the</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> VSPATH</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> variable</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> to</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> point</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> to</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> the</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> path</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">::</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">             of</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> your</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Visual</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Studio</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> installation.</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">::</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">           -</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Generates</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> both</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> 32-</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> and</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> 64-bit</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> payloads</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> if</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> no</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> CPU</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> architecture</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> is</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">::</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">             specified</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> as</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> a</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> second</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> CLI</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> argument.</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">::</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">           -</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Writes</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> payloads</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> to</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> the</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> folder</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> specified</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> by</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> the</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> OUTDIR</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> variable.</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">::</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Usage:</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">    .</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\b</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">uild-dll.bat</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA"> &#x3C;</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">PAYLOA</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">D</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">></span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> [&#x3C;ARCH>]</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">::</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">           .</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\b</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">uild-dll.bat</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> sleep.c</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">::</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">           .</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\b</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">uild-dll.bat</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> reverse-shell.c</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> x86</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">::</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">           .</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\b</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">uild-dll.bat</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> sliver-stager.c</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> amd64</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">@echo</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> off</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">::</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Point</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> this</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> to</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> the</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> path</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> of</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> your</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Visual</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Studio</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> installation.</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">set</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> VSPATH=C:</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\P</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">rogram</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Files</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\M</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">icrosoft</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Visual</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Studio</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\2</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">022</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\C</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">ommunity</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\V</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">C</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\A</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">uxiliary</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\B</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">uild</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">::</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Create</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> directory</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> for</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> compiled</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> payloads.</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">set</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> OUTDIR=payloads</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">if</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic"> not</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> exist</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> "</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">%OUTDIR%</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> mkdir</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> "</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">%OUTDIR%</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">::</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Get</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> payload</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> name.</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">set</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> PAYLOAD=%1</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">set</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> BASENAME=%PAYLOAD:~0,-2%</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">::</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Get</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> CPU</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> architecture.</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Generates</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> both</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> if</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> none</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> specified.</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">set</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> ARCH=%2</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">if</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> [%ARCH%]==[] set </span><span style="--shiki-light:#24292EFF;--shiki-dark:#C5E478">ARCH</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">=</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">x86</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic"> amd64</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">::</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Create</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> dummy</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> C#</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> file</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> to</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> consistute</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> managed</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> portion</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> of</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> mixed</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> mode</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> assembly.</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">echo</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> class</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Empty</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> {}</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA"> ></span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> empty.cs</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">::</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Compile</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> payload.</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> (set</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">|</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">end)local required to prevent a growing PATH variable</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">::</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> from</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> multiple</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> calls</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> to</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> vcvarsall.bat.</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Otherwise,</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> multiple</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> runs</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> of</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> this</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">::</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> script</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> in</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> the</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> same</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> CMD</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> window</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> will</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> eventually</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> fail</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> with:</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> "</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">The input line is</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">:: too long. The syntax of the command is incorrect.</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">for</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> %%a in (</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">%ARCH%</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">) </span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">do</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> (</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">    @echo</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> on</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">    echo</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">.</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">    echo</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> [*] Set up %%a build environment...</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">    setlocal</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">    call</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> "</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">%VSPATH%\vcvarsall.bat</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> %%a</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">    echo</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">.</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">    echo</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> [*] Compile managed code, without generating an assembly...</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">    csc</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> /target:module</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> empty.cs</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">    echo</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> [*] Compile unmanaged code, without linking...</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">    cl</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> /c</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> %PAYLOAD%</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">    echo</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">.</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">    echo</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> [*] Link the compiled .netmodule and .obj files, creating a mixed mode .NET assembly DLL...</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">    link</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> /DLL</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> /LTCG</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> /CLRIMAGETYPE:IJW</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> /out:%OUTDIR%</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\%</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">BASENAME%-%%a.dll</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> %BASENAME%.obj</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> empty.netmodule</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">    echo</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">.</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">    echo</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> [*] Clean up build artifacts and tear down %%a build environment...</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">    del</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> %BASENAME%.obj</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> empty.netmodule</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">    endlocal</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">    dir</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> %OUTDIR%</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\%</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">BASENAME%-%%a.dll</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">    @echo</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> off</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">)</span></span></code></pre>
+<p>注意自 .NET Framework 4 开始禁止通过 Assembly.Load 加载远程 DLL, 因此需要与写文件 Gadget 结合</p>
+<h2 id="第三方库">第三方库</h2>
+<p><img src="https://img.exp10it.io/2024/02/202402122141533.png" alt="img"></p>
+<h3 id="activemqobjectmessage">ActiveMQObjectMessage</h3>
+<p>位于 Apache NMS ActiveMQ</p>
+<p>序列化时触发 Binary Formatter 反序列化, 兼容大多数基于 setter 的序列化器</p>
+<p><img src="https://img.exp10it.io/2024/02/202402122141619.png" alt="img"></p>
+<p>Formatter 默认使用 BinaryFormatter</p>
+<p><img src="https://img.exp10it.io/2024/02/202402122141769.png" alt="img"></p>
+<p>2.1.0 版本增加了 TrustedClassFilter (SerializationBinder), 需要指定 Connection.DeserializationPolicy</p>
+<p>但是对于序列化 gadget 没有影响, 自己手动构造将 DeserializationPolicy 设置为 null 就行</p>
+<p><img src="https://img.exp10it.io/2024/02/202402122141840.png" alt="img"></p>
+<p>&#x3C; 2.1.0 版本</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="json"><code><span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">{</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">    "$type"</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">:</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> "</span><span style="--shiki-light:#22863A;--shiki-dark:#C789D6">Apache.NMS.ActiveMQ.Commands.ActiveMQObjectMessage, Apache.NMS.ActiveMQ, Version=2.0.1.0, Culture=neutral, PublicKeyToken=82756feee3957618</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">    "Content"</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">:</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> "</span><span style="--shiki-light:#22863A;--shiki-dark:#C789D6">base64encoded-binaryformatter-gadget</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">}</span></span></code></pre>
+<p>>= 2.1.0 版本</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="json"><code><span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">{</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">    "$type"</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">:</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> "</span><span style="--shiki-light:#22863A;--shiki-dark:#C789D6">Apache.NMS.ActiveMQ.Commands.ActiveMQObjectMessage, Apache.NMS.ActiveMQ, Version=2.1.0.0, Culture=neutral, PublicKeyToken=82756feee3957618</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">    "Content"</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">:</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> "</span><span style="--shiki-light:#22863A;--shiki-dark:#C789D6">base64-encoded-binaryformatter-gadget</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">    "Connection"</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">:</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> {</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">        "connectionUri"</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">:</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> "</span><span style="--shiki-light:#22863A;--shiki-dark:#C789D6">http://localhost</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">        "transport"</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">:</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> {</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">            "$type"</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">:</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> "</span><span style="--shiki-light:#22863A;--shiki-dark:#C789D6">Apache.NMS.ActiveMQ.Transport.Failover.FailoverTransport, Apache.NMS.ActiveMQ, Version=2.1.0.0, Culture=neutral, PublicKeyToken=82756feee3957618</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">        }</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">        "clientIdGenerator"</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">:</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> {</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">            "$type"</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">:</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> "</span><span style="--shiki-light:#22863A;--shiki-dark:#C789D6">Apache.NMS.ActiveMQ.Util.IdGenerator, Apache.NMS.ActiveMQ, Version=2.1.0.0, Culture=neutral, PublicKeyToken=82756feee3957618</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">        }</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    }</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">}</span></span></code></pre>
+<h3 id="optimisticlockedtextfile">OptimisticLockedTextFile</h3>
+<p>位于 Amazon AWSSDK.Core</p>
+<p>反序列化时可以读取任意文件, 但是需要通过序列化来接收文件内容</p>
+<p><img src="https://img.exp10it.io/2024/02/202402122141987.png" alt="img"></p>
+<p>Read</p>
+<p><img src="https://img.exp10it.io/2024/02/202402122245406.png" alt="img"></p>
+<p><img src="https://img.exp10it.io/2024/02/202402122141508.png" alt="img"></p>
+<p>读取 FilePath 路径的文件内容, 然后将其保存在 OriginalContents 和 Lines 字段</p>
+<p>payload</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="json"><code><span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">{</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">    "$type"</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">:</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> "</span><span style="--shiki-light:#22863A;--shiki-dark:#C789D6">Amazon.Runtime.Internal.Util.OptimisticLockedTextFile, AWSSDK.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">    "filePath"</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">:</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> "</span><span style="--shiki-light:#22863A;--shiki-dark:#C789D6">C:</span><span style="--shiki-light:#22863A;--shiki-dark:#F78C6C">\\</span><span style="--shiki-light:#22863A;--shiki-dark:#C789D6">Windows</span><span style="--shiki-light:#22863A;--shiki-dark:#F78C6C">\\</span><span style="--shiki-light:#22863A;--shiki-dark:#C789D6">win.ini</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">}</span></span></code></pre>
+<p>序列化时仅会读取 Lines 字段的内容</p>
+<p><img src="https://img.exp10it.io/2024/02/202402122141519.png" alt="img"></p>
+<h3 id="customuri">CustomUri</h3>
+<p>位于 Castle Core</p>
+<p>反序列化时会调用 Environment.ExpandEnvironmentVariables 解析 resourceIdentifier 中的环境变量</p>
+<p>同样需要通过序列化来接收数据</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="json"><code><span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">{</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">    "$type"</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">:</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> "</span><span style="--shiki-light:#22863A;--shiki-dark:#C789D6">Castle.Core.Resource.CustomUri, Castle.Core, Version=5.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">    "resourceIdentifier"</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">:</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> "</span><span style="--shiki-light:#22863A;--shiki-dark:#C789D6">C:</span><span style="--shiki-light:#22863A;--shiki-dark:#F78C6C">\\</span><span style="--shiki-light:#22863A;--shiki-dark:#C789D6">test</span><span style="--shiki-light:#22863A;--shiki-dark:#F78C6C">\\</span><span style="--shiki-light:#22863A;--shiki-dark:#C789D6">%PATHEXT%</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">}</span></span></code></pre>
+<h3 id="querypartitionprovider">QueryPartitionProvider</h3>
+<p>位于 Microsoft Azure.Core</p>
+<p>在反序列化时触发 Json.Net 序列化, 可以与上面的序列化 Gadget 相结合</p>
+<p><img src="https://img.exp10it.io/2024/02/202402122141581.png" alt="img"></p>
+<p><img src="https://img.exp10it.io/2024/02/202402122141730.png" alt="img"></p>
+<p>利用流程</p>
+<p><img src="https://img.exp10it.io/2024/02/202402122141736.png" alt="img"></p>
+<p>例如与 ActiveMQObjectMessage 结合</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="json"><code><span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">{</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">    "$type"</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">:</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> "</span><span style="--shiki-light:#22863A;--shiki-dark:#C789D6">Microsoft.Azure.Cosmos.Query.Core.QueryPlan.QueryPartitionProvider, Microsoft.Azure.Cosmos.Client, Version=3.32.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">    "queryengineConfiguration"</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">:</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> {</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">        "poc"</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">:</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> {</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">            "$type"</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">:</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> "</span><span style="--shiki-light:#22863A;--shiki-dark:#C789D6">Apac he.NMS.ActiveMQ.Commands.ActiveMQObjectMessage, Apache.NMS.ActiveMQ, Version=2.0.1.0, Culture=neutral, PublicKeyToken=82756feee3957618</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">            "Content"</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">:</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> "</span><span style="--shiki-light:#22863A;--shiki-dark:#C789D6">base64-encoded-binaryformatter-gadget</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">        }</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    }</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">}</span></span></code></pre> </article> <hr class="my-8 border-dashed"> <a href="https://github.com/X1r0z/exp10it.io/edit/master/src/data/web/dotnet/dotnet-insecure-serialization.md" target="_blank" rel="noopener noreferrer" class="flex justify-baseline gap-1.5 opacity-80 hover:text-accent sm:hidden"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg><span>Edit page</span></a> <ul class="mt-4 mb-8 sm:my-8"> <li class="group inline-block group-hover:cursor-pointer my-1 underline-offset-4"> <a href="/tags/dotnet/" class="relative pe-2 text-lg underline decoration-dashed group-hover:-top-0.5 group-hover:text-accent focus-visible:p-1 focus-visible:no-underline text-sm" data-astro-transition-scope="astro-36ssibgs-2"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block opacity-80 -me-3.5 size-4"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 9l14 0" /><path d="M5 15l14 0" /><path d="M11 4l-4 16" /><path d="M17 4l-4 16" /></svg>
+&nbsp;<span>dotnet</span> </a> </li><li class="group inline-block group-hover:cursor-pointer my-1 underline-offset-4"> <a href="/tags/deserialization/" class="relative pe-2 text-lg underline decoration-dashed group-hover:-top-0.5 group-hover:text-accent focus-visible:p-1 focus-visible:no-underline text-sm" data-astro-transition-scope="astro-36ssibgs-3"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block opacity-80 -me-3.5 size-4"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 9l14 0" /><path d="M5 15l14 0" /><path d="M11 4l-4 16" /><path d="M17 4l-4 16" /></svg>
+&nbsp;<span>Deserialization</span> </a> </li><li class="group inline-block group-hover:cursor-pointer my-1 underline-offset-4"> <a href="/tags/bypass/" class="relative pe-2 text-lg underline decoration-dashed group-hover:-top-0.5 group-hover:text-accent focus-visible:p-1 focus-visible:no-underline text-sm" data-astro-transition-scope="astro-36ssibgs-4"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block opacity-80 -me-3.5 size-4"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 9l14 0" /><path d="M5 15l14 0" /><path d="M11 4l-4 16" /><path d="M17 4l-4 16" /></svg>
+&nbsp;<span>Bypass</span> </a> </li> </ul> <div id="btt-btn-container" class="fixed end-4 bottom-8 z-50 md:sticky md:end-auto md:float-end md:me-1 translate-y-14 opacity-0 transition duration-500"> <button data-button="back-to-top" class="group relative bg-background px-2 py-1 size-14 rounded-full shadow-xl md:h-8 md:w-fit md:rounded-md md:shadow-none md:focus-visible:rounded-none md:bg-background/35 md:bg-clip-padding md:backdrop-blur-lg"> <span id="progress-indicator" class="absolute inset-0 -z-10 block size-14 scale-110 rounded-full bg-transparent md:hidden md:h-8 md:rounded-md"></span> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block rotate-90 md:hidden"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 6l-6 6l6 6" /></svg> <span class="sr-only text-sm group-hover:text-accent md:not-sr-only"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-4"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 5l0 14" /><path d="M16 9l-4 -4" /><path d="M8 9l4 -4" /></svg>
+Back To Top
+</span> </button> </div> <script data-astro-rerun>
+  /** Scrolls the document to the top when
+   * the "Back to Top" button is clicked. */
+  function backToTop() {
+    const rootElement = document.documentElement;
+    const btnContainer = document.querySelector("#btt-btn-container");
+    const backToTopBtn = document.querySelector("[data-button='back-to-top']");
+    const progressIndicator = document.querySelector("#progress-indicator");
+
+    if (!rootElement || !btnContainer || !backToTopBtn || !progressIndicator)
+      return;
+
+    // Attach click event handler for back-to-top button
+    backToTopBtn.addEventListener("click", () => {
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    });
+
+    // Handle button visibility according to scroll position
+    let lastVisible = null;
+    function handleScroll() {
+      const scrollTotal = rootElement.scrollHeight - rootElement.clientHeight;
+      const scrollTop = rootElement.scrollTop;
+      const scrollPercent = Math.floor((scrollTop / scrollTotal) * 100);
+
+      progressIndicator.style.setProperty(
+        "background-image",
+        `conic-gradient(var(--accent), var(--accent) ${scrollPercent}%, transparent ${scrollPercent}%)`
+      );
+
+      const isVisible = scrollTop / scrollTotal > 0.3;
+
+      if (isVisible !== lastVisible) {
+        btnContainer.classList.toggle("opacity-100", isVisible);
+        btnContainer.classList.toggle("translate-y-0", isVisible);
+        btnContainer.classList.toggle("opacity-0", !isVisible);
+        btnContainer.classList.toggle("translate-y-14", !isVisible);
+        lastVisible = isVisible;
+      }
+    }
+
+    let ticking = false;
+    document.addEventListener("scroll", () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+  }
+  backToTop();
+</script> <div class="flex flex-none flex-col items-center justify-center gap-1 md:items-start"><span class="italic">Share this post on:</span><div class="text-center"><a href="https://wa.me/?text=https://exp10it.io/posts/dotnet-insecure-serialization/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post via WhatsApp"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" /><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" /></svg><span class="sr-only">Share this post via WhatsApp</span></a><a href="https://www.facebook.com/sharer.php?u=https://exp10it.io/posts/dotnet-insecure-serialization/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post on Facebook"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" /></svg><span class="sr-only">Share this post on Facebook</span></a><a href="https://x.com/intent/post?url=https://exp10it.io/posts/dotnet-insecure-serialization/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post on X"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 4l11.733 16h4.267l-11.733 -16z" /><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" /></svg><span class="sr-only">Share this post on X</span></a><a href="https://t.me/share/url?url=https://exp10it.io/posts/dotnet-insecure-serialization/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post via Telegram"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg><span class="sr-only">Share this post via Telegram</span></a><a href="https://pinterest.com/pin/create/button/?url=https://exp10it.io/posts/dotnet-insecure-serialization/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post on Pinterest"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M8 20l4 -9" /><path d="M10.7 14c.437 1.263 1.43 2 2.55 2c2.071 0 3.75 -1.554 3.75 -4a5 5 0 1 0 -9.7 1.7" /><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg><span class="sr-only">Share this post on Pinterest</span></a><a href="mailto:?subject=See%20this%20post&#38;body=https://exp10it.io/posts/dotnet-insecure-serialization/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post via email"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg><span class="sr-only">Share this post via email</span></a></div></div> <hr class="my-6 border-dashed"> <!-- Previous/Next Post Buttons --> <div data-pagefind-ignore class="grid grid-cols-1 gap-6 sm:grid-cols-2"> <a href="/posts/dotnet-new-deserialization-gadgets" class="flex w-full gap-1 hover:opacity-75"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block flex-none rtl:rotate-180"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 6l-6 6l6 6" /></svg> <div> <span>Previous Post</span> <div class="text-sm text-accent/85">dotnet New Deserialization Gadgets</div> </div> </a> <a href="/posts/dotnet-serialization-binder-bypass" class="flex w-full justify-end gap-1 text-end hover:opacity-75 sm:col-start-2"> <div> <span>Next Post</span> <div class="text-sm text-accent/85">dotnet SerializationBinder 绕过</div> </div> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block flex-none rtl:rotate-180"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 6l6 6l-6 6" /></svg> </a> </div> </main> <footer class="w-full mt-auto"> <div class="mx-auto max-w-app px-0"> <hr class="border-border" aria-hidden="true"> </div> <div class="flex flex-col items-center justify-between py-6 sm:flex-row-reverse sm:py-4"> <div class="flex-wrap justify-center gap-1 flex"> <a href="https://github.com/X1r0z" class="group inline-block hover:text-accent p-2 hover:rotate-6 sm:p-1" title="X1r0z Blog on GitHub"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" /></svg> <span class="sr-only">X1r0z Blog on GitHub</span> </a><a href="https://x.com/X1r0z" class="group inline-block hover:text-accent p-2 hover:rotate-6 sm:p-1" title="X1r0z Blog on X"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 4l11.733 16h4.267l-11.733 -16z" /><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" /></svg> <span class="sr-only">X1r0z Blog on X</span> </a><a href="https://www.linkedin.com/in/x1r0z/" class="group inline-block hover:text-accent p-2 hover:rotate-6 sm:p-1" title="X1r0z Blog on LinkedIn"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M8 11v5" /><path d="M8 8v.01" /><path d="M12 16v-5" /><path d="M16 16v-3a2 2 0 1 0 -4 0" /><path d="M3 7a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4z" /></svg> <span class="sr-only">X1r0z Blog on LinkedIn</span> </a><a href="mailto:i@exp10it.io" class="group inline-block hover:text-accent p-2 hover:rotate-6 sm:p-1" title="Send an email to X1r0z Blog"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg> <span class="sr-only">Send an email to X1r0z Blog</span> </a> </div> <div class="my-2 flex flex-col items-center whitespace-nowrap sm:flex-row"> <span>Copyright &#169; 2026</span> <span class="hidden sm:inline">&nbsp;|&nbsp;</span> <span>All rights reserved.</span> </div> </div> </footer>  </body></html> <script data-astro-rerun>
+  /** Create a progress indicator
+   *  at the top */
+  function createProgressBar() {
+    // Create the main container div
+    const progressContainer = document.createElement("div");
+    progressContainer.className =
+      "progress-container fixed top-0 z-10 h-1 w-full bg-background";
+
+    // Create the progress bar div
+    const progressBar = document.createElement("div");
+    progressBar.className = "progress-bar h-1 w-0 bg-accent";
+    progressBar.id = "myBar";
+
+    // Append the progress bar to the progress container
+    progressContainer.appendChild(progressBar);
+
+    // Append the progress container to the document body or any other desired parent element
+    document.body.appendChild(progressContainer);
+  }
+  createProgressBar();
+
+  /** Update the progress bar
+   *  when user scrolls */
+  function updateScrollProgress() {
+    document.addEventListener("scroll", () => {
+      const winScroll =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      if (document) {
+        const myBar = document.getElementById("myBar");
+        if (myBar) {
+          myBar.style.width = scrolled + "%";
+        }
+      }
+    });
+  }
+  updateScrollProgress();
+
+  /** Attaches links to headings in the document,
+   *  allowing sharing of sections easily */
+  function addHeadingLinks() {
+    const headings = Array.from(
+      document.querySelectorAll("h2, h3, h4, h5, h6")
+    );
+    for (const heading of headings) {
+      heading.classList.add("group");
+      const link = document.createElement("a");
+      link.className =
+        "heading-link ms-2 no-underline opacity-75 md:opacity-0 md:group-hover:opacity-100 md:focus:opacity-100";
+      link.href = "#" + heading.id;
+
+      const span = document.createElement("span");
+      span.ariaHidden = "true";
+      span.innerText = "#";
+      link.appendChild(span);
+      heading.appendChild(link);
+    }
+  }
+  addHeadingLinks();
+
+  /** Attaches copy buttons to code blocks in the document,
+   * allowing users to copy code easily. */
+  function attachCopyButtons() {
+    const copyButtonLabel = "Copy";
+    const codeBlocks = Array.from(document.querySelectorAll("pre"));
+
+    for (const codeBlock of codeBlocks) {
+      const wrapper = document.createElement("div");
+      wrapper.style.position = "relative";
+
+      // Check if --file-name-offset custom property exists
+      const computedStyle = getComputedStyle(codeBlock);
+      const hasFileNameOffset =
+        computedStyle.getPropertyValue("--file-name-offset").trim() !== "";
+
+      // Determine the top positioning class
+      const topClass = hasFileNameOffset
+        ? "top-(--file-name-offset)"
+        : "-top-3";
+
+      const copyButton = document.createElement("button");
+      copyButton.className = `copy-code absolute end-3 ${topClass} rounded bg-muted border border-muted px-2 py-1 text-xs leading-4 text-foreground font-medium`;
+      copyButton.innerHTML = copyButtonLabel;
+      codeBlock.setAttribute("tabindex", "0");
+      codeBlock.appendChild(copyButton);
+
+      // wrap codebock with relative parent element
+      codeBlock?.parentNode?.insertBefore(wrapper, codeBlock);
+      wrapper.appendChild(codeBlock);
+
+      copyButton.addEventListener("click", async () => {
+        await copyCode(codeBlock, copyButton);
+      });
+    }
+
+    async function copyCode(block, button) {
+      const code = block.querySelector("code");
+      const text = code?.innerText;
+
+      await navigator.clipboard.writeText(text ?? "");
+
+      // visual feedback that task is completed
+      button.innerText = "Copied";
+
+      setTimeout(() => {
+        button.innerText = copyButtonLabel;
+      }, 700);
+    }
+  }
+  attachCopyButtons();
+
+  /* Go to page start after page swap */
+  document.addEventListener("astro:after-swap", () =>
+    window.scrollTo({ left: 0, top: 0, behavior: "instant" })
+  );
+</script>

